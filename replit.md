@@ -48,6 +48,32 @@ Every package extends `tsconfig.base.json` which sets `composite: true`. The roo
 - `pnpm run build` — runs `typecheck` first, then recursively runs `build` in all packages that define it
 - `pnpm run typecheck` — runs `tsc --build --emitDeclarationOnly` using project references
 
+## LexCom Features
+
+### Frontend (artifacts/lexcom)
+- Landing page with all sections
+- `/agentic-chatbots` — AI chat with 11 legal agents (SSE streaming)
+- `/cases` — Legal case management (CRUD)
+- `/documents` — AI document generator (SSE streaming)
+- Replit Auth integration (login/logout)
+
+### Backend (artifacts/api-server routes)
+- `GET/POST /api/openai/conversations` — Conversation management
+- `GET/DELETE /api/openai/conversations/:id` — Single conversation
+- `GET/POST /api/openai/conversations/:id/messages` — Messages with SSE streaming
+- `GET/POST/PUT/DELETE /api/cases` — Case management
+- `GET/POST/DELETE /api/documents` — Document management
+- `POST /api/documents/generate` — AI document generation with SSE
+- `GET /api/auth/user`, `GET /api/login`, `GET /api/logout` — Auth
+
+### Database Tables
+- sessions — Replit Auth sessions
+- users — User accounts
+- conversations — AI chat conversations (with agentType)
+- messages — Chat messages
+- cases — Legal cases
+- documents — Generated legal documents
+
 ## Packages
 
 ### `artifacts/api-server` (`@workspace/api-server`)

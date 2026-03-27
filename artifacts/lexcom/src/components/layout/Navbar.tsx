@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
-import { Link } from "wouter";
-import { Scale, Menu, X } from "lucide-react";
+import { Link, useLocation } from "wouter";
+import { Scale, Menu, X, LogIn, LogOut, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useAuth } from "@workspace/replit-auth-web";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { user, isLoading, isAuthenticated, login, logout } = useAuth();
+  const [location] = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,11 +19,10 @@ export function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: "Beranda", href: "#home" },
-    { name: "Fitur", href: "#features" },
-    { name: "AI Agents", href: "#agents" },
-    { name: "Komunitas", href: "#community" },
-    { name: "Tentang", href: "#about" },
+    { name: "Beranda", href: "/" },
+    { name: "AI Chat", href: "/agentic-chatbots" },
+    { name: "Perkara", href: "/cases" },
+    { name: "Dokumen", href: "/documents" },
   ];
 
   return (
@@ -44,24 +46,42 @@ export function Navbar() {
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground hover:text-gradient transition-all"
+                className={`text-sm font-medium transition-all hover:text-foreground ${
+                  location === link.href ? "text-primary font-bold" : "text-muted-foreground hover:text-gradient"
+                }`}
               >
                 {link.name}
-              </a>
+              </Link>
             ))}
           </nav>
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center gap-4">
-            <button className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-4 py-2">
-              Masuk
-            </button>
-            <button className="px-5 py-2.5 rounded-full text-sm font-semibold bg-white text-background hover:bg-gray-200 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5">
-              Daftar Gratis
-            </button>
+            {isLoading ? (
+              <Loader2 className="w-5 h-5 animate-spin text-muted-foreground" />
+            ) : isAuthenticated ? (
+              <div className="flex items-center gap-4">
+                <span className="text-sm font-medium text-muted-foreground">
+                  {user?.name || user?.email || "User"}
+                </span>
+                <button 
+                  onClick={logout}
+                  className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold bg-white/10 text-foreground hover:bg-white/20 transition-all shadow-lg"
+                >
+                  <LogOut className="w-4 h-4" /> Keluar
+                </button>
+              </div>
+            ) : (
+              <button 
+                onClick={login}
+                className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold bg-white text-background hover:bg-gray-200 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+              >
+                <LogIn className="w-4 h-4" /> Masuk
+              </button>
+            )}
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -85,22 +105,42 @@ export function Navbar() {
           >
             <div className="px-4 py-6 flex flex-col gap-4">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-lg font-medium text-muted-foreground hover:text-foreground block px-2"
+                  className={`text-lg font-medium block px-2 ${
+                    location === link.href ? "text-primary" : "text-muted-foreground hover:text-foreground"
+                  }`}
                 >
                   {link.name}
-                </a>
+                </Link>
               ))}
               <div className="h-px bg-white/10 my-2" />
-              <button className="w-full text-left px-2 py-3 text-lg font-medium text-muted-foreground hover:text-foreground">
-                Masuk
-              </button>
-              <button className="w-full mt-2 px-5 py-3 rounded-xl text-lg font-semibold bg-gradient-to-r from-primary to-secondary text-white text-center shadow-lg">
-                Daftar Gratis
-              </button>
+              {isLoading ? (
+                <div className="flex justify-center p-4">
+                  <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
+                </div>
+              ) : isAuthenticated ? (
+                <>
+                  <div className="px-2 py-2 text-sm text-muted-foreground">
+                    Logged in as {user?.name || user?.email || "User"}
+                  </div>
+                  <button 
+                    onClick={() => { logout(); setIsMobileMenuOpen(false); }}
+                    className="w-full flex justify-center items-center gap-2 mt-2 px-5 py-3 rounded-xl text-lg font-semibold bg-white/10 text-white text-center shadow-lg"
+                  >
+                    <LogOut className="w-5 h-5" /> Keluar
+                  </button>
+                </>
+              ) : (
+                <button 
+                  onClick={() => { login(); setIsMobileMenuOpen(false); }}
+                  className="w-full flex justify-center items-center gap-2 mt-2 px-5 py-3 rounded-xl text-lg font-semibold bg-gradient-to-r from-primary to-secondary text-white text-center shadow-lg"
+                >
+                  <LogIn className="w-5 h-5" /> Masuk
+                </button>
+              )}
             </div>
           </motion.div>
         )}
