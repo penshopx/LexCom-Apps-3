@@ -18,39 +18,59 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
+  const primaryLinks = [
     { name: "Beranda", href: "/" },
-    { name: "AI Chat", href: "/agentic-chatbots" },
-    { name: "Perkara", href: "/cases" },
-    { name: "Dokumen", href: "/documents" },
+    { name: "Agen AI", href: "/agents" },
+    { name: "Layanan", href: "/layanan" },
+    { name: "Peraturan", href: "/peraturan" },
+    { name: "Forum", href: "/forum" },
   ];
+
+  const secondaryLinks = [
+    { name: "🤖 Agentic AI", href: "/agentic-chatbots" },
+    { name: "📚 Kursus", href: "/kursus" },
+    { name: "⚖️ Putusan", href: "/putusan" },
+    { name: "👨‍⚖️ Pengacara", href: "/pengacara" },
+    { name: "📖 Panduan", href: "/panduan" },
+    { name: "📄 Dokumen", href: "/documents" },
+    { name: "📁 Kasus", href: "/cases" },
+    { name: "👥 Komunitas", href: "/komunitas" },
+  ];
+
+  const allLinks = [...primaryLinks, ...secondaryLinks];
+
+  const isActive = (href: string) => {
+    if (href === "/") return location === "/";
+    return location.startsWith(href);
+  };
 
   return (
     <header
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? "glass-panel py-3" : "bg-transparent py-5"
+        isScrolled ? "glass-panel" : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center">
+        {/* Row 1 */}
+        <div className="flex justify-between items-center py-3 border-b border-white/5">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg shadow-primary/25 group-hover:shadow-primary/40 transition-all">
-              <Scale className="w-5 h-5 text-white" />
+          <Link href="/" className="flex items-center gap-2 group flex-shrink-0">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg shadow-primary/25 group-hover:shadow-primary/40 transition-all">
+              <Scale className="w-4 h-4 text-white" />
             </div>
-            <span className="font-display font-bold text-2xl tracking-tight text-foreground">
+            <span className="font-display font-bold text-xl tracking-tight text-foreground">
               LexCom
             </span>
           </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
+          {/* Primary Nav */}
+          <nav className="hidden md:flex items-center gap-6">
+            {primaryLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
                 className={`text-sm font-medium transition-all hover:text-foreground ${
-                  location === link.href ? "text-primary font-bold" : "text-muted-foreground hover:text-gradient"
+                  isActive(link.href) ? "text-primary font-bold" : "text-muted-foreground"
                 }`}
               >
                 {link.name}
@@ -58,39 +78,56 @@ export function Navbar() {
             ))}
           </nav>
 
-          {/* Desktop Actions */}
-          <div className="hidden md:flex items-center gap-4">
+          {/* Auth */}
+          <div className="hidden md:flex items-center gap-3">
             {isLoading ? (
               <Loader2 className="w-5 h-5 animate-spin text-muted-foreground" />
             ) : isAuthenticated ? (
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3">
                 <span className="text-sm font-medium text-muted-foreground">
                   {user?.name || user?.email || "User"}
                 </span>
-                <button 
+                <button
                   onClick={logout}
-                  className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold bg-white/10 text-foreground hover:bg-white/20 transition-all shadow-lg"
+                  className="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold bg-white/10 text-foreground hover:bg-white/20 transition-all"
                 >
-                  <LogOut className="w-4 h-4" /> Keluar
+                  <LogOut className="w-3.5 h-3.5" /> Keluar
                 </button>
               </div>
             ) : (
-              <button 
+              <button
                 onClick={login}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold bg-white text-background hover:bg-gray-200 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                className="flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold bg-white text-background hover:bg-gray-200 transition-all shadow-lg hover:-translate-y-0.5"
               >
                 <LogIn className="w-4 h-4" /> Masuk
               </button>
             )}
           </div>
 
-          {/* Mobile Menu Toggle */}
+          {/* Mobile Toggle */}
           <button
             className="md:hidden p-2 text-foreground"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X /> : <Menu />}
           </button>
+        </div>
+
+        {/* Row 2 — Secondary Nav */}
+        <div className="hidden md:flex items-center gap-1 py-1.5 overflow-x-auto scrollbar-hide">
+          {secondaryLinks.map((link) => (
+            <Link
+              key={link.name}
+              href={link.href}
+              className={`text-xs font-medium px-3 py-1.5 rounded-full whitespace-nowrap transition-all ${
+                isActive(link.href)
+                  ? "bg-primary/20 text-primary border border-primary/30"
+                  : "text-muted-foreground hover:text-foreground hover:bg-white/5 border border-transparent"
+              }`}
+            >
+              {link.name}
+            </Link>
+          ))}
         </div>
       </div>
 
@@ -101,16 +138,16 @@ export function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden glass-panel border-t border-white/5 mt-3"
+            className="md:hidden glass-panel border-t border-white/5"
           >
-            <div className="px-4 py-6 flex flex-col gap-4">
-              {navLinks.map((link) => (
+            <div className="px-4 py-6 flex flex-col gap-3">
+              {allLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`text-lg font-medium block px-2 ${
-                    location === link.href ? "text-primary" : "text-muted-foreground hover:text-foreground"
+                  className={`text-base font-medium block px-2 py-1 ${
+                    isActive(link.href) ? "text-primary" : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
                   {link.name}
@@ -123,20 +160,20 @@ export function Navbar() {
                 </div>
               ) : isAuthenticated ? (
                 <>
-                  <div className="px-2 py-2 text-sm text-muted-foreground">
-                    Logged in as {user?.name || user?.email || "User"}
+                  <div className="px-2 py-1 text-sm text-muted-foreground">
+                    {user?.name || user?.email || "User"}
                   </div>
-                  <button 
+                  <button
                     onClick={() => { logout(); setIsMobileMenuOpen(false); }}
-                    className="w-full flex justify-center items-center gap-2 mt-2 px-5 py-3 rounded-xl text-lg font-semibold bg-white/10 text-white text-center shadow-lg"
+                    className="w-full flex justify-center items-center gap-2 px-5 py-3 rounded-xl text-base font-semibold bg-white/10 text-white"
                   >
                     <LogOut className="w-5 h-5" /> Keluar
                   </button>
                 </>
               ) : (
-                <button 
+                <button
                   onClick={() => { login(); setIsMobileMenuOpen(false); }}
-                  className="w-full flex justify-center items-center gap-2 mt-2 px-5 py-3 rounded-xl text-lg font-semibold bg-gradient-to-r from-primary to-secondary text-white text-center shadow-lg"
+                  className="w-full flex justify-center items-center gap-2 px-5 py-3 rounded-xl text-base font-semibold bg-gradient-to-r from-primary to-secondary text-white"
                 >
                   <LogIn className="w-5 h-5" /> Masuk
                 </button>

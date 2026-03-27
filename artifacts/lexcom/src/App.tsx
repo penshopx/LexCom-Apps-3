@@ -7,6 +7,18 @@ import Home from "@/pages/Home";
 import Chatbots from "@/pages/Chatbots";
 import Cases from "@/pages/Cases";
 import Documents from "@/pages/Documents";
+import Agents from "@/pages/Agents";
+import AgentChat from "@/pages/AgentChat";
+import {
+  Layanan,
+  Peraturan,
+  Kursus,
+  Forum,
+  Putusan,
+  Pengacara,
+  Panduan,
+  Komunitas,
+} from "@/pages/ComingSoon";
 
 const queryClient = new QueryClient();
 
@@ -15,8 +27,18 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/agentic-chatbots" component={Chatbots} />
+      <Route path="/agents" component={Agents} />
+      <Route path="/agents/:agentKey" component={AgentChat} />
       <Route path="/cases" component={Cases} />
       <Route path="/documents" component={Documents} />
+      <Route path="/layanan" component={Layanan} />
+      <Route path="/peraturan" component={Peraturan} />
+      <Route path="/kursus" component={Kursus} />
+      <Route path="/forum" component={Forum} />
+      <Route path="/putusan" component={Putusan} />
+      <Route path="/pengacara" component={Pengacara} />
+      <Route path="/panduan" component={Panduan} />
+      <Route path="/komunitas" component={Komunitas} />
       <Route component={NotFound} />
     </Switch>
   );
