@@ -1,0 +1,14 @@
+packages:
+  "framer-motion": "For smooth scroll reveals and page transitions"
+  "clsx": "For conditional class merging"
+  "tailwind-merge": "For merging tailwind classes safely"
+
+images:
+  - path: "artifacts/lexcom/public/images/hero-bg.png"
+    description: "Abstract dark navy and deep purple gradient mesh background with very subtle glowing nodes and soft light leaks, futuristic elegant legal tech theme, no text"
+    aspect_ratio: "16:9"
+
+notes:
+  - No backend is required, all data is static for this landing page.
+  - Using framer-motion for entry animations.
+  - Theme is forced to dark mode as per design requirements.

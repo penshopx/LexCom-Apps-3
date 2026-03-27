@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "LexCom - Agentic AI untuk Hukum Indonesia"
+version = "1.0.0"
+id = "artifacts/lexcom"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22529
+
+[services.development]
+run = "pnpm --filter @workspace/lexcom run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/lexcom", "run", "build" ]
+publicDir = "artifacts/lexcom/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22529"
+BASE_PATH = "/"
