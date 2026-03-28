@@ -9,15 +9,16 @@ import Cases from "@/pages/Cases";
 import Documents from "@/pages/Documents";
 import Agents from "@/pages/Agents";
 import AgentChat from "@/pages/AgentChat";
+import Forum from "@/pages/Forum";
+import ForumThread from "@/pages/ForumThread";
+import Komunitas from "@/pages/Komunitas";
 import {
   Layanan,
   Peraturan,
   Kursus,
-  Forum,
   Putusan,
   Pengacara,
   Panduan,
-  Komunitas,
 } from "@/pages/ComingSoon";
 
 const queryClient = new QueryClient();
@@ -35,6 +36,7 @@ function Router() {
       <Route path="/peraturan" component={Peraturan} />
       <Route path="/kursus" component={Kursus} />
       <Route path="/forum" component={Forum} />
+      <Route path="/forum/:id" component={ForumThread} />
       <Route path="/putusan" component={Putusan} />
       <Route path="/pengacara" component={Pengacara} />
       <Route path="/panduan" component={Panduan} />

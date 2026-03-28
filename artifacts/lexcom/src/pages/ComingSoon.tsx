@@ -90,16 +90,6 @@ export function Kursus() {
   />;
 }
 
-export function Forum() {
-  return <ComingSoonPage
-    emoji="💬"
-    title="Forum Diskusi Hukum"
-    subtitle="Komunitas Tanya Jawab Hukum Terbesar"
-    description="Diskusikan masalah hukum Anda dengan komunitas, ajukan pertanyaan kepada praktisi hukum, dan bagikan pengetahuan untuk membantu sesama."
-    features={["Tanya Jawab Publik", "Diskusi Kelompok", "Jawaban dari Ahli", "Voting & Reputasi", "Kategori Spesialis", "Notifikasi Real-time"]}
-  />;
-}
-
 export function Putusan() {
   return <ComingSoonPage
     emoji="⚖️"
@@ -130,12 +120,3 @@ export function Panduan() {
   />;
 }
 
-export function Komunitas() {
-  return <ComingSoonPage
-    emoji="👥"
-    title="Komunitas LexCom"
-    subtitle="Bergabung dengan Ribuan Pengguna LexCom"
-    description="Jadilah bagian dari komunitas hukum Indonesia yang aktif. Berbagi pengalaman, belajar bersama, dan saling mendukung dalam memahami hukum."
-    features={["Grup Diskusi", "Event & Webinar", "Mentoring Program", "Newsletter Hukum", "Koneksi Profesional", "Program Loyalitas"]}
-  />;
-}
