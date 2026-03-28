@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import { Sparkles, FileText, Search, Bot, Calculator, BookOpen } from "lucide-react";
+import { Sparkles, FileText, Search, Bot, Calculator, BookOpen, Crown } from "lucide-react";
 import { Link } from "wouter";
+import { useAuth } from "@workspace/replit-auth-web";
 
 const BADGES = [
   { icon: "🤖", text: "19 Agen AI Spesialis" },
@@ -14,6 +15,7 @@ const BADGES = [
 ];
 
 export function Hero() {
+  const { isAuthenticated, login } = useAuth();
   return (
     <section id="home" className="relative min-h-screen flex items-center pt-24 overflow-hidden">
       <div className="absolute inset-0 z-0">
@@ -77,12 +79,21 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="flex flex-col sm:flex-row items-center gap-3 w-full justify-center"
           >
-            <Link href="/lexbot" className="w-full sm:w-auto">
-              <button className="w-full px-7 py-4 rounded-xl font-semibold bg-gradient-to-r from-primary to-secondary text-white shadow-[0_0_40px_-10px_rgba(124,58,237,0.5)] hover:shadow-[0_0_60px_-15px_rgba(124,58,237,0.7)] hover:-translate-y-1 transition-all flex items-center justify-center gap-2 group">
-                <Sparkles className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-                Coba LexBot Gratis
-              </button>
-            </Link>
+            {isAuthenticated ? (
+              <Link href="/lexbot" className="w-full sm:w-auto">
+                <button className="w-full px-7 py-4 rounded-xl font-semibold bg-gradient-to-r from-primary to-secondary text-white shadow-[0_0_40px_-10px_rgba(124,58,237,0.5)] hover:shadow-[0_0_60px_-15px_rgba(124,58,237,0.7)] hover:-translate-y-1 transition-all flex items-center justify-center gap-2 group">
+                  <Sparkles className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+                  Buka LexBot AI
+                </button>
+              </Link>
+            ) : (
+              <Link href="/masuk" className="w-full sm:w-auto">
+                <button className="w-full px-7 py-4 rounded-xl font-semibold bg-gradient-to-r from-primary to-secondary text-white shadow-[0_0_40px_-10px_rgba(124,58,237,0.5)] hover:shadow-[0_0_60px_-15px_rgba(124,58,237,0.7)] hover:-translate-y-1 transition-all flex items-center justify-center gap-2 group">
+                  <Sparkles className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+                  Daftar Gratis Sekarang
+                </button>
+              </Link>
+            )}
 
             <Link href="/peraturan" className="w-full sm:w-auto">
               <button className="w-full px-7 py-4 rounded-xl font-semibold glass-card text-foreground hover:bg-white/10 transition-all flex items-center justify-center gap-2">
@@ -91,10 +102,10 @@ export function Hero() {
               </button>
             </Link>
 
-            <Link href="/agents" className="w-full sm:w-auto">
+            <Link href="/harga" className="w-full sm:w-auto">
               <button className="w-full px-7 py-4 rounded-xl font-semibold border border-white/20 text-foreground hover:bg-white/5 transition-all flex items-center justify-center gap-2">
-                <Bot className="w-5 h-5 text-muted-foreground" />
-                19 Pakar AI
+                <Crown className="w-5 h-5 text-muted-foreground" />
+                Lihat Paket
               </button>
             </Link>
           </motion.div>
@@ -105,7 +116,7 @@ export function Hero() {
             transition={{ delay: 0.8 }}
             className="mt-6 text-xs text-muted-foreground"
           >
-            Tidak perlu kartu kredit · Daftar gratis · Langsung konsultasi
+            Gratis selamanya · Tidak perlu kartu kredit · Upgrade kapan saja
           </motion.p>
         </div>
       </div>

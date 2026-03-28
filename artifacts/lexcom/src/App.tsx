@@ -30,6 +30,9 @@ import PetaPreseden from "@/pages/PetaPreseden";
 import PenulisCerdas from "@/pages/PenulisCerdas";
 import ChatbotBuilder from "@/pages/ChatbotBuilder";
 import EbookBuilder from "@/pages/EbookBuilder";
+import Harga from "@/pages/Harga";
+import Masuk from "@/pages/Masuk";
+import Profil from "@/pages/Profil";
 import { FloatingLexBot } from "@/components/FloatingLexBot";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 
@@ -65,6 +68,9 @@ function Router() {
       <Route path="/penulis-cerdas" component={PenulisCerdas} />
       <Route path="/chatbot-builder" component={ChatbotBuilder} />
       <Route path="/ebook-builder" component={EbookBuilder} />
+      <Route path="/harga" component={Harga} />
+      <Route path="/masuk" component={Masuk} />
+      <Route path="/profil" component={Profil} />
       <Route component={NotFound} />
     </Switch>
   );

@@ -1,9 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "wouter";
-import { Scale, Menu, X, LogIn, LogOut, Loader2, Sun, Moon, ChevronDown } from "lucide-react";
+import { Scale, Menu, X, LogIn, LogOut, Loader2, Sun, Moon, ChevronDown, User, Crown, Settings, BarChart3 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@workspace/replit-auth-web";
 import { useTheme } from "@/contexts/ThemeContext";
+
+const PLAN_BADGE: Record<string, { label: string; color: string; bg: string; icon: string }> = {
+  free:    { label: "Gratis",  color: "text-muted-foreground", bg: "bg-white/10",      icon: "🆓" },
+  starter: { label: "Starter", color: "text-blue-400",         bg: "bg-blue-500/15",   icon: "⚡" },
+  pro:     { label: "Pro",     color: "text-violet-400",       bg: "bg-violet-500/15", icon: "🔥" },
+  advokat: { label: "Advokat", color: "text-amber-400",        bg: "bg-amber-500/15",  icon: "👑" },
+};
 
 const MENU_GROUPS = [
   {
@@ -96,6 +103,9 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
+  const [userDropdownOpen, setUserDropdownOpen] = useState(false);
+  const [userPlanId, setUserPlanId] = useState<string>("free");
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const { user, isLoading, isAuthenticated, login, logout } = useAuth();
   const [location] = useLocation();
   const { theme, toggleTheme } = useTheme();
@@ -109,7 +119,27 @@ export function Navbar() {
   useEffect(() => {
     setMegaMenuOpen(false);
     setIsMobileMenuOpen(false);
+    setUserDropdownOpen(false);
   }, [location]);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetch("/api/user/profile", { credentials: "include" })
+        .then(r => r.ok ? r.json() : null)
+        .then(d => { if (d?.planId) setUserPlanId(d.planId); })
+        .catch(() => {});
+    }
+  }, [isAuthenticated]);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setUserDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const isActive = (href: string) => {
     if (href === "/") return location === "/";
@@ -203,33 +233,81 @@ export function Navbar() {
             </div>
           </nav>
 
-          <div className="hidden md:flex items-center gap-3">
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted transition-all"
-              aria-label={theme === "dark" ? "Mode terang" : "Mode gelap"}
-            >
-              {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+          <div className="hidden md:flex items-center gap-2">
+            {/* Theme toggle */}
+            <button onClick={toggleTheme} className="p-2 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted transition-all" aria-label="Toggle theme">
+              {theme === "dark" ? <Sun className="w-4.5 h-4.5" /> : <Moon className="w-4.5 h-4.5" />}
             </button>
+
+            {/* Harga link */}
+            <Link href="/harga" className="text-sm font-medium text-muted-foreground hover:text-foreground px-3 py-1.5 rounded-lg hover:bg-muted transition-all">
+              Harga
+            </Link>
+
             {isLoading ? (
               <Loader2 className="w-5 h-5 animate-spin text-muted-foreground" />
             ) : isAuthenticated ? (
-              <div className="flex items-center gap-3">
-                <span className="text-sm font-medium text-muted-foreground">{user?.name || user?.email || "User"}</span>
-                <button
-                  onClick={logout}
-                  className="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold bg-muted text-foreground hover:bg-muted/80 transition-all"
+              /* User Dropdown */
+              <div className="relative" ref={dropdownRef}>
+                <button onClick={() => setUserDropdownOpen(!userDropdownOpen)}
+                  className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-all"
                 >
-                  <LogOut className="w-3.5 h-3.5" /> Keluar
+                  {user?.profileImageUrl ? (
+                    <img src={user.profileImageUrl} className="w-6 h-6 rounded-full" alt="avatar" />
+                  ) : (
+                    <div className="w-6 h-6 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white text-[10px] font-bold">
+                      {(user?.firstName?.[0] || user?.email?.[0] || "U").toUpperCase()}
+                    </div>
+                  )}
+                  <span className="text-xs font-semibold text-foreground max-w-[80px] truncate">
+                    {user?.firstName || user?.email?.split("@")[0] || "Akun"}
+                  </span>
+                  <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-bold ${PLAN_BADGE[userPlanId]?.bg} ${PLAN_BADGE[userPlanId]?.color}`}>
+                    {PLAN_BADGE[userPlanId]?.icon}
+                  </span>
+                  <ChevronDown className={`w-3 h-3 text-muted-foreground transition-transform ${userDropdownOpen ? "rotate-180" : ""}`} />
                 </button>
+
+                <AnimatePresence>
+                  {userDropdownOpen && (
+                    <motion.div initial={{ opacity: 0, y: 8, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 8, scale: 0.95 }} transition={{ duration: 0.15 }}
+                      className="absolute right-0 top-full mt-2 w-52 glass-panel rounded-2xl border border-white/10 shadow-xl overflow-hidden z-50">
+                      {/* User info header */}
+                      <div className="p-3 border-b border-white/10">
+                        <p className="text-xs font-bold text-foreground">{user?.firstName ? `${user.firstName} ${user.lastName || ""}`.trim() : user?.email?.split("@")[0]}</p>
+                        <p className="text-[10px] text-muted-foreground truncate">{user?.email}</p>
+                        <div className={`inline-flex items-center gap-1 mt-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold ${PLAN_BADGE[userPlanId]?.bg} ${PLAN_BADGE[userPlanId]?.color}`}>
+                          {PLAN_BADGE[userPlanId]?.icon} Paket {PLAN_BADGE[userPlanId]?.label}
+                        </div>
+                      </div>
+                      {/* Menu items */}
+                      <div className="p-1.5">
+                        {[
+                          { icon: User,     label: "Profil Saya",     href: "/profil" },
+                          { icon: BarChart3, label: "Penggunaan AI",  href: "/profil" },
+                          { icon: Crown,    label: "Upgrade Paket",   href: "/harga" },
+                        ].map((item, i) => (
+                          <Link key={i} href={item.href} onClick={() => setUserDropdownOpen(false)}
+                            className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-white/5 transition-colors">
+                            <item.icon className="w-3.5 h-3.5" /> {item.label}
+                          </Link>
+                        ))}
+                        <div className="h-px bg-white/10 my-1" />
+                        <button onClick={() => { logout(); setUserDropdownOpen(false); }}
+                          className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-red-400 hover:bg-red-500/10 transition-colors">
+                          <LogOut className="w-3.5 h-3.5" /> Keluar
+                        </button>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             ) : (
-              <button
-                onClick={login}
-                className="flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold bg-primary text-primary-foreground hover:opacity-90 transition-all shadow-lg hover:-translate-y-0.5"
-              >
-                <LogIn className="w-4 h-4" /> Masuk
-              </button>
+              <Link href="/masuk">
+                <button className="flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold bg-primary text-primary-foreground hover:opacity-90 transition-all shadow-lg hover:-translate-y-0.5">
+                  <LogIn className="w-4 h-4" /> Masuk
+                </button>
+              </Link>
             )}
           </div>
 
@@ -299,21 +377,45 @@ export function Navbar() {
                 <div className="flex justify-center p-4"><Loader2 className="w-6 h-6 animate-spin text-muted-foreground" /></div>
               ) : isAuthenticated ? (
                 <>
-                  <div className="px-2 py-1 text-sm text-muted-foreground">{user?.name || user?.email || "User"}</div>
-                  <button
-                    onClick={() => { logout(); setIsMobileMenuOpen(false); }}
-                    className="w-full flex justify-center items-center gap-2 px-5 py-3 rounded-xl text-base font-semibold bg-muted text-foreground"
-                  >
-                    <LogOut className="w-5 h-5" /> Keluar
+                  <div className="flex items-center gap-3 px-2 py-2 rounded-xl bg-white/5 border border-white/10">
+                    {user?.profileImageUrl ? (
+                      <img src={user.profileImageUrl} className="w-9 h-9 rounded-xl" alt="avatar" />
+                    ) : (
+                      <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold">
+                        {(user?.firstName?.[0] || user?.email?.[0] || "U").toUpperCase()}
+                      </div>
+                    )}
+                    <div>
+                      <p className="text-sm font-bold text-foreground">{user?.firstName || user?.email?.split("@")[0]}</p>
+                      <div className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[10px] font-bold mt-0.5 ${PLAN_BADGE[userPlanId]?.bg} ${PLAN_BADGE[userPlanId]?.color}`}>
+                        {PLAN_BADGE[userPlanId]?.icon} Paket {PLAN_BADGE[userPlanId]?.label}
+                      </div>
+                    </div>
+                  </div>
+                  <Link href="/profil" onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium bg-white/5 border border-white/10 text-foreground hover:bg-white/10 transition-colors">
+                    <User className="w-4 h-4" /> Profil Saya
+                  </Link>
+                  <Link href="/harga" onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium bg-primary/10 border border-primary/20 text-primary hover:bg-primary/20 transition-colors">
+                    <Crown className="w-4 h-4" /> Upgrade Paket
+                  </Link>
+                  <button onClick={() => { logout(); setIsMobileMenuOpen(false); }}
+                    className="w-full flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium text-red-400 border border-red-500/20 bg-red-500/10 hover:bg-red-500/20 transition-colors">
+                    <LogOut className="w-4 h-4" /> Keluar
                   </button>
                 </>
               ) : (
-                <button
-                  onClick={() => { login(); setIsMobileMenuOpen(false); }}
-                  className="w-full flex justify-center items-center gap-2 px-5 py-3 rounded-xl text-base font-semibold bg-gradient-to-r from-primary to-secondary text-white"
-                >
-                  <LogIn className="w-5 h-5" /> Masuk
-                </button>
+                <>
+                  <Link href="/masuk" onClick={() => setIsMobileMenuOpen(false)}
+                    className="w-full flex justify-center items-center gap-2 px-5 py-3 rounded-xl text-base font-semibold bg-gradient-to-r from-primary to-secondary text-white">
+                    <LogIn className="w-5 h-5" /> Masuk / Daftar Gratis
+                  </Link>
+                  <Link href="/harga" onClick={() => setIsMobileMenuOpen(false)}
+                    className="w-full flex justify-center items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium bg-white/5 border border-white/10 text-muted-foreground hover:text-foreground transition-colors">
+                    <Crown className="w-4 h-4" /> Lihat Paket & Harga
+                  </Link>
+                </>
               )}
             </div>
           </motion.div>

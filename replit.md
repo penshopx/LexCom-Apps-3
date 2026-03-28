@@ -72,9 +72,22 @@ Every package extends `tsconfig.base.json` which sets `composite: true`. The roo
 - `/penulis-cerdas` — Smart Writer: 3-agent pipeline (Researcher→Drafter→Editor) for articles, legal memos, academic papers, skripsi, MOU drafts; supports 8 doc types; 3-step wizard
 - `/chatbot-builder` — No-code custom legal chatbot builder with 8 specialty options, personality config, knowledge base selection, live chat preview, and embed code generator
 - `/ebook-builder` — AI ebook/module builder: select template (6 types), manage chapters, AI generates each chapter, preview assembled ebook, export full content
-- Replit Auth integration (login/logout)
+- `/harga` — Pricing page with 4 tiers (Gratis/Starter Rp79k/Pro Rp199k/Advokat Rp499k), annual toggle (25% off), feature comparison, FAQ, WhatsApp purchase CTA
+- `/masuk` — Auth gateway page with value proposition, free features list, target user cards, and Replit OAuth login button
+- `/profil` — User profile dashboard with plan info, usage bar, quick links, stats, account info; redirects to /masuk if unauthenticated
+- Replit Auth integration (login/logout) — Replit OIDC OAuth, sessions in DB, auth middleware, `useAuth()` hook
+- User plan system: `plans` + `subscriptions` + `usage_logs` DB tables; `/api/user/profile` endpoint returns planId + usageToday
+- Navbar enhanced: user dropdown with avatar, plan badge (🆓⚡🔥👑), Profil/Upgrade/Keluar links; "Harga" link; mobile user menu with plan info
+- Hero CTA: shows "Daftar Gratis Sekarang" → /masuk for guests, "Buka LexBot AI" → /lexbot for logged-in; "Lihat Paket" → /harga
 - Dark/Light mode toggle — ThemeContext in `src/contexts/ThemeContext.tsx`, persisted to localStorage, sun/moon toggle in Navbar
 - PWA support — `vite-plugin-pwa` with manifest, service worker (workbox), law-themed PNG icons (192/512), installable on Android
+
+### Monetization Model
+- Free tier: forever free, 5 AI queries/day, database access, calculators, glossary
+- Starter (Rp79k/bln, Rp59k annual): 50 queries/day, all 19 AI agents, document generator, case/doc management
+- Pro (Rp199k/bln, Rp149k annual): 200 queries/day, Studio AI (Penulis/Chatbot/Ebook), Riset AI, Telaah Dokumen, Peta Preseden
+- Advokat/Enterprise (Rp499k/bln, Rp399k annual): unlimited, chatbot embed, API access, white-label, multi-user, 24/7 support
+- Payment: WhatsApp-based for now (structured message per plan), replace with Midtrans/Xendit later
 
 ### Key Data Files
 - `src/data/glosarium.ts` — 120+ legal terms across 10 categories

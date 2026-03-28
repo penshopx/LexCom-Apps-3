@@ -7,6 +7,7 @@ import documentsRouter from "./documents";
 import forumRouter from "./forum";
 import assistantRouter from "./assistant";
 import agenticRouter from "./agentic";
+import userProfileRouter from "./userProfile";
 
 const router: IRouter = Router();
 
@@ -18,5 +19,6 @@ router.use(documentsRouter);
 router.use(forumRouter);
 router.use(assistantRouter);
 router.use(agenticRouter);
+router.use(userProfileRouter);
 
 export default router;
