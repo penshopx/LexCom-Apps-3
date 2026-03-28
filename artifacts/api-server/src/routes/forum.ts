@@ -63,10 +63,10 @@ router.get("/forum/threads/:id", async (req, res) => {
   }
 });
 
-router.post("/forum/threads/:id/replies", async (req, res) => {
+async function createReply(req: any, res: any) {
   try {
     const threadId = parseInt(req.params.id);
-    const { content } = req.body;
+    const { content, authorName: anonName } = req.body;
     if (!content) {
       res.status(400).json({ error: "content is required" });
       return;
@@ -77,7 +77,7 @@ router.post("/forum/threads/:id/replies", async (req, res) => {
       return;
     }
     const userId = req.user?.id ?? null;
-    const authorName = req.user?.name || req.user?.email || "Anonim";
+    const authorName = req.user?.name || req.user?.email || anonName || "Anonim";
     const [reply] = await db
       .insert(forumRepliesTable)
       .values({ threadId, userId, authorName, content })
@@ -91,6 +91,9 @@ router.post("/forum/threads/:id/replies", async (req, res) => {
     req.log.error({ err }, "Failed to create reply");
     res.status(500).json({ error: "Internal server error" });
   }
-});
+}
+
+router.post("/forum/threads/:id/replies", createReply);
+router.post("/forum/threads/:id", createReply);
 
 export default router;

@@ -58,7 +58,6 @@ export default function ForumThread() {
 
   async function submitReply() {
     if (!replyContent.trim()) return;
-    if (!isAuthenticated) { login(); return; }
     setSubmitting(true);
     try {
       const res = await fetch(`/api/forum/threads/${id}/replies`, {
@@ -163,15 +162,15 @@ export default function ForumThread() {
           {/* Reply form */}
           <div ref={bottomRef} className="glass-card rounded-2xl border border-white/15 p-5">
             <h3 className="font-semibold mb-3 text-sm">Tulis Balasan</h3>
-            {isAuthenticated ? (
-              <div className="space-y-3">
-                <textarea
-                  value={replyContent}
-                  onChange={e => setReplyContent(e.target.value)}
-                  placeholder="Tulis balasan Anda..."
-                  rows={4}
-                  className="w-full px-3 py-2 text-sm bg-white/5 border border-white/10 rounded-lg text-foreground placeholder:text-muted-foreground resize-none focus:outline-none focus:ring-1 focus:ring-primary/50"
-                />
+            <div className="space-y-3">
+              <textarea
+                value={replyContent}
+                onChange={e => setReplyContent(e.target.value)}
+                placeholder="Tulis balasan Anda..."
+                rows={4}
+                className="w-full px-3 py-2 text-sm bg-white/5 border border-white/10 rounded-lg text-foreground placeholder:text-muted-foreground resize-none focus:outline-none focus:ring-1 focus:ring-primary/50"
+              />
+              <div className="flex items-center gap-3">
                 <Button
                   onClick={submitReply}
                   disabled={!replyContent.trim() || submitting}
@@ -180,13 +179,11 @@ export default function ForumThread() {
                   <Send className="w-4 h-4" />
                   {submitting ? "Mengirim..." : "Kirim Balasan"}
                 </Button>
+                {!isAuthenticated && (
+                  <p className="text-xs text-muted-foreground">atau <button onClick={login} className="text-primary hover:underline">masuk</button> agar nama Anda tampil</p>
+                )}
               </div>
-            ) : (
-              <div className="text-center py-4">
-                <p className="text-sm text-muted-foreground mb-3">Masuk untuk membalas thread ini</p>
-                <Button onClick={login} className="rounded-full px-6">Masuk Sekarang</Button>
-              </div>
-            )}
+            </div>
           </div>
         </div>
       </main>
