@@ -6,6 +6,7 @@ import casesRouter from "./cases";
 import documentsRouter from "./documents";
 import forumRouter from "./forum";
 import assistantRouter from "./assistant";
+import agenticRouter from "./agentic";
 
 const router: IRouter = Router();
 
@@ -16,5 +17,6 @@ router.use(casesRouter);
 router.use(documentsRouter);
 router.use(forumRouter);
 router.use(assistantRouter);
+router.use(agenticRouter);
 
 export default router;
