@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { Sparkles, FileText, Search, ArrowRight } from "lucide-react";
+import { Sparkles, FileText, Search } from "lucide-react";
+import { Link } from "wouter";
 
 export function Hero() {
   return (
@@ -73,20 +74,26 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="flex flex-col sm:flex-row items-center gap-4 w-full justify-center"
           >
-            <button className="w-full sm:w-auto px-8 py-4 rounded-xl font-semibold bg-gradient-to-r from-primary to-secondary text-white shadow-[0_0_40px_-10px_rgba(124,58,237,0.5)] hover:shadow-[0_0_60px_-15px_rgba(124,58,237,0.7)] hover:-translate-y-1 transition-all flex items-center justify-center gap-2 group">
-              <Sparkles className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-              Coba Agentic AI
-            </button>
+            <Link href="/agents" className="w-full sm:w-auto">
+              <button className="w-full px-8 py-4 rounded-xl font-semibold bg-gradient-to-r from-primary to-secondary text-white shadow-[0_0_40px_-10px_rgba(124,58,237,0.5)] hover:shadow-[0_0_60px_-15px_rgba(124,58,237,0.7)] hover:-translate-y-1 transition-all flex items-center justify-center gap-2 group">
+                <Sparkles className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+                Coba Agentic AI
+              </button>
+            </Link>
             
-            <button className="w-full sm:w-auto px-8 py-4 rounded-xl font-semibold glass-card text-foreground hover:bg-white/10 transition-all flex items-center justify-center gap-2">
-              <Search className="w-5 h-5 text-muted-foreground" />
-              Cari Peraturan
-            </button>
+            <Link href="/peraturan" className="w-full sm:w-auto">
+              <button className="w-full px-8 py-4 rounded-xl font-semibold glass-card text-foreground hover:bg-white/10 transition-all flex items-center justify-center gap-2">
+                <Search className="w-5 h-5 text-muted-foreground" />
+                Cari Peraturan
+              </button>
+            </Link>
             
-            <button className="w-full sm:w-auto px-8 py-4 rounded-xl font-semibold border border-white/20 text-foreground hover:bg-white/5 transition-all flex items-center justify-center gap-2">
-              <FileText className="w-5 h-5 text-muted-foreground" />
-              Buat Dokumen
-            </button>
+            <Link href="/documents" className="w-full sm:w-auto">
+              <button className="w-full px-8 py-4 rounded-xl font-semibold border border-white/20 text-foreground hover:bg-white/5 transition-all flex items-center justify-center gap-2">
+                <FileText className="w-5 h-5 text-muted-foreground" />
+                Buat Dokumen
+              </button>
+            </Link>
           </motion.div>
         </div>
       </div>

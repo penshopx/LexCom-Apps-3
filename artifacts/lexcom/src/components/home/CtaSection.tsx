@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Users, Scale } from "lucide-react";
+import { Link } from "wouter";
 
 export function CtaSection() {
   return (
@@ -31,9 +32,11 @@ export function CtaSection() {
             <p className="text-muted-foreground mb-8">
               Akses konsultasi hukum gratis, edukasi, dan pendampingan dari praktisi berlisensi.
             </p>
-            <button className="w-full py-4 rounded-xl font-bold bg-white text-background hover:bg-gray-200 transition-colors mt-auto">
-              Daftar sebagai Anggota
-            </button>
+            <Link href="/agents" className="w-full mt-auto">
+              <button className="w-full py-4 rounded-xl font-bold bg-white text-background hover:bg-gray-200 transition-colors">
+                Mulai Konsultasi Gratis
+              </button>
+            </Link>
           </motion.div>
 
           {/* Card 2 */}
@@ -49,9 +52,11 @@ export function CtaSection() {
             <p className="text-muted-foreground mb-8">
               Akses alat bantu digital, kelola perkara, dan berkontribusi kepada masyarakat.
             </p>
-            <button className="w-full py-4 rounded-xl font-bold bg-primary text-primary-foreground hover:bg-primary/90 transition-colors mt-auto shadow-lg shadow-primary/25">
-              Daftar sebagai Praktisi
-            </button>
+            <Link href="/pengacara" className="w-full mt-auto">
+              <button className="w-full py-4 rounded-xl font-bold bg-primary text-primary-foreground hover:bg-primary/90 transition-colors shadow-lg shadow-primary/25">
+                Daftar sebagai Praktisi
+              </button>
+            </Link>
           </motion.div>
         </div>
 

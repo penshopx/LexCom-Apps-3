@@ -1,21 +1,22 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageSquare, Circle } from "lucide-react";
+import { Link } from "wouter";
 
 type Category = "Semua" | "Bisnis & Korporasi" | "Personal & Keluarga";
 
 const agents = [
-  { id: 1, emoji: "🏢", name: "Corporate Lawyer AI", category: "Bisnis & Korporasi", desc: "Spesialis pendirian perusahaan, merger & akuisisi, tata kelola perusahaan, kontrak bisnis, dan kepatuhan korporasi di Indonesia." },
-  { id: 2, emoji: "💰", name: "Tax Lawyer AI", category: "Bisnis & Korporasi", desc: "Ahli perpajakan Indonesia, perencanaan pajak, sengketa pajak, kepatuhan fiskal." },
-  { id: 3, emoji: "👔", name: "Employment Lawyer AI", category: "Bisnis & Korporasi", desc: "Spesialis hubungan industrial, PHK, kontrak kerja, upah minimum, K3." },
-  { id: 4, emoji: "🌍", name: "Immigration Lawyer AI", category: "Bisnis & Korporasi", desc: "Spesialis visa, izin tinggal, kewarganegaraan, deportasi." },
-  { id: 5, emoji: "📊", name: "Bankruptcy Lawyer AI", category: "Bisnis & Korporasi", desc: "Ahli kepailitan, PKPU, restrukturisasi utang, dan perlindungan kreditor maupun debitor." },
-  { id: 6, emoji: "📈", name: "Securities Lawyer AI", category: "Bisnis & Korporasi", desc: "Ahli dalam regulasi pasar modal, sekuritas, penawaran umum, dan perlindungan investor." },
-  { id: 7, emoji: "⚖️", name: "Civil Rights Lawyer AI", category: "Personal & Keluarga", desc: "Pembela hak-hak sipil dan HAM, diskriminasi, kebebasan berekspresi." },
-  { id: 8, emoji: "🛡️", name: "Criminal Defense AI", category: "Personal & Keluarga", desc: "Ahli hukum pidana untuk pembelaan terdakwa, analisis dakwaan, strategi pembelaan." },
-  { id: 9, emoji: "👨‍👩‍👧", name: "Family Lawyer AI", category: "Personal & Keluarga", desc: "Menangani perceraian, hak asuh anak, pembagian harta, adopsi, dan permasalahan keluarga." },
-  { id: 10, emoji: "🏠", name: "Real Estate Lawyer AI", category: "Personal & Keluarga", desc: "Spesialis transaksi properti, sengketa tanah, sertifikasi hak atas tanah." },
-  { id: 11, emoji: "🚗", name: "Personal Injury AI", category: "Personal & Keluarga", desc: "Spesialis kasus kecelakaan, cedera akibat kelalaian, klaim asuransi, dan kompensasi korban." },
+  { id: 1, key: "corporate", emoji: "🏢", name: "Corporate Lawyer AI", category: "Bisnis & Korporasi" as Category, desc: "Spesialis pendirian perusahaan, merger & akuisisi, tata kelola perusahaan, kontrak bisnis, dan kepatuhan korporasi di Indonesia." },
+  { id: 2, key: "tax", emoji: "💰", name: "Tax Lawyer AI", category: "Bisnis & Korporasi" as Category, desc: "Ahli perpajakan Indonesia, perencanaan pajak, sengketa pajak, kepatuhan fiskal." },
+  { id: 3, key: "employment", emoji: "👔", name: "Employment Lawyer AI", category: "Bisnis & Korporasi" as Category, desc: "Spesialis hubungan industrial, PHK, kontrak kerja, upah minimum, K3." },
+  { id: 4, key: "immigration", emoji: "🌍", name: "Immigration Lawyer AI", category: "Bisnis & Korporasi" as Category, desc: "Spesialis visa, izin tinggal, kewarganegaraan, deportasi." },
+  { id: 5, key: "bankruptcy", emoji: "📊", name: "Bankruptcy Lawyer AI", category: "Bisnis & Korporasi" as Category, desc: "Ahli kepailitan, PKPU, restrukturisasi utang, dan perlindungan kreditor maupun debitor." },
+  { id: 6, key: "securities", emoji: "📈", name: "Securities Lawyer AI", category: "Bisnis & Korporasi" as Category, desc: "Ahli dalam regulasi pasar modal, sekuritas, penawaran umum, dan perlindungan investor." },
+  { id: 7, key: "civilrights", emoji: "⚖️", name: "Civil Rights Lawyer AI", category: "Personal & Keluarga" as Category, desc: "Pembela hak-hak sipil dan HAM, diskriminasi, kebebasan berekspresi." },
+  { id: 8, key: "criminal", emoji: "🛡️", name: "Criminal Defense AI", category: "Personal & Keluarga" as Category, desc: "Ahli hukum pidana untuk pembelaan terdakwa, analisis dakwaan, strategi pembelaan." },
+  { id: 9, key: "family", emoji: "👨‍👩‍👧", name: "Family Lawyer AI", category: "Personal & Keluarga" as Category, desc: "Menangani perceraian, hak asuh anak, pembagian harta, adopsi, dan permasalahan keluarga." },
+  { id: 10, key: "realestate", emoji: "🏠", name: "Real Estate Lawyer AI", category: "Personal & Keluarga" as Category, desc: "Spesialis transaksi properti, sengketa tanah, sertifikasi hak atas tanah." },
+  { id: 11, key: "personalinjury", emoji: "🚗", name: "Personal Injury AI", category: "Personal & Keluarga" as Category, desc: "Spesialis kasus kecelakaan, cedera akibat kelalaian, klaim asuransi, dan kompensasi korban." },
 ];
 
 export function AgentsSection() {
@@ -69,31 +70,34 @@ export function AgentsSection() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3 }}
-                className="glass-card rounded-2xl p-6 flex flex-col h-full group"
               >
-                <div className="flex justify-between items-start mb-6">
-                  <div className="w-14 h-14 rounded-xl bg-white/5 flex items-center justify-center text-3xl border border-white/10 group-hover:scale-110 transition-transform">
-                    {agent.emoji}
+                <Link href={`/agents/${agent.key}`} className="block h-full">
+                  <div className="glass-card rounded-2xl p-6 flex flex-col h-full group cursor-pointer hover:border-primary/30 transition-all">
+                    <div className="flex justify-between items-start mb-6">
+                      <div className="w-14 h-14 rounded-xl bg-white/5 flex items-center justify-center text-3xl border border-white/10 group-hover:scale-110 transition-transform">
+                        {agent.emoji}
+                      </div>
+                      <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium">
+                        <Circle className="w-2 h-2 fill-current" /> Online
+                      </div>
+                    </div>
+                    
+                    <h3 className="text-xl font-display font-bold text-foreground mb-2">
+                      {agent.name}
+                    </h3>
+                    <p className="text-xs font-medium text-primary mb-4 uppercase tracking-wider">
+                      {agent.category}
+                    </p>
+                    <p className="text-muted-foreground text-sm leading-relaxed flex-grow mb-8">
+                      {agent.desc}
+                    </p>
+                    
+                    <div className="w-full py-3 px-4 rounded-xl bg-white/5 border border-white/10 group-hover:bg-primary/20 group-hover:border-primary/50 text-foreground group-hover:text-primary transition-all flex items-center justify-center gap-2 group-hover:shadow-[0_0_20px_-5px_rgba(124,58,237,0.3)]">
+                      <MessageSquare className="w-4 h-4" />
+                      <span className="font-semibold text-sm">Mulai Konsultasi →</span>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium">
-                    <Circle className="w-2 h-2 fill-current" /> Online
-                  </div>
-                </div>
-                
-                <h3 className="text-xl font-display font-bold text-foreground mb-2">
-                  {agent.name}
-                </h3>
-                <p className="text-xs font-medium text-primary mb-4 uppercase tracking-wider">
-                  {agent.category}
-                </p>
-                <p className="text-muted-foreground text-sm leading-relaxed flex-grow mb-8">
-                  {agent.desc}
-                </p>
-                
-                <button className="w-full py-3 px-4 rounded-xl bg-white/5 border border-white/10 hover:bg-primary/20 hover:border-primary/50 text-foreground hover:text-primary transition-all flex items-center justify-center gap-2 group-hover:shadow-[0_0_20px_-5px_rgba(124,58,237,0.3)]">
-                  <MessageSquare className="w-4 h-4" />
-                  <span className="font-semibold text-sm">Klik untuk Chat &rarr;</span>
-                </button>
+                </Link>
               </motion.div>
             ))}
           </AnimatePresence>

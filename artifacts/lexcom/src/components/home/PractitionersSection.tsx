@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { FileEdit, FolderKanban, Search, Users, ArrowRight } from "lucide-react";
+import { FileEdit, FolderKanban, Search, Users } from "lucide-react";
+import { Link } from "wouter";
 
 const tools = [
   {
@@ -8,6 +9,7 @@ const tools = [
     desc: "Buat dokumen hukum profesional dengan template terstruktur.",
     tags: ["Gugatan & Jawaban", "Replik & Duplik", "Surat Kuasa", "Kontrak & Perjanjian"],
     action: "Coba Sekarang →",
+    href: "/documents",
     primary: true
   },
   {
@@ -16,6 +18,7 @@ const tools = [
     desc: "Kelola semua perkara hukum Anda dalam satu sistem terorganisir.",
     tags: ["Tracking Status Perkara", "Jadwal Sidang", "Dokumen Perkara", "Notifikasi Otomatis"],
     action: "Coba Sekarang →",
+    href: "/cases",
     primary: true
   },
   {
@@ -24,6 +27,7 @@ const tools = [
     desc: "Akses database peraturan perundang-undangan dan putusan pengadilan.",
     tags: ["Peraturan Perundangan", "Putusan Pengadilan", "Yurisprudensi", "Regulasi Terbaru"],
     action: "Eksplorasi →",
+    href: "/peraturan",
     primary: false
   },
   {
@@ -31,7 +35,8 @@ const tools = [
     title: "Forum Profesional",
     desc: "Diskusi eksklusif antar advokat dan praktisi hukum.",
     tags: ["Diskusi Kasus", "Sharing Pengetahuan", "Networking Advokat", "Konsultasi Sejawat"],
-    action: "Daftar sebagai Praktisi",
+    action: "Buka Forum →",
+    href: "/forum",
     primary: false
   }
 ];
@@ -85,13 +90,13 @@ export function PractitionersSection() {
                     ))}
                   </div>
 
-                  <button className={`inline-flex items-center gap-2 text-sm font-bold transition-all ${
+                  <Link href={tool.href} className={`inline-flex items-center gap-2 text-sm font-bold transition-all hover:translate-x-1 ${
                     tool.primary 
-                      ? "text-primary hover:text-primary-foreground hover:translate-x-1" 
-                      : "text-foreground hover:text-primary hover:translate-x-1"
+                      ? "text-primary hover:text-primary/80" 
+                      : "text-foreground hover:text-primary"
                   }`}>
                     {tool.action}
-                  </button>
+                  </Link>
                 </div>
               </div>
             </motion.div>
