@@ -128,8 +128,12 @@ export default function Putusan() {
                         <span className="text-xs text-muted-foreground">{formatTanggal(p.tanggal)}</span>
                       </div>
                       <p className="text-xs font-mono text-muted-foreground mb-1">{p.nomor}</p>
-                      <p className="text-sm text-muted-foreground line-clamp-2 group-hover:text-foreground transition-colors">
+                      <p className="text-xs text-muted-foreground/70 mb-1 truncate">Majelis: {p.majelis.split(";")[0].trim()}</p>
+                      <p className="text-sm text-muted-foreground line-clamp-2 group-hover:text-foreground transition-colors mb-2">
                         {p.pokok_perkara}
+                      </p>
+                      <p className="text-xs text-muted-foreground/60 line-clamp-1 italic">
+                        Amar: {p.amar.slice(0, 100)}…
                       </p>
                     </div>
                   </div>
