@@ -26,7 +26,7 @@ function timeAgo(dateStr: string) {
 const STATS = [
   { icon: Users, label: "Member Aktif", value: "12.400+", color: "text-blue-400" },
   { icon: MessageSquare, label: "Thread Diskusi", value: "3.800+", color: "text-purple-400" },
-  { icon: Bot, label: "Konsultasi AI", value: "28.000+", color: "text-primary" },
+  { icon: Bot, label: "Pertanyaan Terjawab", value: "9.200+", color: "text-primary" },
   { icon: BookOpen, label: "Artikel Panduan", value: "500+", color: "text-green-400" },
 ];
 

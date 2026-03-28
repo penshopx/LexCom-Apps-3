@@ -1,10 +1,10 @@
-import { Router, type IRouter } from "express";
+import { Router, type IRouter, type Request, type Response } from "express";
 import { db, forumThreadsTable, forumRepliesTable } from "@workspace/db";
 import { eq, desc } from "drizzle-orm";
 
 const router: IRouter = Router();
 
-router.get("/forum/threads", async (req, res) => {
+router.get("/forum/threads", async (req: Request, res: Response) => {
   try {
     const threads = await db
       .select()
@@ -17,24 +17,23 @@ router.get("/forum/threads", async (req, res) => {
   }
 });
 
-router.post("/forum/threads", async (req, res) => {
+router.post("/forum/threads", async (req: Request, res: Response) => {
   try {
-    const { title, content, category } = req.body;
+    const { title, content, category, authorName: anonName } = req.body as {
+      title?: string;
+      content?: string;
+      category?: string;
+      authorName?: string;
+    };
     if (!title || !content) {
       res.status(400).json({ error: "title and content are required" });
       return;
     }
     const userId = req.user?.id ?? null;
-    const authorName = req.user?.name || req.user?.email || "Anonim";
+    const authorName = req.user?.name || req.user?.email || anonName || "Anonim";
     const [thread] = await db
       .insert(forumThreadsTable)
-      .values({
-        userId,
-        authorName,
-        title,
-        content,
-        category: category || "Umum",
-      })
+      .values({ userId, authorName, title, content, category: category || "Umum" })
       .returning();
     res.status(201).json(thread);
   } catch (err) {
@@ -43,7 +42,7 @@ router.post("/forum/threads", async (req, res) => {
   }
 });
 
-router.get("/forum/threads/:id", async (req, res) => {
+router.get("/forum/threads/:id", async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);
     const [thread] = await db.select().from(forumThreadsTable).where(eq(forumThreadsTable.id, id));
@@ -63,10 +62,10 @@ router.get("/forum/threads/:id", async (req, res) => {
   }
 });
 
-async function createReply(req: any, res: any) {
+async function createReply(req: Request, res: Response): Promise<void> {
   try {
     const threadId = parseInt(req.params.id);
-    const { content, authorName: anonName } = req.body;
+    const { content, authorName: anonName } = req.body as { content?: string; authorName?: string };
     if (!content) {
       res.status(400).json({ error: "content is required" });
       return;

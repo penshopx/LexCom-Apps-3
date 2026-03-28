@@ -16,6 +16,27 @@ const CATEGORY_COLORS: Record<string, string> = {
   Umum: "bg-green-500/20 text-green-400 border-green-500/30",
 };
 
+interface ForumThread {
+  id: number;
+  userId: string | null;
+  authorName: string;
+  title: string;
+  content: string;
+  category: string;
+  replyCount: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface ForumReply {
+  id: number;
+  threadId: number;
+  userId: string | null;
+  authorName: string;
+  content: string;
+  createdAt: string;
+}
+
 function timeAgo(dateStr: string) {
   const diff = Date.now() - new Date(dateStr).getTime();
   const mins = Math.floor(diff / 60000);
@@ -31,8 +52,8 @@ export default function ForumThread() {
   const id = params.id;
   const { isAuthenticated, login } = useAuth();
   const { toast } = useToast();
-  const [thread, setThread] = useState<any>(null);
-  const [replies, setReplies] = useState<any[]>([]);
+  const [thread, setThread] = useState<ForumThread | null>(null);
+  const [replies, setReplies] = useState<ForumReply[]>([]);
   const [loading, setLoading] = useState(true);
   const [replyContent, setReplyContent] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -45,8 +66,8 @@ export default function ForumThread() {
   async function fetchThread() {
     try {
       const res = await fetch(`/api/forum/threads/${id}`, { credentials: "include" });
-      if (!res.ok) throw new Error();
-      const data = await res.json();
+      if (!res.ok) throw new Error("Failed to fetch");
+      const data = await res.json() as { thread: ForumThread; replies: ForumReply[] };
       setThread(data.thread);
       setReplies(data.replies);
     } catch {
@@ -66,10 +87,10 @@ export default function ForumThread() {
         credentials: "include",
         body: JSON.stringify({ content: replyContent }),
       });
-      if (!res.ok) throw new Error();
-      const newReply = await res.json();
+      if (!res.ok) throw new Error("Failed to submit");
+      const newReply = await res.json() as ForumReply;
       setReplies(prev => [...prev, newReply]);
-      setThread((t: any) => t ? { ...t, replyCount: t.replyCount + 1 } : t);
+      setThread(prev => prev ? { ...prev, replyCount: prev.replyCount + 1 } : prev);
       setReplyContent("");
       toast({ title: "Balasan berhasil dikirim!" });
       setTimeout(() => bottomRef.current?.scrollIntoView({ behavior: "smooth" }), 100);
@@ -122,7 +143,7 @@ export default function ForumThread() {
           {/* Thread */}
           <div className="glass-card rounded-2xl border border-white/15 p-6 mb-6">
             <div className="flex items-center gap-2 mb-3 flex-wrap">
-              <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${CATEGORY_COLORS[thread.category] || CATEGORY_COLORS.Umum}`}>
+              <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${CATEGORY_COLORS[thread.category] ?? CATEGORY_COLORS.Umum}`}>
                 <Tag className="w-2.5 h-2.5 inline mr-1" />{thread.category}
               </span>
             </div>
@@ -180,7 +201,13 @@ export default function ForumThread() {
                   {submitting ? "Mengirim..." : "Kirim Balasan"}
                 </Button>
                 {!isAuthenticated && (
-                  <p className="text-xs text-muted-foreground">atau <button onClick={login} className="text-primary hover:underline">masuk</button> agar nama Anda tampil</p>
+                  <p className="text-xs text-muted-foreground">
+                    atau{" "}
+                    <button onClick={login} className="text-primary hover:underline">
+                      masuk
+                    </button>{" "}
+                    agar nama Anda tampil
+                  </p>
                 )}
               </div>
             </div>
