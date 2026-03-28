@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { Scale, Menu, X, LogIn, LogOut, Loader2 } from "lucide-react";
+import { Scale, Menu, X, LogIn, LogOut, Loader2, Sun, Moon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@workspace/replit-auth-web";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { user, isLoading, isAuthenticated, login, logout } = useAuth();
   const [location] = useLocation();
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,15 +29,15 @@ export function Navbar() {
   ];
 
   const secondaryLinks = [
-    { name: "✨ LexBot", href: "/lexbot" },
-    { name: "🤖 Agentic AI", href: "/agentic-chatbots" },
-    { name: "📚 Kursus", href: "/kursus" },
-    { name: "⚖️ Putusan", href: "/putusan" },
-    { name: "👨‍⚖️ Pengacara", href: "/pengacara" },
-    { name: "📖 Panduan", href: "/panduan" },
-    { name: "📄 Dokumen", href: "/documents" },
-    { name: "📁 Kasus", href: "/cases" },
-    { name: "👥 Komunitas", href: "/komunitas" },
+    { name: "\u2728 LexBot", href: "/lexbot" },
+    { name: "\ud83e\udd16 Agentic AI", href: "/agentic-chatbots" },
+    { name: "\ud83d\udcda Kursus", href: "/kursus" },
+    { name: "\u2696\ufe0f Putusan", href: "/putusan" },
+    { name: "\ud83d\udc68\u200d\u2696\ufe0f Pengacara", href: "/pengacara" },
+    { name: "\ud83d\udcd6 Panduan", href: "/panduan" },
+    { name: "\ud83d\udcc4 Dokumen", href: "/documents" },
+    { name: "\ud83d\udcc1 Kasus", href: "/cases" },
+    { name: "\ud83d\udc65 Komunitas", href: "/komunitas" },
   ];
 
   const allLinks = [...primaryLinks, ...secondaryLinks];
@@ -53,7 +55,7 @@ export function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Row 1 */}
-        <div className="flex justify-between items-center py-3 border-b border-white/5">
+        <div className="flex justify-between items-center py-3 border-b border-border/30">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group flex-shrink-0">
             <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg shadow-primary/25 group-hover:shadow-primary/40 transition-all">
@@ -79,8 +81,15 @@ export function Navbar() {
             ))}
           </nav>
 
-          {/* Auth */}
+          {/* Auth + Theme Toggle */}
           <div className="hidden md:flex items-center gap-3">
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted transition-all"
+              aria-label={theme === "dark" ? "Aktifkan mode terang" : "Aktifkan mode gelap"}
+            >
+              {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            </button>
             {isLoading ? (
               <Loader2 className="w-5 h-5 animate-spin text-muted-foreground" />
             ) : isAuthenticated ? (
@@ -90,7 +99,7 @@ export function Navbar() {
                 </span>
                 <button
                   onClick={logout}
-                  className="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold bg-white/10 text-foreground hover:bg-white/20 transition-all"
+                  className="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold bg-muted text-foreground hover:bg-muted/80 transition-all"
                 >
                   <LogOut className="w-3.5 h-3.5" /> Keluar
                 </button>
@@ -98,20 +107,29 @@ export function Navbar() {
             ) : (
               <button
                 onClick={login}
-                className="flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold bg-white text-background hover:bg-gray-200 transition-all shadow-lg hover:-translate-y-0.5"
+                className="flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold bg-primary text-primary-foreground hover:opacity-90 transition-all shadow-lg hover:-translate-y-0.5"
               >
                 <LogIn className="w-4 h-4" /> Masuk
               </button>
             )}
           </div>
 
-          {/* Mobile Toggle */}
-          <button
-            className="md:hidden p-2 text-foreground"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X /> : <Menu />}
-          </button>
+          {/* Mobile: Theme Toggle + Menu Toggle */}
+          <div className="md:hidden flex items-center gap-2">
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted transition-all"
+              aria-label={theme === "dark" ? "Aktifkan mode terang" : "Aktifkan mode gelap"}
+            >
+              {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            </button>
+            <button
+              className="p-2 text-foreground"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? <X /> : <Menu />}
+            </button>
+          </div>
         </div>
 
         {/* Row 2 — Secondary Nav */}
@@ -123,7 +141,7 @@ export function Navbar() {
               className={`text-xs font-medium px-3 py-1.5 rounded-full whitespace-nowrap transition-all ${
                 isActive(link.href)
                   ? "bg-primary/20 text-primary border border-primary/30"
-                  : "text-muted-foreground hover:text-foreground hover:bg-white/5 border border-transparent"
+                  : "text-muted-foreground hover:text-foreground hover:bg-muted border border-transparent"
               }`}
             >
               {link.name}
@@ -139,7 +157,7 @@ export function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden glass-panel border-t border-white/5"
+            className="md:hidden glass-panel border-t border-border/30"
           >
             <div className="px-4 py-6 flex flex-col gap-3">
               {allLinks.map((link) => (
@@ -154,7 +172,7 @@ export function Navbar() {
                   {link.name}
                 </Link>
               ))}
-              <div className="h-px bg-white/10 my-2" />
+              <div className="h-px bg-border my-2" />
               {isLoading ? (
                 <div className="flex justify-center p-4">
                   <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
@@ -166,7 +184,7 @@ export function Navbar() {
                   </div>
                   <button
                     onClick={() => { logout(); setIsMobileMenuOpen(false); }}
-                    className="w-full flex justify-center items-center gap-2 px-5 py-3 rounded-xl text-base font-semibold bg-white/10 text-white"
+                    className="w-full flex justify-center items-center gap-2 px-5 py-3 rounded-xl text-base font-semibold bg-muted text-foreground"
                   >
                     <LogOut className="w-5 h-5" /> Keluar
                   </button>

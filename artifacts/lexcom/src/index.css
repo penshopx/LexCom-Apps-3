@@ -36,8 +36,8 @@
   --radius-2xl: 1.5rem;
 }
 
-:root {
-  /* Enforcing Dark Mode */
+/* Dark mode (default) */
+:root, .dark {
   --background: 230 25% 6%;
   --foreground: 210 40% 98%;
   
@@ -67,6 +67,37 @@
   --ring: 255 85% 65%;
 }
 
+/* Light mode */
+.light {
+  --background: 0 0% 98%;
+  --foreground: 230 25% 10%;
+  
+  --card: 0 0% 100%;
+  --card-foreground: 230 25% 10%;
+  
+  --popover: 0 0% 100%;
+  --popover-foreground: 230 25% 10%;
+  
+  --primary: 255 75% 55%;
+  --primary-foreground: 0 0% 100%;
+  
+  --secondary: 220 75% 50%;
+  --secondary-foreground: 0 0% 100%;
+  
+  --muted: 220 14% 94%;
+  --muted-foreground: 220 10% 45%;
+  
+  --accent: 280 75% 50%;
+  --accent-foreground: 0 0% 100%;
+  
+  --destructive: 0 62.8% 45%;
+  --destructive-foreground: 0 0% 100%;
+  
+  --border: 220 14% 88%;
+  --input: 220 14% 88%;
+  --ring: 255 75% 55%;
+}
+
 @layer base {
   * {
     @apply border-border;
@@ -88,11 +119,20 @@
 }
 
 .glass-panel {
-  @apply bg-card/60 backdrop-blur-xl border border-white/5 shadow-2xl;
+  @apply bg-card/60 backdrop-blur-xl border border-border shadow-2xl;
 }
 
 .glass-card {
-  @apply bg-card/40 backdrop-blur-md border border-white/10 hover:border-primary/50 transition-all duration-300;
+  @apply bg-card/40 backdrop-blur-md border border-border hover:border-primary/50 transition-all duration-300;
+}
+
+/* Light mode glass overrides */
+.light .glass-panel {
+  @apply bg-white/80 border-border/60;
+}
+
+.light .glass-card {
+  @apply bg-white/60 border-border/60;
 }
 
 /* Animated background mesh */

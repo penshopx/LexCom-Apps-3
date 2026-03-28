@@ -56,6 +56,8 @@ Every package extends `tsconfig.base.json` which sets `composite: true`. The roo
 - `/cases` — Legal case management (CRUD)
 - `/documents` — AI document generator (SSE streaming)
 - Replit Auth integration (login/logout)
+- Dark/Light mode toggle — ThemeContext in `src/contexts/ThemeContext.tsx`, persisted to localStorage, sun/moon toggle in Navbar
+- PWA support — `vite-plugin-pwa` with manifest, service worker (workbox), law-themed PNG icons (192/512), installable on Android
 
 ### Backend (artifacts/api-server routes)
 - `GET/POST /api/openai/conversations` — Conversation management

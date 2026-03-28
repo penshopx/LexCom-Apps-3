@@ -3,7 +3,7 @@ import { Scale, Twitter, Linkedin, Github, Instagram } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="bg-card border-t border-white/5 pt-20 pb-10">
+    <footer className="bg-card border-t border-border pt-20 pb-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="md:col-span-1">
@@ -18,7 +18,7 @@ export function Footer() {
             </p>
             <div className="flex items-center gap-4">
               {[Twitter, Linkedin, Github, Instagram].map((Icon, i) => (
-                <a key={i} href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-muted-foreground hover:bg-primary/20 hover:text-primary transition-all">
+                <a key={i} href="#" className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-muted-foreground hover:bg-primary/20 hover:text-primary transition-all">
                   <Icon className="w-4 h-4" />
                 </a>
               ))}
@@ -56,7 +56,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-muted-foreground">
             © 2024 LexCom. Semua hak dilindungi.
           </p>
