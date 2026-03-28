@@ -56,6 +56,22 @@ const SUMBER_PEMERINTAH = [
     color: "border-cyan-500/30 hover:border-cyan-500/50 bg-cyan-500/5",
     badgeColor: "bg-cyan-500/20 text-cyan-400",
   },
+  {
+    label: "Penanganan Perkara KPK",
+    desc: "Data perkara korupsi yang ditangani KPK RI",
+    url: "https://kpk.go.id/id/publikasi-data/penanganan-perkara",
+    badge: "KPK",
+    color: "border-yellow-500/30 hover:border-yellow-500/50 bg-yellow-500/5",
+    badgeColor: "bg-yellow-500/20 text-yellow-400",
+  },
+  {
+    label: "Sidang Tipikor KPK",
+    desc: "Jadwal & info sidang tindak pidana korupsi KPK",
+    url: "https://kpk.go.id/id/ruang-informasi/sidang-tipikor",
+    badge: "KPK",
+    color: "border-amber-500/30 hover:border-amber-500/50 bg-amber-500/5",
+    badgeColor: "bg-amber-500/20 text-amber-400",
+  },
 ];
 
 const LAYANAN = [

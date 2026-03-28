@@ -55,6 +55,22 @@ const SUMBER_RESMI = [
     color: "border-cyan-500/30 hover:border-cyan-500/60 bg-cyan-500/5",
     badgeColor: "bg-cyan-500/20 text-cyan-400",
   },
+  {
+    label: "Penanganan Perkara KPK",
+    desc: "Data penanganan perkara korupsi oleh KPK RI",
+    url: "https://kpk.go.id/id/publikasi-data/penanganan-perkara",
+    badge: "KPK",
+    color: "border-yellow-500/30 hover:border-yellow-500/60 bg-yellow-500/5",
+    badgeColor: "bg-yellow-500/20 text-yellow-400",
+  },
+  {
+    label: "Sidang Tipikor KPK",
+    desc: "Jadwal & informasi sidang tindak pidana korupsi KPK",
+    url: "https://kpk.go.id/id/ruang-informasi/sidang-tipikor",
+    badge: "KPK",
+    color: "border-amber-500/30 hover:border-amber-500/60 bg-amber-500/5",
+    badgeColor: "bg-amber-500/20 text-amber-400",
+  },
 ];
 
 function buildSearchUrl(putusan: TPutusan): string {
@@ -308,14 +324,32 @@ export default function Putusan() {
                           <ExternalLink className="w-3 h-3" /> Direktori Putusan MA
                         </a>
                         {selected.jenis === "PN" && (
-                          <a
-                            href={`https://badilum.mahkamahagung.go.id/publik/pelayanan-informasi/penelusuran-perkara.html`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 text-xs px-3 py-2 rounded-lg bg-green-500/10 border border-green-500/30 text-green-400 hover:bg-green-500/20 transition-colors"
-                          >
-                            <ExternalLink className="w-3 h-3" /> Penelusuran Perkara PN
-                          </a>
+                          <>
+                            <a
+                              href="https://badilum.mahkamahagung.go.id/publik/pelayanan-informasi/penelusuran-perkara.html"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 text-xs px-3 py-2 rounded-lg bg-green-500/10 border border-green-500/30 text-green-400 hover:bg-green-500/20 transition-colors"
+                            >
+                              <ExternalLink className="w-3 h-3" /> Penelusuran Perkara PN
+                            </a>
+                            <a
+                              href="https://kpk.go.id/id/publikasi-data/penanganan-perkara"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 text-xs px-3 py-2 rounded-lg bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 hover:bg-yellow-500/20 transition-colors"
+                            >
+                              <ExternalLink className="w-3 h-3" /> Perkara KPK
+                            </a>
+                            <a
+                              href="https://kpk.go.id/id/ruang-informasi/sidang-tipikor"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 text-xs px-3 py-2 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-400 hover:bg-amber-500/20 transition-colors"
+                            >
+                              <ExternalLink className="w-3 h-3" /> Sidang Tipikor KPK
+                            </a>
+                          </>
                         )}
                         <a
                           href={`https://kepaniteraan.mahkamahagung.go.id/perkara/`}
