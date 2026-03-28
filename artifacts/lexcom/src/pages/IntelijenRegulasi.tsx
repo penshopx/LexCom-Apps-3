@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { MarkdownRenderer } from "@/components/ui/MarkdownRenderer";
 import {
   DATA_ISU, KATEGORI_FILTER,
   type IsuRegulasi, type RisikoLevel,
@@ -377,8 +378,8 @@ function AIAskPanel() {
                 <Brain className="w-3 h-3 text-white" />
               </div>
             )}
-            <div className={`max-w-[85%] px-3 py-2 rounded-xl text-xs leading-relaxed ${m.role === "user" ? "bg-primary text-white rounded-br-sm" : "bg-white/8 border border-white/10 text-foreground/85 rounded-bl-sm"}`}>
-              {m.text}
+            <div className={`max-w-[85%] px-3 py-2 rounded-xl ${m.role === "user" ? "bg-primary text-white rounded-br-sm text-xs leading-relaxed" : "bg-white/8 border border-white/10 text-foreground/85 rounded-bl-sm"}`}>
+              {m.role === "user" ? m.text : <MarkdownRenderer content={m.text} compact className="text-xs" />}
             </div>
           </div>
         ))}
