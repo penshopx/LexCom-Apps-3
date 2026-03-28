@@ -14,6 +14,25 @@ import { Plus, Edit2, Trash2, Calendar, Scale, Briefcase, AlertCircle, Loader2 }
 import { useToast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
 
+interface LegalCase {
+  id: number;
+  title: string;
+  description: string | null;
+  caseType: string;
+  status: string;
+  hearingDate: string | null;
+  userId: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface CaseFormData {
+  title: string;
+  caseType: string;
+  status: string;
+  hearingDate: string;
+}
+
 const CASE_TYPES = [
   { value: "Perdata", label: "Perdata" },
   { value: "Pidana", label: "Pidana" },
@@ -28,8 +47,8 @@ const STATUSES = [
   { value: "closed", label: "Selesai (Closed)", color: "bg-green-500/20 text-green-400" },
 ];
 
-function fetchCases() {
-  return fetch("/api/cases", { credentials: "include" }).then((res) => res.json());
+function fetchCases(): Promise<LegalCase[]> {
+  return fetch("/api/cases", { credentials: "include" }).then((res) => res.json() as Promise<LegalCase[]>);
 }
 
 export default function Cases() {
@@ -40,10 +59,10 @@ export default function Cases() {
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
-  const [selectedCase, setSelectedCase] = useState<any>(null);
+  const [selectedCase, setSelectedCase] = useState<LegalCase | null>(null);
   
   // Form state
-  const [formData, setFormData] = useState({ title: "", caseType: "", status: "open", hearingDate: "" });
+  const [formData, setFormData] = useState<CaseFormData>({ title: "", caseType: "", status: "open", hearingDate: "" });
 
   const { data: cases, isLoading } = useQuery({
     queryKey: ["cases"],
@@ -52,7 +71,7 @@ export default function Cases() {
   });
 
   const createMutation = useMutation({
-    mutationFn: (newCase: any) =>
+    mutationFn: (newCase: CaseFormData) =>
       fetch("/api/cases", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -74,7 +93,7 @@ export default function Cases() {
   });
 
   const updateMutation = useMutation({
-    mutationFn: ({ id, data }: { id: number; data: any }) =>
+    mutationFn: ({ id, data }: { id: number; data: CaseFormData }) =>
       fetch(`/api/cases/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -137,7 +156,7 @@ export default function Cases() {
     });
   };
 
-  const openEdit = (c: any) => {
+  const openEdit = (c: LegalCase) => {
     setSelectedCase(c);
     setFormData({
       title: c.title,
@@ -148,7 +167,7 @@ export default function Cases() {
     setIsEditOpen(true);
   };
 
-  const openDelete = (c: any) => {
+  const openDelete = (c: LegalCase) => {
     setSelectedCase(c);
     setIsDeleteOpen(true);
   };
@@ -258,7 +277,7 @@ export default function Cases() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {cases.map((c: any, i: number) => (
+            {(cases ?? []).map((c: LegalCase, i: number) => (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}

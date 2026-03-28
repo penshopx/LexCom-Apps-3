@@ -14,6 +14,16 @@ import { FileText, Save, Copy, Trash2, Loader2, Sparkles, Wand2, FileCode2 } fro
 import { useToast } from "@/hooks/use-toast";
 import { motion, AnimatePresence } from "framer-motion";
 
+interface LegalDocument {
+  id: number;
+  title: string;
+  documentType: string;
+  content: string | null;
+  userId: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
 const DOC_TYPES = [
   { value: "gugatan", label: "Surat Gugatan" },
   { value: "jawaban", label: "Surat Jawaban" },
@@ -23,8 +33,8 @@ const DOC_TYPES = [
   { value: "kontrak", label: "Kontrak/Perjanjian" },
 ];
 
-function fetchDocuments() {
-  return fetch("/api/documents", { credentials: "include" }).then((res) => res.json());
+function fetchDocuments(): Promise<LegalDocument[]> {
+  return fetch("/api/documents", { credentials: "include" }).then((res) => res.json() as Promise<LegalDocument[]>);
 }
 
 export default function Documents() {
@@ -326,7 +336,7 @@ export default function Documents() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <AnimatePresence>
-                {documents.map((doc: any, i: number) => (
+                {documents.map((doc: LegalDocument, i: number) => (
                   <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}

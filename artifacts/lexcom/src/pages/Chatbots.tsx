@@ -9,7 +9,19 @@ import { Send, Bot, User as UserIcon, Loader2, Sparkles, MessageSquare } from "l
 import { useToast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
 
-const AGENTS = [
+interface Agent {
+  key: string;
+  emoji: string;
+  name: string;
+  category: string;
+}
+
+interface ChatMessage {
+  role: "user" | "assistant";
+  content: string;
+}
+
+const AGENTS: Agent[] = [
   { key: 'corporate', emoji: '🏢', name: 'Corporate Lawyer AI', category: 'Bisnis & Korporasi' },
   { key: 'tax', emoji: '💰', name: 'Tax Lawyer AI', category: 'Bisnis & Korporasi' },
   { key: 'employment', emoji: '👔', name: 'Employment Lawyer AI', category: 'Bisnis & Korporasi' },
@@ -26,9 +38,9 @@ const AGENTS = [
 export default function Chatbots() {
   const { isAuthenticated, login } = useAuth();
   const { toast } = useToast();
-  const [selectedAgent, setSelectedAgent] = useState(null as any);
+  const [selectedAgent, setSelectedAgent] = useState<Agent | null>(null);
   const [conversationId, setConversationId] = useState<string | null>(null);
-  const [messages, setMessages] = useState<any[]>([]);
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -39,7 +51,7 @@ export default function Chatbots() {
     }
   }, [messages, isTyping]);
 
-  const startConversation = async (agent: any) => {
+  const startConversation = async (agent: Agent) => {
     if (!isAuthenticated) {
       login();
       return;
