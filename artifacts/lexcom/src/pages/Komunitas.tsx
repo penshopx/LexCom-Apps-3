@@ -6,6 +6,15 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Users, MessageSquare, Bot, BookOpen, ArrowRight, TrendingUp } from "lucide-react";
 
+interface RecentThread {
+  id: number;
+  title: string;
+  category: string;
+  authorName: string;
+  createdAt: string;
+  replyCount: number;
+}
+
 const CATEGORY_COLORS: Record<string, string> = {
   Perdata: "bg-blue-500/20 text-blue-400 border-blue-500/30",
   Pidana: "bg-red-500/20 text-red-400 border-red-500/30",
@@ -38,7 +47,7 @@ const HIGHLIGHTS = [
 ];
 
 export default function Komunitas() {
-  const [recentThreads, setRecentThreads] = useState<any[]>([]);
+  const [recentThreads, setRecentThreads] = useState<RecentThread[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
