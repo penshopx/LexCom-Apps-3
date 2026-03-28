@@ -144,6 +144,83 @@ const PAKAR_AI = [
     warnaText: "text-sky-400",
     warnaBadge: "bg-sky-500/10 text-sky-400 border-sky-500/20",
   },
+  {
+    key: "kehutanan",
+    emoji: "🌳",
+    nama: "Pakar Hukum Kehutanan",
+    badge: "UU 41/1999 & PPNS",
+    deskripsi: "UU No. 41/1999 Kehutanan, izin kawasan hutan, penebangan liar, PPNS Kehutanan.",
+    tag: ["Kawasan Hutan", "Illegal Logging", "PPNS", "KLHK"],
+    warna: "from-amber-700/20 to-amber-700/5 border-amber-700/20",
+    warnaText: "text-amber-500",
+    warnaBadge: "bg-amber-700/10 text-amber-500 border-amber-700/20",
+  },
+  {
+    key: "pertambangan",
+    emoji: "⛏️",
+    nama: "Pakar Hukum Pertambangan",
+    badge: "UU Minerba 2020",
+    deskripsi: "UU No. 3/2020 Minerba: IUP, IUPK, royalti, divestasi saham, PPNS Tambang.",
+    tag: ["Minerba", "IUP/IUPK", "Royalti", "Divestasi"],
+    warna: "from-stone-500/20 to-stone-500/5 border-stone-500/20",
+    warnaText: "text-stone-400",
+    warnaBadge: "bg-stone-500/10 text-stone-400 border-stone-500/20",
+  },
+  {
+    key: "konstruksi",
+    emoji: "🏗️",
+    nama: "Pakar Hukum Jasa Konstruksi",
+    badge: "UU 2/2017 & BPJK",
+    deskripsi: "UU No. 2/2017, kontrak konstruksi, sengketa proyek BPJK, dan pengadaan pemerintah.",
+    tag: ["Kontrak Konstruksi", "BPJK", "LKPP", "Sengketa Proyek"],
+    warna: "from-orange-600/20 to-orange-600/5 border-orange-600/20",
+    warnaText: "text-orange-400",
+    warnaBadge: "bg-orange-600/10 text-orange-400 border-orange-600/20",
+  },
+  {
+    key: "kepabeanan",
+    emoji: "🛃",
+    nama: "Pakar Hukum Kepabeanan & Cukai",
+    badge: "DJBC & UU 17/2006",
+    deskripsi: "UU No. 17/2006 Kepabeanan, bea masuk, cukai, sengketa impor-ekspor, PPNS DJBC.",
+    tag: ["Bea Masuk", "Cukai", "DJBC", "Impor-Ekspor"],
+    warna: "from-teal-500/20 to-teal-500/5 border-teal-500/20",
+    warnaText: "text-teal-400",
+    warnaBadge: "bg-teal-500/10 text-teal-400 border-teal-500/20",
+  },
+  {
+    key: "penilai_ahli",
+    emoji: "🔧",
+    nama: "Penilai Ahli Jasa Konstruksi",
+    badge: "PP No. 22/2020",
+    deskripsi: "Advokasi, mediasi & arbitrasi sengketa jasa konstruksi. PP No. 22/2020 & Permen PUPR.",
+    tag: ["Mediasi Konstruksi", "Arbitrasi BPJK", "Penilai Ahli", "Klaim Proyek"],
+    warna: "from-blue-600/20 to-blue-600/5 border-blue-600/20",
+    warnaText: "text-blue-400",
+    warnaBadge: "bg-blue-600/10 text-blue-400 border-blue-600/20",
+  },
+  {
+    key: "penilai_publik",
+    emoji: "📐",
+    nama: "Penilai Publik & Aset (KJPP)",
+    badge: "KJPP & KEPI/SPI",
+    deskripsi: "Penilaian properti & aset untuk pengadilan, BUMN, M&A, agunan, dan restrukturisasi.",
+    tag: ["Penilaian Properti", "KJPP", "KEPI/SPI", "Due Diligence"],
+    warna: "from-fuchsia-500/20 to-fuchsia-500/5 border-fuchsia-500/20",
+    warnaText: "text-fuchsia-400",
+    warnaBadge: "bg-fuchsia-500/10 text-fuchsia-400 border-fuchsia-500/20",
+  },
+  {
+    key: "akuntan_forensik",
+    emoji: "🔬",
+    nama: "Akuntan Forensik & Investigasi",
+    badge: "Audit Forensik",
+    deskripsi: "Audit forensik, investigasi fraud, tracing aset, due diligence, dan dukungan litigasi keuangan.",
+    tag: ["Audit Forensik", "Fraud Investigation", "Tracing Aset", "Expert Witness"],
+    warna: "from-lime-500/20 to-lime-500/5 border-lime-500/20",
+    warnaText: "text-lime-400",
+    warnaBadge: "bg-lime-500/10 text-lime-400 border-lime-500/20",
+  },
 ];
 
 export default function Pengacara() {
@@ -235,46 +312,59 @@ export default function Pengacara() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {PAKAR_AI.map((pakar, i) => (
-                    <motion.div
-                      key={pakar.key}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: i * 0.04 }}
-                    >
-                      <Link href={`/agents/${pakar.key}`}>
-                        <div className={`group glass-card rounded-2xl border bg-gradient-to-br ${pakar.warna} p-5 hover:scale-[1.02] hover:shadow-xl transition-all duration-300 cursor-pointer h-full flex flex-col`}>
-                          <div className="flex items-start justify-between mb-3">
-                            <div className="text-3xl">{pakar.emoji}</div>
-                            <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${pakar.warnaBadge}`}>
-                              {pakar.badge}
-                            </span>
-                          </div>
+                {[
+                  { label: "Pakar Hukum Umum", deskripsi: "Bidang hukum pokok — pidana, perdata, tata negara, keluarga, dan lainnya", items: PAKAR_AI.slice(0, 12) },
+                  { label: "Pakar Hukum Lex Specialis", deskripsi: "Bidang hukum sektoral dengan penyidik khusus (PPNS) dan regulasi tersendiri", items: PAKAR_AI.slice(12, 16) },
+                  { label: "Tenaga Ahli Profesi", deskripsi: "Profesi keahlian teknis yang berperan dalam advokasi, penilaian, dan investigasi hukum", items: PAKAR_AI.slice(16) },
+                ].map(group => (
+                  <div key={group.label} className="mb-10">
+                    <div className="flex items-baseline gap-3 mb-1">
+                      <h2 className="text-sm font-bold tracking-widest uppercase text-muted-foreground">{group.label}</h2>
+                      <span className="text-xs px-1.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-muted-foreground">{group.items.length}</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground mb-4">{group.deskripsi}</p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {group.items.map((pakar, i) => (
+                        <motion.div
+                          key={pakar.key}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: i * 0.04 }}
+                        >
+                          <Link href={`/agents/${pakar.key}`}>
+                            <div className={`group glass-card rounded-2xl border bg-gradient-to-br ${pakar.warna} p-5 hover:scale-[1.02] hover:shadow-xl transition-all duration-300 cursor-pointer h-full flex flex-col`}>
+                              <div className="flex items-start justify-between mb-3">
+                                <div className="text-3xl">{pakar.emoji}</div>
+                                <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${pakar.warnaBadge}`}>
+                                  {pakar.badge}
+                                </span>
+                              </div>
 
-                          <h3 className={`font-semibold text-sm mb-1.5 group-hover:${pakar.warnaText} transition-colors`}>
-                            {pakar.nama}
-                          </h3>
-                          <p className="text-xs text-muted-foreground leading-relaxed flex-1 mb-3">
-                            {pakar.deskripsi}
-                          </p>
+                              <h3 className={`font-semibold text-sm mb-1.5 group-hover:${pakar.warnaText} transition-colors`}>
+                                {pakar.nama}
+                              </h3>
+                              <p className="text-xs text-muted-foreground leading-relaxed flex-1 mb-3">
+                                {pakar.deskripsi}
+                              </p>
 
-                          <div className="flex flex-wrap gap-1 mb-3">
-                            {pakar.tag.map(t => (
-                              <span key={t} className="text-[9px] font-medium px-1.5 py-0.5 rounded-full bg-white/5 text-muted-foreground border border-white/10">
-                                {t}
-                              </span>
-                            ))}
-                          </div>
+                              <div className="flex flex-wrap gap-1 mb-3">
+                                {pakar.tag.map(t => (
+                                  <span key={t} className="text-[9px] font-medium px-1.5 py-0.5 rounded-full bg-white/5 text-muted-foreground border border-white/10">
+                                    {t}
+                                  </span>
+                                ))}
+                              </div>
 
-                          <div className={`flex items-center gap-1.5 text-xs font-semibold ${pakar.warnaText} opacity-0 group-hover:opacity-100 transition-opacity`}>
-                            <Bot className="w-3 h-3" /> Konsultasi Sekarang <ArrowRight className="w-3 h-3" />
-                          </div>
-                        </div>
-                      </Link>
-                    </motion.div>
-                  ))}
-                </div>
+                              <div className={`flex items-center gap-1.5 text-xs font-semibold ${pakar.warnaText} opacity-0 group-hover:opacity-100 transition-opacity`}>
+                                <Bot className="w-3 h-3" /> Konsultasi Sekarang <ArrowRight className="w-3 h-3" />
+                              </div>
+                            </div>
+                          </Link>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
               </motion.div>
             ) : (
               <motion.div

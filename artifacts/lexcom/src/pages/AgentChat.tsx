@@ -173,6 +173,55 @@ const AGENTS: Record<string, { emoji: string; name: string; category: string; de
     description: "Spesialis hukum internasional publik dan privat, perjanjian bilateral/multilateral, dan arbitrase internasional.",
     specialties: ["Perjanjian Internasional", "Hukum Perdata Internasional", "Arbitrase SIAC/ICC", "ASEAN Law", "Hukum Diplomatik", "Ekstradisi"],
   },
+  kehutanan: {
+    emoji: "🌳",
+    name: "Pakar Hukum Kehutanan",
+    category: "Pakar Hukum Indonesia",
+    description: "Ahli UU No. 41/1999 Kehutanan, perizinan kawasan hutan, penebangan liar, PPNS Kehutanan, dan sengketa tata batas hutan.",
+    specialties: ["UU Kehutanan No. 41/1999", "Kawasan Hutan & KLHK", "PPNS Kehutanan", "Izin Usaha Pemanfaatan Hutan", "Penebangan Liar (Illegal Logging)", "Sengketa Tata Batas Hutan"],
+  },
+  pertambangan: {
+    emoji: "⛏️",
+    name: "Pakar Hukum Pertambangan",
+    category: "Pakar Hukum Indonesia",
+    description: "Spesialis UU No. 3/2020 Minerba: IUP, IUPK, royalti, divestasi, kewajiban reklamasi, dan PPNS Pertambangan.",
+    specialties: ["UU Minerba No. 3/2020", "IUP & IUPK", "Royalti & PNBP", "Divestasi Saham", "Kewajiban Reklamasi", "PPNS Pertambangan"],
+  },
+  konstruksi: {
+    emoji: "🏗️",
+    name: "Pakar Hukum Jasa Konstruksi",
+    category: "Pakar Hukum Indonesia",
+    description: "Ahli UU No. 2/2017 Jasa Konstruksi, kontrak konstruksi, sengketa proyek, BPJK, dan pengadaan barang/jasa pemerintah.",
+    specialties: ["UU Jasa Konstruksi No. 2/2017", "Kontrak FIDIC & Domestik", "Sengketa Konstruksi", "BPJK & Mediasi", "LKPP & Pengadaan Pemerintah", "Klaim Konstruksi"],
+  },
+  kepabeanan: {
+    emoji: "🛃",
+    name: "Pakar Hukum Kepabeanan & Cukai",
+    category: "Pakar Hukum Indonesia",
+    description: "Spesialis UU No. 17/2006 Kepabeanan, bea masuk, cukai, sengketa impor-ekspor, anti dumping, dan PPNS DJBC.",
+    specialties: ["UU Kepabeanan No. 17/2006", "Bea Masuk & Cukai", "DJBC & Bea Cukai", "Sengketa Impor-Ekspor", "Anti Dumping & Safeguards", "PPNS Kepabeanan"],
+  },
+  penilai_ahli: {
+    emoji: "🔧",
+    name: "Penilai Ahli Jasa Konstruksi",
+    category: "Tenaga Ahli Profesi",
+    description: "Profesi Penilai Ahli untuk advokasi, mediasi, dan arbitrasi sengketa jasa konstruksi berdasarkan PP No. 22/2020 dan Permen PUPR.",
+    specialties: ["PP No. 22/2020", "Mediasi Sengketa Konstruksi", "Arbitrasi BPJK/BANI", "Penilaian Kegagalan Bangunan", "Advokasi Klaim Konstruksi", "Permen PUPR No. 7/2021"],
+  },
+  penilai_publik: {
+    emoji: "📐",
+    name: "Penilai Publik & Aset (KJPP)",
+    category: "Tenaga Ahli Profesi",
+    description: "Penilai Publik berlisensi KJPP untuk penilaian properti dan aset dalam rangka pengadilan, BUMN, M&A, dan agunan bank.",
+    specialties: ["KJPP & PMK Penilaian", "KEPI & SPI", "Penilaian Properti & Tanah", "Penilaian Aset BUMN", "Due Diligence & M&A", "Agunan & Restrukturisasi"],
+  },
+  akuntan_forensik: {
+    emoji: "🔬",
+    name: "Akuntan Forensik & Investigasi",
+    category: "Tenaga Ahli Profesi",
+    description: "Ahli audit forensik, investigasi kecurangan (fraud), tracing aset, due diligence keuangan, dan dukungan litigasi.",
+    specialties: ["Audit Forensik", "Fraud & Korupsi Investigation", "Tracing Aset", "Due Diligence Keuangan", "Expert Witness Akuntansi", "Dukungan Litigasi Pidana"],
+  },
 };
 
 export default function AgentChat() {
