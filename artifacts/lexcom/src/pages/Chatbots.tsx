@@ -352,7 +352,7 @@ export default function Chatbots() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-background pt-24">
+    <div className="min-h-screen flex flex-col bg-background pt-36">
       <Navbar />
       <main className="flex-1 max-w-[1400px] w-full mx-auto px-4 py-4 flex gap-4 h-[calc(100vh-96px)]">
         {/* ─── Sidebar ─── */}

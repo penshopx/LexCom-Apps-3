@@ -17,7 +17,7 @@ const BADGES = [
 export function Hero() {
   const { isAuthenticated, login } = useAuth();
   return (
-    <section id="home" className="relative min-h-screen flex items-center pt-24 overflow-hidden">
+    <section id="home" className="relative min-h-screen flex items-center pt-36 overflow-hidden">
       <div className="absolute inset-0 z-0">
         <img
           src={`${import.meta.env.BASE_URL}images/hero-bg.png`}

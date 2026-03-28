@@ -45,7 +45,7 @@ export default function Masuk() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Navbar />
-      <main className="flex-1 pt-20">
+      <main className="flex-1 pt-36">
         <div className="max-w-6xl mx-auto px-4 py-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
@@ -117,7 +117,7 @@ export default function Masuk() {
                   className="w-full flex items-center justify-center gap-3 py-4 rounded-2xl bg-gradient-to-r from-primary to-secondary text-white font-bold text-base hover:opacity-90 transition-all shadow-lg shadow-primary/30 mb-4"
                 >
                   <LogIn className="w-5 h-5" />
-                  {isLoading ? "Memuat..." : "Masuk / Daftar dengan Replit"}
+                  {isLoading ? "Memuat..." : "Masuk / Daftar Sekarang"}
                 </button>
 
                 <div className="text-center text-xs text-muted-foreground mb-6">

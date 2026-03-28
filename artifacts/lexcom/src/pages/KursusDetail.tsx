@@ -73,7 +73,7 @@ export default function KursusDetail() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Navbar />
-      <main className="flex-1 pt-28 pb-16 px-4">
+      <main className="flex-1 pt-36 pb-16 px-4">
 
         {/* Hero Thumbnail */}
         <div
