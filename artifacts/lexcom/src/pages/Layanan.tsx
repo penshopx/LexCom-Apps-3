@@ -4,8 +4,59 @@ import { Footer } from "@/components/layout/Footer";
 import { motion } from "framer-motion";
 import {
   Bot, FileText, Briefcase, Users, BookOpen, Scale, Calculator, Library,
-  MessageSquare, ArrowRight, CheckCircle, Star, Shield, Zap, Clock, Globe,
+  MessageSquare, ArrowRight, CheckCircle, Star, Shield, Zap, Clock, Globe, ExternalLink,
 } from "lucide-react";
+
+const SUMBER_PEMERINTAH = [
+  {
+    label: "Kemenkum — Layanan Publik",
+    desc: "Layanan publik resmi Kementerian Hukum RI: AHU, Notariat, DJKI, Imigrasi",
+    url: "https://kemenkum.go.id/layananpublik",
+    badge: "Kemenkum",
+    color: "border-red-500/30 hover:border-red-500/50 bg-red-500/5",
+    badgeColor: "bg-red-500/20 text-red-400",
+  },
+  {
+    label: "Peraturan.go.id",
+    desc: "Portal resmi seluruh peraturan perundang-undangan Indonesia",
+    url: "https://peraturan.go.id/",
+    badge: "Pemerintah",
+    color: "border-green-500/30 hover:border-green-500/50 bg-green-500/5",
+    badgeColor: "bg-green-500/20 text-green-400",
+  },
+  {
+    label: "JDIH Mahkamah Agung",
+    desc: "Peraturan, SEMA, PERMA, dan kebijakan Mahkamah Agung RI",
+    url: "https://jdih.mahkamahagung.go.id/",
+    badge: "MA",
+    color: "border-blue-500/30 hover:border-blue-500/50 bg-blue-500/5",
+    badgeColor: "bg-blue-500/20 text-blue-400",
+  },
+  {
+    label: "Direktori Putusan MA",
+    desc: "Database putusan lengkap Mahkamah Agung RI sejak 2010",
+    url: "https://putusan3.mahkamahagung.go.id/",
+    badge: "MA",
+    color: "border-purple-500/30 hover:border-purple-500/50 bg-purple-500/5",
+    badgeColor: "bg-purple-500/20 text-purple-400",
+  },
+  {
+    label: "Putusan Mahkamah Konstitusi",
+    desc: "Seluruh putusan MK sejak berdiri tahun 2003",
+    url: "https://www.mkri.id/perkara/persidangan/putusan",
+    badge: "MK",
+    color: "border-orange-500/30 hover:border-orange-500/50 bg-orange-500/5",
+    badgeColor: "bg-orange-500/20 text-orange-400",
+  },
+  {
+    label: "Penelusuran Perkara PN",
+    desc: "Cari perkara di seluruh Pengadilan Negeri se-Indonesia",
+    url: "https://badilum.mahkamahagung.go.id/publik/pelayanan-informasi/penelusuran-perkara.html",
+    badge: "PN",
+    color: "border-cyan-500/30 hover:border-cyan-500/50 bg-cyan-500/5",
+    badgeColor: "bg-cyan-500/20 text-cyan-400",
+  },
+];
 
 const LAYANAN = [
   {
@@ -218,6 +269,33 @@ export default function Layanan() {
                   <h3 className="font-semibold text-foreground mb-1 text-sm">{k.title}</h3>
                   <p className="text-xs text-muted-foreground leading-relaxed">{k.desc}</p>
                 </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Sumber Resmi Pemerintah */}
+          <div className="mb-10 bg-card border border-border rounded-2xl p-6">
+            <div className="flex items-center gap-2 mb-5">
+              <ExternalLink className="w-4 h-4 text-primary" />
+              <h2 className="font-bold text-base text-foreground">Sumber Hukum Resmi Pemerintah</h2>
+              <span className="text-xs text-muted-foreground ml-auto hidden sm:block">Akses langsung website resmi RI</span>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+              {SUMBER_PEMERINTAH.map((s) => (
+                <a
+                  key={s.url}
+                  href={s.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`flex items-start gap-2.5 p-3 rounded-xl border transition-all group ${s.color}`}
+                >
+                  <div className="flex-1 min-w-0">
+                    <span className={`inline-block text-[10px] font-bold px-1.5 py-0.5 rounded-full mb-1 ${s.badgeColor}`}>{s.badge}</span>
+                    <p className="text-xs font-semibold text-foreground leading-tight mb-0.5 group-hover:text-primary transition-colors">{s.label}</p>
+                    <p className="text-[10px] text-muted-foreground leading-tight hidden sm:block">{s.desc}</p>
+                  </div>
+                  <ExternalLink className="w-3 h-3 text-muted-foreground group-hover:text-primary flex-shrink-0 mt-0.5 transition-colors" />
+                </a>
               ))}
             </div>
           </div>

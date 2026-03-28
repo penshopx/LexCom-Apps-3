@@ -16,12 +16,12 @@ const SUMBER_JDIH = [
     badgeColor: "bg-blue-500/20 text-blue-400",
   },
   {
-    label: "JDIH Nasional (BPHN)",
-    desc: "Database peraturan perundang-undangan nasional RI",
-    url: "https://jdih.kemenkumham.go.id/",
-    badge: "Kemenkumham",
-    color: "border-purple-500/30 hover:border-purple-500/60 bg-purple-500/5",
-    badgeColor: "bg-purple-500/20 text-purple-400",
+    label: "Layanan Publik Kemenkum",
+    desc: "Layanan publik resmi Kementerian Hukum RI",
+    url: "https://kemenkum.go.id/layananpublik",
+    badge: "Kemenkum",
+    color: "border-red-500/30 hover:border-red-500/60 bg-red-500/5",
+    badgeColor: "bg-red-500/20 text-red-400",
   },
   {
     label: "Peraturan.go.id",
@@ -226,7 +226,7 @@ export default function Peraturan() {
                       <ExternalLink className="w-3 h-3" /> Peraturan.go.id
                     </a>
                     <a
-                      href={`https://jdih.mahkamahagung.go.id/`}
+                      href="https://jdih.mahkamahagung.go.id/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 text-xs px-3 py-2 rounded-lg bg-blue-500/10 border border-blue-500/30 text-blue-400 hover:bg-blue-500/20 transition-colors"
@@ -234,12 +234,12 @@ export default function Peraturan() {
                       <ExternalLink className="w-3 h-3" /> JDIH Mahkamah Agung
                     </a>
                     <a
-                      href={`https://jdih.kemenkumham.go.id/`}
+                      href="https://kemenkum.go.id/layananpublik"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs px-3 py-2 rounded-lg bg-purple-500/10 border border-purple-500/30 text-purple-400 hover:bg-purple-500/20 transition-colors"
+                      className="inline-flex items-center gap-1.5 text-xs px-3 py-2 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 hover:bg-red-500/20 transition-colors"
                     >
-                      <ExternalLink className="w-3 h-3" /> JDIH Nasional (BPHN)
+                      <ExternalLink className="w-3 h-3" /> Layanan Kemenkum
                     </a>
                   </div>
                 </div>
