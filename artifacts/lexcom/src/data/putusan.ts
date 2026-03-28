@@ -1,0 +1,158 @@
+export type JenisPengadilan = "MA" | "MK" | "PN" | "PA";
+
+export interface Putusan {
+  id: string;
+  nomor: string;
+  tanggal: string;
+  jenis: JenisPengadilan;
+  majelis: string;
+  pokok_perkara: string;
+  amar: string;
+}
+
+export const dataPutusan: Putusan[] = [
+  {
+    id: "mk-91-2020",
+    nomor: "Putusan MK No. 91/PUU-XVIII/2020",
+    tanggal: "2021-11-25",
+    jenis: "MK",
+    majelis: "Anwar Usman, Aswanto, Enny Nurbaningsih (Ketua MK)",
+    pokok_perkara: "Pengujian formil dan materiil Undang-Undang Nomor 11 Tahun 2020 tentang Cipta Kerja. Para pemohon mendalilkan bahwa UU Cipta Kerja cacat secara formil karena proses pembentukan yang tidak transparan dan melanggar asas-asas pembentukan peraturan perundang-undangan.",
+    amar: "Menyatakan pembentukan Undang-Undang Nomor 11 Tahun 2020 tentang Cipta Kerja bertentangan dengan UUD 1945 dan tidak mempunyai kekuatan hukum mengikat secara bersyarat sepanjang tidak dilakukan perbaikan dalam waktu 2 (dua) tahun sejak putusan ini diucapkan.",
+  },
+  {
+    id: "mk-22-2017",
+    nomor: "Putusan MK No. 22/PUU-XV/2017",
+    tanggal: "2018-12-13",
+    jenis: "MK",
+    majelis: "Arief Hidayat (Ketua MK), Anwar Usman, Manahan MP Sitompul",
+    pokok_perkara: "Pengujian Pasal 7 ayat (1) Undang-Undang Nomor 1 Tahun 1974 tentang Perkawinan yang menetapkan batas usia perkawinan perempuan 16 tahun berbeda dengan laki-laki 19 tahun, dianggap diskriminatif dan merugikan hak konstitusional perempuan.",
+    amar: "Menyatakan Pasal 7 ayat (1) UU No. 1 Tahun 1974 sepanjang frasa 'usia 16 (enam belas) tahun' bertentangan dengan UUD 1945 dan tidak mempunyai kekuatan hukum mengikat. Memerintahkan pembentuk undang-undang segera melakukan perubahan dalam waktu 3 tahun.",
+  },
+  {
+    id: "mk-46-2010",
+    nomor: "Putusan MK No. 46/PUU-VIII/2010",
+    tanggal: "2012-02-17",
+    jenis: "MK",
+    majelis: "Mahfud MD (Ketua MK), Hamdan Zoelva, Muhammad Alim",
+    pokok_perkara: "Pengujian Pasal 43 ayat (1) UU Perkawinan mengenai status anak yang dilahirkan di luar perkawinan yang hanya memiliki hubungan perdata dengan ibunya. Pemohon mendalilkan ketentuan tersebut diskriminatif dan melanggar hak anak.",
+    amar: "Pasal 43 ayat (1) UU Perkawinan harus dibaca: Anak yang dilahirkan di luar perkawinan mempunyai hubungan perdata dengan ibunya dan keluarga ibunya serta dengan laki-laki sebagai ayahnya yang dapat dibuktikan berdasarkan ilmu pengetahuan dan teknologi (tes DNA).",
+  },
+  {
+    id: "ma-651k-2019",
+    nomor: "Putusan MA No. 651 K/Pdt/2019",
+    tanggal: "2019-06-15",
+    jenis: "MA",
+    majelis: "Dr. H. Hamdi, SH, MH; H. Syamsul Ma'arif, SH, LLM, PhD; H. Edi Riadi, SH, MH",
+    pokok_perkara: "Sengketa kepemilikan tanah seluas 1,2 hektar di Jakarta Selatan antara pewaris almarhum Bapak Sutanto melawan PT Griya Jaya yang mengklaim memiliki HGB atas objek yang sama berdasarkan sertifikat yang diperoleh dari PPAT.",
+    amar: "Menolak permohonan kasasi dari PT Griya Jaya. Menguatkan putusan Pengadilan Tinggi yang mengabulkan gugatan ahli waris. Menyatakan sertifikat HGB PT Griya Jaya batal demi hukum karena diperoleh dengan iktikad tidak baik.",
+  },
+  {
+    id: "ma-2087k-pdt-2021",
+    nomor: "Putusan MA No. 2087 K/Pdt/2021",
+    tanggal: "2021-09-08",
+    jenis: "MA",
+    majelis: "Dr. Panji Widagdo, SH, MH; Prof. Dr. Takdir Rahmadi, SH, LLM; H. Ibrahim, SH, MH",
+    pokok_perkara: "Gugatan wanprestasi dalam perjanjian pengadaan alat kesehatan antara CV Mitra Medika selaku supplier dan Rumah Sakit Umum Daerah Kabupaten Bekasi. Penggugat menuntut pembayaran senilai Rp 2,8 miliar beserta bunga keterlambatan.",
+    amar: "Mengabulkan gugatan Penggugat sebagian. Menghukum Tergugat (RSUD) membayar pokok tagihan Rp 2,8 miliar. Menolak tuntutan bunga karena RSUD sebagai SKPD tidak dapat dikenai bunga komersial berdasarkan aturan keuangan negara.",
+  },
+  {
+    id: "ma-pk-228-2022",
+    nomor: "Putusan MA (PK) No. 228 PK/Pid.Sus/2022",
+    tanggal: "2022-04-12",
+    jenis: "MA",
+    majelis: "H. Agus Subroto, SH, MH; Dr. Desnayeti, SH, MH; H. Ansori, SH, MH",
+    pokok_perkara: "Permohonan Peninjauan Kembali dalam perkara tindak pidana korupsi pengadaan proyek infrastruktur desa senilai Rp 4,5 miliar oleh mantan Kepala Dinas PU Kabupaten Lampung Tengah.",
+    amar: "Menolak permohonan Peninjauan Kembali dari Pemohon/Terpidana. Putusan sebelumnya (penjara 6 tahun dan denda Rp 300 juta) tetap berlaku. Aset terpidana sebesar Rp 3 miliar dirampas untuk negara.",
+  },
+  {
+    id: "pn-jkt-pst-342-2021",
+    nomor: "Putusan PN Jakarta Pusat No. 342/Pdt.G/2021/PN.Jkt.Pst",
+    tanggal: "2021-11-30",
+    jenis: "PN",
+    majelis: "Ketua Majelis: Dr. Hari Purwanto, SH, MH; Hakim Anggota: Siti Rohana, SH; Dewi Prihatini, SH",
+    pokok_perkara: "Gugatan perbuatan melawan hukum dan ganti rugi senilai Rp 15 miliar antara pemegang saham minoritas PT Indah Sejahtera melawan direksi dan komisaris atas dugaan penyimpangan penggunaan dana perusahaan untuk kepentingan pribadi.",
+    amar: "Mengabulkan gugatan Penggugat sebagian. Menyatakan Tergugat I (Direktur Utama) telah melakukan perbuatan melawan hukum. Menghukum Tergugat I membayar ganti rugi materiil Rp 8,2 miliar. Menolak tuntutan ganti rugi imateriil karena tidak terbukti.",
+  },
+  {
+    id: "pn-sby-175-2022",
+    nomor: "Putusan PN Surabaya No. 175/Pid.B/2022/PN.Sby",
+    tanggal: "2022-08-24",
+    jenis: "PN",
+    majelis: "Ketua Majelis: Rudi Hartono, SH, MH; Hakim Anggota: Agustina Rahayu, SH; Bayu Prakoso, SH",
+    pokok_perkara: "Dakwaan penipuan dan penggelapan dalam kerangka investasi bodong yang merugikan 320 korban dengan total kerugian Rp 12,7 miliar. Terdakwa Antonius Budiman menjalankan skema Ponzi berkedok koperasi investasi.",
+    amar: "Menyatakan Terdakwa terbukti secara sah dan meyakinkan bersalah melakukan tindak pidana penipuan (Pasal 378 KUHP) dan penggelapan (Pasal 372 KUHP). Menjatuhkan pidana penjara 7 tahun dan denda Rp 500 juta subsidair 6 bulan kurungan.",
+  },
+  {
+    id: "pa-bks-211-2021",
+    nomor: "Putusan PA Bekasi No. 211/Pdt.G/2021/PA.Bks",
+    tanggal: "2021-07-15",
+    jenis: "PA",
+    majelis: "Ketua Majelis: Drs. H. Mansur, SH, MH; Hakim Anggota: Dra. Hj. Rahmawati; Muhamad Fauzi, SH",
+    pokok_perkara: "Gugatan cerai gugat yang diajukan isteri (Pemohon) terhadap suami (Termohon) dengan alasan perselisihan dan pertengkaran terus menerus yang tidak dapat dirukunkan kembali, serta Termohon tidak memberikan nafkah selama 8 bulan.",
+    amar: "Mengabulkan gugatan cerai Pemohon. Menjatuhkan talak satu ba'in shugra Termohon terhadap Pemohon. Menghukum Termohon membayar nafkah iddah Rp 3 juta per bulan selama 3 bulan dan mut'ah Rp 5 juta.",
+  },
+  {
+    id: "pa-bdg-156-2022",
+    nomor: "Putusan PA Bandung No. 156/Pdt.G/2022/PA.Bdg",
+    tanggal: "2022-05-10",
+    jenis: "PA",
+    majelis: "Ketua Majelis: Drs. H. Rustam Effendi, SH, MH; Hakim Anggota: Dra. Hj. Nuraini; Ahmad Firdaus, SH, MH",
+    pokok_perkara: "Permohonan penetapan wali adhal (wali enggan) dalam pernikahan calon mempelai perempuan dengan pria pilihannya. Wali nasab (ayah kandung) menolak menikahkan tanpa alasan yang dibenarkan syariat.",
+    amar: "Mengabulkan permohonan Pemohon. Menyatakan ayah kandung Pemohon adalah wali adhal. Menetapkan Kepala KUA Kecamatan setempat sebagai wali hakim untuk menikahkan Pemohon dengan calon suaminya.",
+  },
+  {
+    id: "mk-105-2021",
+    nomor: "Putusan MK No. 105/PUU-XIX/2021",
+    tanggal: "2022-03-24",
+    jenis: "MK",
+    majelis: "Anwar Usman (Ketua MK), Arief Hidayat, Wahiduddin Adams",
+    pokok_perkara: "Pengujian Pasal 47 UU No. 30 Tahun 2004 tentang Jabatan Notaris yang melarang notaris membuat akta untuk dirinya sendiri, keluarga sedarah atau semenda, istri/suami, atau orang lain yang memiliki hubungan keluarga dalam garis lurus.",
+    amar: "Menolak permohonan Pemohon untuk seluruhnya. Ketentuan larangan tersebut konstitusional karena bertujuan menjaga independensi dan objektivitas notaris dalam membuat akta autentik.",
+  },
+  {
+    id: "pn-mdn-86-2021",
+    nomor: "Putusan PN Medan No. 86/Pid.B/2021/PN.Mdn",
+    tanggal: "2021-10-05",
+    jenis: "PN",
+    majelis: "Ketua Majelis: Rahmat Hidayat, SH, MH; Hakim Anggota: Yuli Astuti, SH; Budi Santoso, SH",
+    pokok_perkara: "Dakwaan pencemaran nama baik melalui media sosial (Facebook) yang diajukan oleh pengusaha terhadap mantan karyawan yang mengunggah kritik tentang kondisi kerja dan gaji yang tidak dibayar.",
+    amar: "Menyatakan Terdakwa terbukti melakukan tindak pidana sebagaimana Pasal 27 ayat (3) UU ITE. Menjatuhkan pidana penjara 1 tahun dengan masa percobaan 2 tahun. Mempertimbangkan postingan dimaksudkan sebagai laporan kondisi nyata, bukan semata fitnah.",
+  },
+  {
+    id: "ma-2341k-2020",
+    nomor: "Putusan MA No. 2341 K/Pdt/2020",
+    tanggal: "2020-11-18",
+    jenis: "MA",
+    majelis: "H. Nurul Huda, SH, MH; Dr. Sudrajad Dimyati, SH, MH; H. Yodi Martono Wahyunadi, SH, LLM",
+    pokok_perkara: "Sengketa warisan tanah dan bangunan senilai Rp 6,5 miliar antara tiga orang anak kandung dari dua perkawinan yang berbeda. Anak dari perkawinan pertama (almarhum) menggugat bagian warisan yang telah dialihkan anak dari perkawinan kedua.",
+    amar: "Mengabulkan kasasi Pemohon. Membatalkan putusan Pengadilan Tinggi. Menyatakan tindakan pengalihan hak atas tanah oleh Tergugat tanpa persetujuan ahli waris lain adalah perbuatan melawan hukum. Menetapkan pembagian waris sesuai ketentuan KHI.",
+  },
+  {
+    id: "pn-jkt-sel-521-2022",
+    nomor: "Putusan PN Jakarta Selatan No. 521/Pdt.G/2022/PN.Jkt.Sel",
+    tanggal: "2022-12-14",
+    jenis: "PN",
+    majelis: "Ketua Majelis: Prof. Dr. Binsar Gultom, SH, SE, MH; Hakim Anggota: Dr. Sulistyo Utomo, SH, MH; Rina Permata, SH",
+    pokok_perkara: "Gugatan Pemutusan Hubungan Kerja (PHK) sepihak oleh karyawan terhadap perusahaan multinasional. Penggugat mendalilkan PHK tidak melalui prosedur yang benar dan tidak disertai pesangon sesuai UU Ketenagakerjaan.",
+    amar: "Mengabulkan gugatan Penggugat sebagian. Menyatakan PHK oleh Tergugat tidak sah secara hukum. Menghukum Tergugat membayar pesangon 2x PMTK senilai Rp 380 juta, uang penghargaan masa kerja Rp 90 juta, dan biaya perkara.",
+  },
+  {
+    id: "mk-79-2022",
+    nomor: "Putusan MK No. 79/PUU-XX/2022",
+    tanggal: "2023-01-17",
+    jenis: "MK",
+    majelis: "Anwar Usman (Ketua MK), Saldi Isra, Enny Nurbaningsih",
+    pokok_perkara: "Pengujian Pasal 164 UU Ketenagakerjaan tentang PHK akibat perubahan status perusahaan melalui merger, akuisisi, atau konsolidasi. Pemohon mendalilkan ketentuan ini bertentangan dengan hak bekerja dan hak atas perlindungan dalam UUD 1945.",
+    amar: "Mengabulkan permohonan Pemohon sebagian. Pasal 164 ayat (3) UU Ketenagakerjaan bertentangan dengan UUD 1945 sepanjang frasa 'perusahaan tutup' dimaknai termasuk merger. Pekerja berhak melanjutkan hubungan kerja dalam perusahaan hasil merger.",
+  },
+  {
+    id: "pa-yog-89-2022",
+    nomor: "Putusan PA Yogyakarta No. 89/Pdt.G/2022/PA.Yk",
+    tanggal: "2022-09-28",
+    jenis: "PA",
+    majelis: "Ketua Majelis: Drs. H. Zarkasi, MH; Hakim Anggota: Dra. Hj. Rosita; Ahmad Subhan, SH",
+    pokok_perkara: "Permohonan hak asuh anak pasca perceraian. Kedua orang tua bercerai dan bersengketa tentang hak asuh anak usia 4 tahun. Ibunda mendalilkan lebih layak mengasuh karena stabilitas ekonomi dan kedekatan emosional, sementara ayah mendalilkan ibunda kerap abai.",
+    amar: "Mengabulkan gugatan Pemohon (Ibunda). Menetapkan hak hadhanah (pengasuhan) anak diserahkan kepada Pemohon. Mewajibkan Termohon (Ayah) memberi nafkah anak Rp 3 juta per bulan. Memberikan hak kunjung Termohon setiap minggu.",
+  },
+];

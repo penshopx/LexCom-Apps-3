@@ -70,53 +70,5 @@ export function Layanan() {
   />;
 }
 
-export function Peraturan() {
-  return <ComingSoonPage
-    emoji="📜"
-    title="Database Peraturan"
-    subtitle="Ribuan Peraturan Perundang-undangan Indonesia"
-    description="Akses mudah ke UU, PP, Perpres, Permen, Perda, dan seluruh regulasi hukum Indonesia yang terupdate secara real-time dengan fitur pencarian canggih."
-    features={["Undang-Undang & PP", "Peraturan Menteri", "Peraturan Daerah", "Putusan MK & MA", "Pencarian Full-Text", "Update Real-time"]}
-  />;
-}
 
-export function Kursus() {
-  return <ComingSoonPage
-    emoji="📚"
-    title="Kursus Hukum Online"
-    subtitle="Tingkatkan Pemahaman Hukum Anda"
-    description="Pelajari hukum Indonesia dari para ahli melalui kursus video, modul interaktif, dan sertifikasi yang diakui. Tersedia untuk masyarakat umum maupun praktisi hukum."
-    features={["Kursus Video HD", "Modul Interaktif", "Sertifikasi Resmi", "Instruktur Berpengalaman", "Forum Diskusi Kelas", "Akses Seumur Hidup"]}
-  />;
-}
-
-export function Putusan() {
-  return <ComingSoonPage
-    emoji="⚖️"
-    title="Database Putusan"
-    subtitle="Arsip Putusan Pengadilan Indonesia"
-    description="Akses ribuan putusan Mahkamah Agung, Mahkamah Konstitusi, Pengadilan Negeri, dan Pengadilan Agama untuk referensi hukum yang kuat."
-    features={["Putusan MA & MK", "Putusan Pengadilan Negeri", "Putusan Pengadilan Agama", "Pencarian by Nomor", "Filter by Tahun & Jenis", "Analisis AI Putusan"]}
-  />;
-}
-
-export function Pengacara() {
-  return <ComingSoonPage
-    emoji="👨‍⚖️"
-    title="Direktori Pengacara"
-    subtitle="Temukan Pengacara Terpercaya di Seluruh Indonesia"
-    description="Hubungkan diri Anda dengan pengacara berpengalaman dan terverifikasi di seluruh Indonesia. Filter berdasarkan spesialisasi, lokasi, dan rating."
-    features={["Profil Terverifikasi", "Filter Spesialisasi", "Rating & Ulasan", "Konsultasi Online", "Jadwal Pertemuan", "Estimasi Biaya"]}
-  />;
-}
-
-export function Panduan() {
-  return <ComingSoonPage
-    emoji="📖"
-    title="Panduan Hukum"
-    subtitle="Panduan Praktis Hukum Indonesia"
-    description="Kumpulan panduan hukum praktis yang ditulis dalam Bahasa Indonesia yang mudah dipahami, mencakup berbagai situasi hukum sehari-hari."
-    features={["Panduan Step-by-Step", "Contoh Kasus Nyata", "Template Dokumen", "Checklist Hukum", "Tips & Strategi", "Update Berkala"]}
-  />;
-}
 

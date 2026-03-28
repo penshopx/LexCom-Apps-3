@@ -12,14 +12,14 @@ import AgentChat from "@/pages/AgentChat";
 import Forum from "@/pages/Forum";
 import ForumThread from "@/pages/ForumThread";
 import Komunitas from "@/pages/Komunitas";
-import {
-  Layanan,
-  Peraturan,
-  Kursus,
-  Putusan,
-  Pengacara,
-  Panduan,
-} from "@/pages/ComingSoon";
+import Peraturan from "@/pages/Peraturan";
+import Putusan from "@/pages/Putusan";
+import Panduan from "@/pages/Panduan";
+import PanduanDetail from "@/pages/PanduanDetail";
+import Kursus from "@/pages/Kursus";
+import KursusDetail from "@/pages/KursusDetail";
+import Pengacara from "@/pages/Pengacara";
+import { Layanan } from "@/pages/ComingSoon";
 
 const queryClient = new QueryClient();
 
@@ -40,6 +40,8 @@ function Router() {
       <Route path="/putusan" component={Putusan} />
       <Route path="/pengacara" component={Pengacara} />
       <Route path="/panduan" component={Panduan} />
+      <Route path="/panduan/:id" component={PanduanDetail} />
+      <Route path="/kursus/:id" component={KursusDetail} />
       <Route path="/komunitas" component={Komunitas} />
       <Route component={NotFound} />
     </Switch>
