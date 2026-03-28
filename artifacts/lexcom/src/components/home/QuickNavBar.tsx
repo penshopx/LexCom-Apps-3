@@ -59,14 +59,14 @@ export function QuickNavBar() {
         </div>
 
         {/* Baris 1 — AI Tools */}
-        <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide pb-1 mb-2">
+        <div className="flex items-center justify-center flex-wrap gap-2 pb-1 mb-2">
           {ROW_AI.map((item) => (
             <NavLink key={item.href} {...item} />
           ))}
         </div>
 
         {/* Baris 2 — Database & Resources */}
-        <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide pt-1">
+        <div className="flex items-center justify-center flex-wrap gap-2 pt-1">
           {ROW_DB.map((item) => (
             <NavLink key={item.href} {...item} />
           ))}
