@@ -12,6 +12,7 @@ import AgentChat from "@/pages/AgentChat";
 import Forum from "@/pages/Forum";
 import ForumThread from "@/pages/ForumThread";
 import Komunitas from "@/pages/Komunitas";
+import LexBot from "@/pages/LexBot";
 import Peraturan from "@/pages/Peraturan";
 import Putusan from "@/pages/Putusan";
 import Panduan from "@/pages/Panduan";
@@ -43,6 +44,7 @@ function Router() {
       <Route path="/panduan/:id" component={PanduanDetail} />
       <Route path="/kursus/:id" component={KursusDetail} />
       <Route path="/komunitas" component={Komunitas} />
+      <Route path="/lexbot" component={LexBot} />
       <Route component={NotFound} />
     </Switch>
   );

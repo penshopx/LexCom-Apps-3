@@ -27,6 +27,7 @@ export function Navbar() {
   ];
 
   const secondaryLinks = [
+    { name: "✨ LexBot", href: "/lexbot" },
     { name: "🤖 Agentic AI", href: "/agentic-chatbots" },
     { name: "📚 Kursus", href: "/kursus" },
     { name: "⚖️ Putusan", href: "/putusan" },
