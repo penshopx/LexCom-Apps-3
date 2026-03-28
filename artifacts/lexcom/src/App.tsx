@@ -21,6 +21,7 @@ import Kursus from "@/pages/Kursus";
 import KursusDetail from "@/pages/KursusDetail";
 import Pengacara from "@/pages/Pengacara";
 import { Layanan } from "@/pages/ComingSoon";
+import { FloatingLexBot } from "@/components/FloatingLexBot";
 
 const queryClient = new QueryClient();
 
@@ -56,6 +57,7 @@ function App() {
       <TooltipProvider>
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
           <Router />
+          <FloatingLexBot />
         </WouterRouter>
         <Toaster />
       </TooltipProvider>

@@ -8,36 +8,109 @@ const router: IRouter = Router();
 const PLATFORM_KNOWLEDGE = `
 ## LexCom — Platform LegalTech Indonesia
 
-### Fitur-Fitur Tersedia:
-1. **Agen AI Hukum** (/agents) — 11 agen spesialis hukum, klik langsung di halaman /agents
-   - Corporate, Tax, Employment, Immigration, Bankruptcy, Securities (Bisnis & Korporasi)
-   - Civil Rights, Criminal Defense, Family, Real Estate, Personal Injury (Personal & Keluarga)
-   - Cara pakai: Klik kartu agen → Tekan "Mulai Konsultasi" → Ketik pertanyaan (butuh login)
+---
 
-2. **Agentic AI Chatbot** (/agentic-chatbots) — Sidebar 11 agen + area chat real-time
-   - Cara pakai: Buka halaman → pilih agen di sidebar kiri → mulai chat (butuh login)
+## 🤖 SISTEM AGENTIC AI DI LEXCOM (Penjelasan Teknis & Cara Pakai)
 
-3. **Generator Dokumen** (/documents) — Buat draft dokumen hukum otomatis dengan AI
-   - Jenis: Gugatan, Jawaban, Replik, Duplik, Surat Kuasa, Kontrak
-   - Cara pakai: Login → Pilih jenis dokumen → Isi detail → Klik "Generate" (butuh login)
+### Apa itu Agentic AI di LexCom?
+LexCom menggunakan arsitektur multi-agent berbasis function calling (OpenAI tools). Artinya: ada satu Orchestrator Agent yang mengarahkan, dan beberapa Specialist Agents yang mengeksekusi.
 
-4. **Manajemen Perkara** (/cases) — Kelola daftar perkara hukum Anda
-   - Cara pakai: Login → Klik "+ Tambah Perkara" → Isi detail → Simpan (butuh login)
+### Arsitektur Multi-Agen LexCom:
+\`\`\`
+User Input
+    ↓
+[Orchestrator Agent] — menganalisis pertanyaan, memilih agen
+    ↓ function calling (tool: orchestrate / select_agents / ask_clarifying_question)
+[Specialist Agent 1] → streaming jawaban
+[Specialist Agent 2] → streaming jawaban  ← jika multi-agen
+[Specialist Agent 3] → streaming jawaban
+    ↓
+[Synthesis Agent]   → menggabungkan semua perspektif (jika multi-agen)
+    ↓
+Jawaban final ke user
+\`\`\`
 
-5. **Peraturan** (/peraturan) — Database 22 peraturan hukum Indonesia, bisa difilter dan dicari
-6. **Putusan** (/putusan) — 16 putusan pengadilan lengkap dengan amar dan majelis hakim
-7. **Panduan** (/panduan) — 15 artikel praktis: cara gugat, hak tersangka, PHK, dll
-8. **Kursus** (/kursus) — 10 kursus hukum online dari pemula hingga lanjutan
-9. **Pengacara** (/pengacara) — Direktori 16 pengacara terpercaya, filter spesialisasi & kota
-10. **Forum Diskusi** (/forum) — Tanya jawab hukum komunitas, bisa anonim
-11. **Komunitas** (/komunitas) — Komunitas hukum, events, networking
+### 3 Jenis Chatbot AI di LexCom:
 
-### Cara Login:
-Klik tombol "Masuk" di pojok kanan atas → Login dengan akun Replit.
-Fitur yang butuh login: Chatbot AI, Generator Dokumen, Manajemen Perkara.
+**1. LexBot (/lexbot)** — Asisten Platform & Konsultasi Hukum
+- Accessible tanpa login, muncul sebagai floating widget di semua halaman
+- Orchestrator dengan 5 tools: ask_clarifying_question, provide_platform_guide, delegate_to_specialist, create_action_plan, direct_answer
+- Cocok untuk: pertanyaan platform, tutorial fitur, panduan hukum umum, konsultasi awal
 
-### Fitur Gratis Tanpa Login:
-Peraturan, Putusan, Panduan, Kursus, Pengacara, Forum (baca & anonim), Komunitas.
+**2. Agentic AI Chat (/agentic-chatbots)** — Kolaborasi Multi-Agen Hukum
+- Membutuhkan login
+- Mode Otomatis: Orchestrator memilih 1-3 agen terbaik secara AI
+- Mode Manual: User memilih sendiri 1-3 agen dari 11 yang tersedia (checkbox)
+- Setiap agen streaming jawaban secara berurutan di kartu terpisah
+- Synthesis Agent menggabungkan semua perspektif jika mode multi
+- Cocok untuk: pertanyaan hukum kompleks lintas-bidang
+
+**3. Agent Chat Individual (/agents)** — Konsultasi Langsung ke Satu Agen
+- Butuh login, 11 agen tersedia sebagai kartu
+- Chat langsung dengan satu agen spesifik tanpa orchestrator
+- Cocok untuk: pertanyaan spesifik satu bidang hukum
+
+### 11 Agent Spesialis Hukum:
+| Agen | Spesialisasi |
+|------|-------------|
+| 🏢 Corporate Lawyer AI | PT, merger, kontrak, investasi |
+| 💰 Tax Lawyer AI | Pajak, PPh, PPN, sengketa pajak |
+| 👔 Employment Lawyer AI | PHK, pesangon, kontrak kerja |
+| ✈️ Immigration Lawyer AI | KITAS, visa, izin kerja WNA |
+| 📊 Bankruptcy Lawyer AI | Kepailitan, PKPU |
+| 📈 Securities Lawyer AI | Pasar modal, OJK, IPO |
+| ⚖️ Civil Rights Lawyer AI | HAM, diskriminasi |
+| 🛡️ Criminal Defense AI | Pidana, praperadilan |
+| 👨‍👩‍👧 Family Lawyer AI | Cerai, waris, hak asuh |
+| 🏠 Real Estate Lawyer AI | Tanah, SHM, sengketa properti |
+| 🩺 Personal Injury AI | Kecelakaan, malpraktik |
+
+### Cara Menggunakan Agentic AI Chat (Tutorial Lengkap):
+**Mode Otomatis (Recommended):**
+1. Buka /agentic-chatbots
+2. Pastikan toggle "Otomatis" dipilih di sidebar kiri
+3. Ketik pertanyaan hukum Anda (bisa kompleks, lintas bidang)
+4. Tunggu: Orchestrator memilih agen → agen streaming jawaban → Synthesis menggabungkan
+5. Baca kartu per-agen (collapsible) dan Sintesis Akhir di bawah
+
+**Mode Manual:**
+1. Klik toggle "Manual" di sidebar kiri
+2. Centang 1-3 agen yang ingin Anda libatkan (max 3)
+3. Agen yang dipilih tampil sebagai badge berwarna di header
+4. Ketik pertanyaan dan kirim
+5. Hanya agen yang Anda pilih yang akan merespons
+
+### Function Calling (Cara Eksekusi AI):
+LexCom menggunakan OpenAI Function Calling (disebut juga "tool use") untuk:
+- Orchestrator memanggil fungsi untuk memilih agen (bukan generasi teks biasa)
+- LexBot memanggil tools: ask_clarifying_question, provide_platform_guide, dll
+- Ini memastikan AI mengambil keputusan terstruktur, bukan hanya menghasilkan teks
+
+### Kapan Menggunakan Chatbot yang Mana?
+- Tidak tahu mau mulai dari mana → LexBot (floating widget ✨)
+- Pertanyaan hukum umum → LexBot
+- Pertanyaan hukum kompleks, butuh pandangan multi-perspektif → Agentic AI Chat
+- Pertanyaan spesifik satu bidang → Agent Chat Individual (/agents)
+
+---
+
+## 📱 FITUR-FITUR PLATFORM LENGKAP
+
+1. **Agen AI Hukum** (/agents) — 11 agen spesialis, klik kartu untuk konsultasi (butuh login)
+2. **Agentic AI Chat** (/agentic-chatbots) — Multi-agen kolaborasi (butuh login)
+3. **LexBot** (/lexbot) — Asisten utama, gratis, floating widget di semua halaman
+4. **Generator Dokumen** (/documents) — Draft hukum otomatis: Gugatan, Kontrak, dll (butuh login)
+5. **Manajemen Perkara** (/cases) — Kelola perkara hukum Anda (butuh login)
+6. **Peraturan** (/peraturan) — 22 peraturan hukum Indonesia, gratis
+7. **Putusan** (/putusan) — 16 putusan pengadilan, gratis
+8. **Panduan** (/panduan) — 15 artikel praktis, gratis
+9. **Kursus** (/kursus) — 10 kursus hukum online, gratis
+10. **Pengacara** (/pengacara) — Direktori 16 pengacara, gratis
+11. **Forum Diskusi** (/forum) — Diskusi komunitas, posting anonim, gratis
+12. **Komunitas** (/komunitas) — Events, networking, gratis
+
+### Cara Login: Klik "Masuk" → Login dengan akun Replit
+### Gratis tanpa login: Semua kecuali Chatbot AI, Generator Dokumen, Manajemen Perkara
 `;
 
 const ORCHESTRATOR_SYSTEM = `Anda adalah LexBot, asisten AI utama platform LexCom — platform LegalTech terdepan di Indonesia.
