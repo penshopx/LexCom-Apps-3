@@ -81,17 +81,25 @@ interface StreamEvent {
 }
 
 const ALL_AGENTS: AgentMeta[] = [
-  { key: "corporate",      name: "Corporate Lawyer AI",       emoji: "🏢", color: "#6366f1" },
-  { key: "tax",            name: "Tax Lawyer AI",              emoji: "💰", color: "#f59e0b" },
-  { key: "employment",     name: "Employment Lawyer AI",       emoji: "👔", color: "#10b981" },
-  { key: "immigration",    name: "Immigration Lawyer AI",      emoji: "✈️",  color: "#06b6d4" },
-  { key: "bankruptcy",     name: "Bankruptcy Lawyer AI",       emoji: "📊", color: "#ef4444" },
-  { key: "securities",     name: "Securities Lawyer AI",       emoji: "📈", color: "#8b5cf6" },
-  { key: "civilrights",    name: "Civil Rights Lawyer AI",     emoji: "⚖️",  color: "#f97316" },
-  { key: "criminal",       name: "Criminal Defense AI",        emoji: "🛡️",  color: "#64748b" },
-  { key: "family",         name: "Family Lawyer AI",           emoji: "👨‍👩‍👧", color: "#ec4899" },
-  { key: "realestate",     name: "Real Estate Lawyer AI",      emoji: "🏠", color: "#14b8a6" },
-  { key: "personalinjury", name: "Personal Injury Lawyer AI",  emoji: "🩺", color: "#eab308" },
+  { key: "corporate",      name: "Corporate Lawyer AI",         emoji: "🏢", color: "#6366f1" },
+  { key: "tax",            name: "Tax Lawyer AI",               emoji: "💰", color: "#f59e0b" },
+  { key: "employment",     name: "Employment Lawyer AI",        emoji: "👔", color: "#10b981" },
+  { key: "immigration",    name: "Immigration Lawyer AI",       emoji: "✈️",  color: "#06b6d4" },
+  { key: "bankruptcy",     name: "Bankruptcy Lawyer AI",        emoji: "📊", color: "#ef4444" },
+  { key: "securities",     name: "Securities Lawyer AI",        emoji: "📈", color: "#8b5cf6" },
+  { key: "civilrights",    name: "Civil Rights Lawyer AI",      emoji: "⚖️",  color: "#f97316" },
+  { key: "criminal",       name: "Criminal Defense AI",         emoji: "🛡️",  color: "#64748b" },
+  { key: "family",         name: "Family Lawyer AI",            emoji: "👨‍👩‍👧", color: "#ec4899" },
+  { key: "realestate",     name: "Real Estate Lawyer AI",       emoji: "🏠", color: "#14b8a6" },
+  { key: "personalinjury", name: "Personal Injury Lawyer AI",   emoji: "🩺", color: "#eab308" },
+  { key: "ip",             name: "Intellectual Property AI",    emoji: "💡", color: "#a855f7" },
+  { key: "syariah",        name: "Hukum Syariah AI",            emoji: "🕌", color: "#16a34a" },
+  { key: "tun",            name: "Hukum Adm. Negara AI",        emoji: "🏛️",  color: "#0369a1" },
+  { key: "lingkungan",     name: "Hukum Lingkungan AI",         emoji: "🌿", color: "#15803d" },
+  { key: "persaingan",     name: "Hukum Persaingan Usaha AI",   emoji: "🔍", color: "#b45309" },
+  { key: "researcher",     name: "Legal Researcher AI",         emoji: "🔬", color: "#7c3aed" },
+  { key: "drafter",        name: "Legal Drafter AI",            emoji: "✍️",  color: "#db2777" },
+  { key: "notaris",        name: "Notaris & PPAT AI",           emoji: "📜", color: "#c2410c" },
 ];
 
 const SAMPLE_PROMPTS = [

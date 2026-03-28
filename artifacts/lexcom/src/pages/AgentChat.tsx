@@ -222,6 +222,55 @@ const AGENTS: Record<string, { emoji: string; name: string; category: string; de
     description: "Ahli audit forensik, investigasi kecurangan (fraud), tracing aset, due diligence keuangan, dan dukungan litigasi.",
     specialties: ["Audit Forensik", "Fraud & Korupsi Investigation", "Tracing Aset", "Due Diligence Keuangan", "Expert Witness Akuntansi", "Dukungan Litigasi Pidana"],
   },
+  ip: {
+    emoji: "💡",
+    name: "Intellectual Property AI",
+    category: "Pakar Hukum",
+    description: "Spesialis hak kekayaan intelektual: merek, hak cipta, paten, desain industri, rahasia dagang, dan perlindungan HKI di Indonesia & internasional.",
+    specialties: ["Hak Merek & Branding", "Hak Cipta & Karya Kreatif", "Paten & Invensi", "Desain Industri", "Rahasia Dagang", "Sengketa HKI & DJKI"],
+  },
+  syariah: {
+    emoji: "🕌",
+    name: "Hukum Syariah AI",
+    category: "Lex Specialis",
+    description: "Konsultan hukum syariah: ekonomi Islam, perbankan syariah, zakat, wakaf, waris faraidh, dan Kompilasi Hukum Islam (KHI).",
+    specialties: ["Ekonomi & Perbankan Syariah", "Zakat & Wakaf", "Waris Faraidh", "Kompilasi Hukum Islam", "Akad Muamalat", "Sengketa Pengadilan Agama"],
+  },
+  tun: {
+    emoji: "🏛️",
+    name: "Hukum Adm. Negara AI",
+    category: "Lex Specialis",
+    description: "Ahli Hukum Tata Usaha Negara: PTUN, keputusan pemerintah, perizinan, sengketa administrasi, dan kebijakan publik.",
+    specialties: ["PTUN & Hukum Acara TUN", "Keputusan TUN", "Sengketa Administrasi", "Perizinan & OSS", "Kebijakan Publik", "Gugatan Fiktif Positif"],
+  },
+  persaingan: {
+    emoji: "🔍",
+    name: "Hukum Persaingan Usaha AI",
+    category: "Lex Specialis",
+    description: "Spesialis antimonopoli, praktik kartel, posisi dominan, merger & akuisisi (KPPU), dan persaingan usaha yang sehat.",
+    specialties: ["UU No. 5/1999", "KPPU & Investigasi", "Kartel & Monopoli", "Merger Notifikasi", "Posisi Dominan", "Perjanjian Tertutup"],
+  },
+  researcher: {
+    emoji: "🔬",
+    name: "Legal Researcher AI",
+    category: "Tenaga Ahli",
+    description: "Peneliti hukum profesional: riset doktrin, teori hukum, perbandingan hukum lintas negara, dan analisis yurisprudensi Indonesia.",
+    specialties: ["Riset Doktrin Hukum", "Perbandingan Hukum", "Analisis Yurisprudensi", "Legal Memorandum", "Bibliografi Hukum", "Opini Hukum"],
+  },
+  drafter: {
+    emoji: "✍️",
+    name: "Legal Drafter AI",
+    category: "Tenaga Ahli",
+    description: "Drafter instrumen hukum profesional: peraturan, kontrak, MOU, perjanjian, dan dokumen hukum sesuai teknik perundang-undangan.",
+    specialties: ["Drafting Peraturan", "Kontrak & MOU", "Naskah Akademik", "Legal Opinion", "Teknik Perundang-undangan", "Amendemen & Revisi"],
+  },
+  notaris: {
+    emoji: "📜",
+    name: "Notaris & PPAT AI",
+    category: "Tenaga Ahli",
+    description: "Konsultan notaris & PPAT: akta autentik, akta jual beli tanah, perjanjian perkawinan, warisan, dan korporasi.",
+    specialties: ["Akta Notaris", "PPAT & Akta Jual Beli", "Perjanjian Perkawinan", "Akta Waris & Keterangan Hak Waris", "Pendirian Badan Hukum", "RUPS & Perubahan AD"],
+  },
 };
 
 export default function AgentChat() {

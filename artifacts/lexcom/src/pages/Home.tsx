@@ -3,6 +3,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/home/Hero";
 import { AgentsSection } from "@/components/home/AgentsSection";
 import { FeaturesSection } from "@/components/home/FeaturesSection";
+import { EkosistemSection } from "@/components/home/EkosistemSection";
 import { PractitionersSection } from "@/components/home/PractitionersSection";
 import { StatsSection } from "@/components/home/StatsSection";
 import { TestimonialsSection } from "@/components/home/TestimonialsSection";
@@ -15,8 +16,9 @@ export default function Home() {
       <Navbar />
       <main className="flex-1">
         <Hero />
-        <AgentsSection />
         <FeaturesSection />
+        <AgentsSection />
+        <EkosistemSection />
         <PractitionersSection />
         <StatsSection />
         <TestimonialsSection />
