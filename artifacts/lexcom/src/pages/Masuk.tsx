@@ -25,7 +25,7 @@ const USERS = [
 ];
 
 const FREE_FEATURES = [
-  "LexBot AI (konsultasi hukum dasar)",
+  "Chaesa Lexbot (konsultasi hukum dasar)",
   "Database peraturan, putusan & panduan",
   "6 kalkulator hukum (pesangon, waris, dll)",
   "Glosarium 120+ istilah hukum",

@@ -16,7 +16,7 @@ const MENU_GROUPS = [
   {
     label: "Konsultasi AI",
     links: [
-      { name: "✨ LexBot", href: "/lexbot", desc: "Multi-agent AI orchestrator" },
+      { name: "✨ Chaesa Lexbot", href: "/lexbot", desc: "Multi-agent AI orchestrator" },
       { name: "🤖 Agentic AI", href: "/agentic-chatbots", desc: "19 agen berkolaborasi" },
       { name: "⚖️ Pakar Hukum AI", href: "/agents", desc: "19 spesialis hukum" },
     ],

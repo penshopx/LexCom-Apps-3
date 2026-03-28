@@ -86,7 +86,7 @@ const QUICK_ACTIONS = [
 ];
 
 const AGENT_DISPLAY: Record<string, { label: string; color: string; icon: string }> = {
-  orchestrator: { label: "LexBot", color: "bg-violet-600", icon: "🤖" },
+  orchestrator: { label: "Chaesa Lexbot", color: "bg-violet-600", icon: "🤖" },
   corporate: { label: "Corporate Lawyer AI", color: "bg-blue-600", icon: "🏢" },
   tax: { label: "Tax Lawyer AI", color: "bg-amber-600", icon: "💰" },
   employment: { label: "Employment Lawyer AI", color: "bg-green-600", icon: "👷" },
@@ -190,7 +190,7 @@ export default function LexBot() {
             role: "assistant",
             content: "",
             agent: resolvedAgent,
-            agentLabel: AGENT_DISPLAY[resolvedAgent]?.label ?? "LexBot",
+            agentLabel: AGENT_DISPLAY[resolvedAgent]?.label ?? "Chaesa Lexbot",
             timestamp: new Date(),
           },
         ]);
@@ -325,7 +325,7 @@ export default function LexBot() {
               <Sparkles className="w-5 h-5 text-white" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-foreground">LexBot</h1>
+              <h1 className="text-xl font-bold text-foreground">Chaesa Lexbot</h1>
               <p className="text-xs text-muted-foreground">
                 Asisten AI Multi-Agen · Panduan & Konsultasi LexCom
               </p>
@@ -357,7 +357,7 @@ export default function LexBot() {
                 <Sparkles className="w-10 h-10 text-white" />
               </div>
               <h2 className="text-2xl font-bold text-foreground">
-                Halo! Saya LexBot 👋
+                Halo! Saya Chaesa Lexbot 👋
               </h2>
               <p className="text-muted-foreground leading-relaxed">
                 Asisten AI utama LexCom yang siap membantu Anda memahami platform,
@@ -472,7 +472,7 @@ export default function LexBot() {
         </form>
 
         <p className="text-center text-xs text-muted-foreground/60">
-          LexBot menggunakan multi-agent AI. Untuk konsultasi hukum formal, selalu hubungi pengacara berlisensi.
+          Chaesa Lexbot menggunakan multi-agent AI. Untuk konsultasi hukum formal, selalu hubungi pengacara berlisensi.
         </p>
       </div>
     </div>
@@ -543,7 +543,7 @@ function AgentStatusBubble({
   agentInfo: { label: string; color: string; icon: string };
 }) {
   const statusText: Record<AgentStatusType["type"], string> = {
-    thinking: "LexBot sedang menganalisis pertanyaan Anda...",
+    thinking: "Chaesa Lexbot sedang menganalisis pertanyaan Anda...",
     delegating: `Berkonsultasi dengan ${status.specialistName ?? "spesialis"}...`,
     guide: `Menyiapkan panduan tentang ${status.feature ?? "fitur"}...`,
     planning: `Membuat rencana tindakan: ${status.title ?? ""}...`,

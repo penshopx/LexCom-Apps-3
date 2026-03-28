@@ -58,10 +58,10 @@ const PAGE_CONTEXT: Record<string, { title: string; prompts: string[] }> = {
     ],
   },
   "/lexbot": {
-    title: "Halaman LexBot",
+    title: "Halaman Chaesa Lexbot",
     prompts: [
-      "Apa bedanya LexBot dengan Agentic AI Chat?",
-      "Bagaimana cara kerja multi-agent di LexBot?",
+      "Apa bedanya Chaesa Lexbot dengan Agentic AI Chat?",
+      "Bagaimana cara kerja multi-agent di Chaesa Lexbot?",
     ],
   },
   "/agents": {
@@ -127,7 +127,7 @@ const AGENT_DISPLAY: Record<string, { label: string; emoji: string }> = {
   family: { label: "Family Lawyer AI", emoji: "👨‍👩‍👧" },
   realestate: { label: "Real Estate Lawyer AI", emoji: "🏠" },
   personalinjury: { label: "Personal Injury AI", emoji: "🩺" },
-  orchestrator: { label: "LexBot", emoji: "✨" },
+  orchestrator: { label: "Chaesa Lexbot", emoji: "✨" },
 };
 
 export function FloatingLexBot() {
@@ -190,11 +190,11 @@ export function FloatingLexBot() {
       setMessages((p) => [
         ...p,
         userMsg,
-        { id: asstId, role: "assistant", content: "", agentLabel: "LexBot", agentEmoji: "✨", isStreaming: true },
+        { id: asstId, role: "assistant", content: "", agentLabel: "Chaesa Lexbot", agentEmoji: "✨", isStreaming: true },
       ]);
       setInput("");
       setIsStreaming(true);
-      setAgentStatus({ type: "thinking", label: "LexBot sedang menganalisis..." });
+      setAgentStatus({ type: "thinking", label: "Chaesa Lexbot sedang menganalisis..." });
 
       try {
         const convId = await initConv();
@@ -228,7 +228,7 @@ export function FloatingLexBot() {
               const ev = JSON.parse(json) as StreamEvent;
 
               if (ev.type === "thinking") {
-                setAgentStatus({ type: "thinking", label: "LexBot sedang menganalisis..." });
+                setAgentStatus({ type: "thinking", label: "Chaesa Lexbot sedang menganalisis..." });
               } else if (ev.type === "action") {
                 if (ev.action === "delegating" && ev.specialist) {
                   resolvedAgent = ev.specialist;
@@ -323,7 +323,7 @@ export function FloatingLexBot() {
             <button
               onClick={() => { setIsOpen(true); setIsMinimized(false); }}
               className="relative w-14 h-14 rounded-full bg-gradient-to-br from-violet-600 to-purple-700 shadow-2xl shadow-violet-500/40 hover:shadow-violet-500/60 hover:scale-110 transition-all duration-200 flex items-center justify-center"
-              title="Buka LexBot"
+              title="Buka Chaesa Lexbot"
             >
               <Sparkles className="w-6 h-6 text-white" />
               {hasUnread && (
@@ -332,7 +332,7 @@ export function FloatingLexBot() {
             </button>
             <div className="mt-2 text-center">
               <span className="text-[10px] text-muted-foreground bg-background/80 px-2 py-0.5 rounded-full border border-white/10 backdrop-blur-sm">
-                LexBot
+                Chaesa Lexbot
               </span>
             </div>
           </motion.div>
@@ -358,7 +358,7 @@ export function FloatingLexBot() {
                 </div>
                 <div>
                   <div className="flex items-center gap-1.5">
-                    <span className="text-sm font-bold text-white">LexBot</span>
+                    <span className="text-sm font-bold text-white">Chaesa Lexbot</span>
                     <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
                   </div>
                   {!isMinimized && (
@@ -457,7 +457,7 @@ export function FloatingLexBot() {
                       ref={inputRef}
                       value={input}
                       onChange={(e) => setInput(e.target.value)}
-                      placeholder="Tanya LexBot apapun..."
+                      placeholder="Tanya Chaesa Lexbot apapun..."
                       disabled={isStreaming}
                       className="pr-8 py-2 h-9 text-xs bg-white/5 border-white/15 focus-visible:ring-violet-500 rounded-xl"
                       onKeyDown={(e) => {
@@ -502,7 +502,7 @@ function WelcomeState({ prompts, onSend }: { prompts: string[]; onSend: (p: stri
         <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-violet-600 to-purple-700 flex items-center justify-center mx-auto shadow-lg shadow-violet-500/20">
           <Sparkles className="w-6 h-6 text-white" />
         </div>
-        <h4 className="font-bold text-sm text-foreground">Halo! Saya LexBot</h4>
+        <h4 className="font-bold text-sm text-foreground">Halo! Saya Chaesa Lexbot</h4>
         <p className="text-xs text-muted-foreground leading-relaxed">
           Tanya saya cara menggunakan LexCom, atau ajukan pertanyaan hukum Anda — saya akan melibatkan spesialis yang tepat.
         </p>
@@ -565,7 +565,7 @@ function MsgBubble({ msg }: { msg: ChatMsg }) {
       <div className="flex-1 min-w-0 space-y-1">
         <div className="flex items-center gap-1.5">
           <span className="text-[10px] font-semibold text-muted-foreground">
-            {msg.agentLabel ?? "LexBot"}
+            {msg.agentLabel ?? "Chaesa Lexbot"}
           </span>
           {msg.action === "delegate_to_specialist" && (
             <Badge variant="outline" className="text-[9px] h-3.5 border-blue-500/30 text-blue-400 px-1">

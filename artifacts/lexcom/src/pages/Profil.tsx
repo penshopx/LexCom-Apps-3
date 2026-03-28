@@ -19,7 +19,7 @@ const PLAN_INFO: Record<string, { name: string; color: string; bg: string; limit
 };
 
 const QUICK_LINKS = [
-  { icon: MessageSquare, label: "LexBot AI",           href: "/lexbot",              desc: "Konsultasi hukum" },
+  { icon: MessageSquare, label: "Chaesa Lexbot",        href: "/lexbot",              desc: "Konsultasi hukum" },
   { icon: Scale,         label: "Pakar Hukum AI",      href: "/agents",              desc: "19 spesialis AI" },
   { icon: PenLine,       label: "Penulis Cerdas",      href: "/penulis-cerdas",      desc: "Studio penulisan AI" },
   { icon: Bot,           label: "Chatbot Builder",     href: "/chatbot-builder",     desc: "Buat chatbot kustom" },
@@ -195,7 +195,7 @@ export default function Profil() {
                   <p className="text-sm">Belum ada aktivitas.</p>
                   <p className="text-xs mt-1">Mulai konsultasi hukum Anda pertama!</p>
                   <a href="/lexbot" className="inline-flex items-center gap-1 mt-3 text-xs text-primary hover:underline">
-                    Buka LexBot <ArrowRight className="w-3 h-3" />
+                    Buka Chaesa Lexbot <ArrowRight className="w-3 h-3" />
                   </a>
                 </div>
               </div>

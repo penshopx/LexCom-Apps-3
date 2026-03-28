@@ -14,7 +14,7 @@ const EKOSISTEM = [
     border: "border-violet-500/20",
     titleColor: "text-violet-400",
     items: [
-      { icon: Sparkles,     label: "LexBot AI",           desc: "Multi-agent orchestrator",         href: "/lexbot" },
+      { icon: Sparkles,     label: "Chaesa Lexbot",        desc: "Multi-agent orchestrator",         href: "/lexbot" },
       { icon: Bot,          label: "Agentic Chatbots",    desc: "19 agen berkolaborasi",            href: "/agentic-chatbots" },
       { icon: MessageSquare,label: "19 Pakar Hukum AI",  desc: "Spesialis bidang hukum",           href: "/agents" },
     ],

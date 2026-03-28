@@ -83,7 +83,7 @@ export function Hero() {
               <Link href="/lexbot" className="w-full sm:w-auto">
                 <button className="w-full px-7 py-4 rounded-xl font-semibold bg-gradient-to-r from-primary to-secondary text-white shadow-[0_0_40px_-10px_rgba(124,58,237,0.5)] hover:shadow-[0_0_60px_-15px_rgba(124,58,237,0.7)] hover:-translate-y-1 transition-all flex items-center justify-center gap-2 group">
                   <Sparkles className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-                  Buka LexBot AI
+                  Buka Chaesa Lexbot
                 </button>
               </Link>
             ) : (

@@ -79,7 +79,7 @@ const LAYANAN = [
   {
     icon: Bot,
     title: "Konsultasi AI 24/7",
-    subtitle: "LexBot & Pakar Hukum AI",
+    subtitle: "Chaesa Lexbot & Pakar Hukum AI",
     desc: "Konsultasi hukum kapan saja dengan 19 Pakar AI yang terspecialisasi: hukum pidana, perdata, ketenagakerjaan, perpajakan, syariah, dan banyak lagi.",
     features: ["19 spesialis AI hukum", "Streaming real-time", "Riwayat percakapan tersimpan", "Analisis legal reasoning"],
     link: "/pengacara",
@@ -398,7 +398,7 @@ export default function Layanan() {
           {/* CTA */}
           <div className="text-center">
             <Link href="/lexbot" className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-bold px-8 py-4 rounded-2xl hover:opacity-90 transition text-base">
-              <Bot className="w-5 h-5" /> Mulai dengan LexBot Gratis
+              <Bot className="w-5 h-5" /> Mulai dengan Chaesa Lexbot Gratis
             </Link>
             <p className="text-xs text-muted-foreground mt-3">Tidak perlu kartu kredit. Daftar dan konsultasi langsung.</p>
           </div>

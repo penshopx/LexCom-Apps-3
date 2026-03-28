@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { motion } from "framer-motion";
 
 const ROW_AI = [
-  { emoji: "✨", name: "LexBot AI",           href: "/lexbot" },
+  { emoji: "✨", name: "Chaesa Lexbot",        href: "/lexbot" },
   { emoji: "🤖", name: "Agentic AI",          href: "/agentic-chatbots" },
   { emoji: "⚖️", name: "Pakar Hukum AI",      href: "/agents" },
   { emoji: "🧠", name: "Riset AI Hub",        href: "/riset-ai" },

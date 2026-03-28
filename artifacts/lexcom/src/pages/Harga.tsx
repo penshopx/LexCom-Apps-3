@@ -24,7 +24,7 @@ const PLANS = [
     cta: "Daftar Gratis",
     ctaStyle: "bg-white/10 border border-white/20 text-foreground hover:bg-white/20",
     features: [
-      { text: "LexBot AI (dasar)", ok: true },
+      { text: "Chaesa Lexbot (dasar)", ok: true },
       { text: "Database Peraturan & Putusan", ok: true },
       { text: "Glosarium 120+ istilah hukum", ok: true },
       { text: "6 Kalkulator Hukum", ok: true },
@@ -56,7 +56,7 @@ const PLANS = [
       { text: "Semua fitur Gratis", ok: true },
       { text: "19 Pakar Hukum AI", ok: true },
       { text: "Agentic Multi-Agent AI", ok: true },
-      { text: "LexBot Advanced", ok: true },
+      { text: "Chaesa Lexbot Advanced", ok: true },
       { text: "Generator Dokumen AI", ok: true },
       { text: "Manajemen Kasus & Dokumen", ok: true },
       { text: "Forum Komunitas (posting & reply)", ok: true },
@@ -131,10 +131,10 @@ const PLANS = [
 ];
 
 const FAQS = [
-  { q: "Apakah saya bisa mencoba sebelum berlangganan?", a: "Ya! Paket Gratis tersedia selamanya tanpa kartu kredit. Anda bisa menggunakan LexBot, database hukum, kalkulator, dan glosarium secara gratis." },
+  { q: "Apakah saya bisa mencoba sebelum berlangganan?", a: "Ya! Paket Gratis tersedia selamanya tanpa kartu kredit. Anda bisa menggunakan Chaesa Lexbot, database hukum, kalkulator, dan glosarium secara gratis." },
   { q: "Bagaimana cara pembayaran?", a: "Pembayaran dapat dilakukan via transfer bank (BCA, BNI, BRI, Mandiri), GoPay, OVO, Dana, QRIS, atau kartu kredit/debit. Setelah konfirmasi pembayaran, akses langsung aktif." },
   { q: "Apakah bisa upgrade atau downgrade plan?", a: "Bisa. Upgrade plan akan langsung aktif (sisa saldo diperhitungkan). Downgrade akan berlaku di siklus penagihan berikutnya." },
-  { q: 'Apa itu "kueri AI"?', a: "Setiap percakapan atau permintaan ke sistem AI (LexBot, Pakar AI, Penulis Cerdas, dll.) menghitung sebagai 1 kueri. Batas direset setiap tengah malam WIB." },
+  { q: 'Apa itu "kueri AI"?', a: "Setiap percakapan atau permintaan ke sistem AI (Chaesa Lexbot, Pakar AI, Penulis Cerdas, dll.) menghitung sebagai 1 kueri. Batas direset setiap tengah malam WIB." },
   { q: "Apakah data saya aman?", a: "Ya. Semua data dienkripsi end-to-end dan disimpan di server Indonesia. Kami tidak menjual atau membagikan data pengguna kepada pihak ketiga." },
   { q: "Bagaimana cara berlangganan plan Advokat/Enterprise?", a: "Klik 'Hubungi Kami' dan tim kami akan menghubungi Anda dalam 1x24 jam untuk demo dan konfigurasi sesuai kebutuhan organisasi Anda." },
 ];
