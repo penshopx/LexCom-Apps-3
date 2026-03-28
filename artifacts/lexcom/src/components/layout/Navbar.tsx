@@ -28,7 +28,15 @@ const MENU_GROUPS = [
     links: [
       { name: "🧮 Kalkulator", href: "/kalkulator", desc: "Pesangon, waris, biaya perkara" },
       { name: "📄 Dokumen AI", href: "/documents", desc: "Generator dokumen otomatis" },
+      { name: "🔬 Telaah Dokumen", href: "/telaah-dokumen", desc: "Review 5 agen AI secara paralel" },
       { name: "📁 Manajemen Kasus", href: "/cases", desc: "Kelola perkara & jadwal" },
+    ],
+  },
+  {
+    label: "Riset AI",
+    links: [
+      { name: "🧠 Riset AI Hub", href: "/riset-ai", desc: "Ringkasan multi-agen & pencarian semantik" },
+      { name: "🕸️ Peta Preseden", href: "/peta-preseden", desc: "Jaringan yurisprudensi & putusan terkait" },
     ],
   },
   {
@@ -60,7 +68,11 @@ const secondaryLinks = [
   { name: "·", href: "#", divider: true },
   { name: "🧮 Kalkulator", href: "/kalkulator" },
   { name: "📄 Dokumen", href: "/documents" },
+  { name: "🔬 Telaah Dokumen", href: "/telaah-dokumen" },
   { name: "📁 Kasus", href: "/cases" },
+  { name: "·", href: "#", divider: true },
+  { name: "🧠 Riset AI", href: "/riset-ai" },
+  { name: "🕸️ Peta Preseden", href: "/peta-preseden" },
   { name: "·", href: "#", divider: true },
   { name: "📚 Kursus", href: "/kursus" },
   { name: "👨‍⚖️ Pengacara", href: "/pengacara" },

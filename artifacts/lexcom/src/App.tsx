@@ -24,6 +24,9 @@ import PromoAdvokat from "@/pages/PromoAdvokat";
 import Layanan from "@/pages/Layanan";
 import Glosarium from "@/pages/Glosarium";
 import Kalkulator from "@/pages/Kalkulator";
+import RisetAI from "@/pages/RisetAI";
+import TelaahDokumen from "@/pages/TelaahDokumen";
+import PetaPreseden from "@/pages/PetaPreseden";
 import { FloatingLexBot } from "@/components/FloatingLexBot";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 
@@ -53,6 +56,9 @@ function Router() {
       <Route path="/promo" component={PromoAdvokat} />
       <Route path="/glosarium" component={Glosarium} />
       <Route path="/kalkulator" component={Kalkulator} />
+      <Route path="/riset-ai" component={RisetAI} />
+      <Route path="/telaah-dokumen" component={TelaahDokumen} />
+      <Route path="/peta-preseden" component={PetaPreseden} />
       <Route component={NotFound} />
     </Switch>
   );

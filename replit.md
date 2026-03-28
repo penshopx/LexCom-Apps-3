@@ -66,6 +66,9 @@ Every package extends `tsconfig.base.json` which sets `composite: true`. The roo
 - `/kalkulator` — 6 legal calculators: biaya perkara, pesangon PHK (PP 35/2021), daluwarsa, masa penahanan, waris, biaya notaris
 - `/glosarium` — 120+ legal terms with definitions, examples & legal basis
 - `/promo` — Sales/promo landing page with pricing
+- `/riset-ai` — AI Research Hub: multi-agent summarizer (4 agents: researcher, criminal, corporate, drafter) + semantic search
+- `/telaah-dokumen` — Document Review with 5 parallel agents (drafter, corporate, employment, researcher, notaris), risk badge detection
+- `/peta-preseden` — Precedent Mapping: 3 agents map related court decisions with visual network graph
 - Replit Auth integration (login/logout)
 - Dark/Light mode toggle — ThemeContext in `src/contexts/ThemeContext.tsx`, persisted to localStorage, sun/moon toggle in Navbar
 - PWA support — `vite-plugin-pwa` with manifest, service worker (workbox), law-themed PNG icons (192/512), installable on Android
