@@ -29,15 +29,17 @@ export function Navbar() {
   ];
 
   const secondaryLinks = [
-    { name: "\u2728 LexBot", href: "/lexbot" },
-    { name: "\ud83e\udd16 Agentic AI", href: "/agentic-chatbots" },
-    { name: "\ud83d\udcda Kursus", href: "/kursus" },
-    { name: "\u2696\ufe0f Putusan", href: "/putusan" },
-    { name: "\ud83d\udc68\u200d\u2696\ufe0f Pengacara", href: "/pengacara" },
-    { name: "\ud83d\udcd6 Panduan", href: "/panduan" },
-    { name: "\ud83d\udcc4 Dokumen", href: "/documents" },
-    { name: "\ud83d\udcc1 Kasus", href: "/cases" },
-    { name: "\ud83d\udc65 Komunitas", href: "/komunitas" },
+    { name: "✨ LexBot", href: "/lexbot" },
+    { name: "🤖 Agentic AI", href: "/agentic-chatbots" },
+    { name: "📚 Kursus", href: "/kursus" },
+    { name: "⚖️ Putusan", href: "/putusan" },
+    { name: "👨‍⚖️ Pengacara", href: "/pengacara" },
+    { name: "📖 Panduan", href: "/panduan" },
+    { name: "📄 Dokumen", href: "/documents" },
+    { name: "📁 Kasus", href: "/cases" },
+    { name: "🧮 Kalkulator", href: "/kalkulator" },
+    { name: "📕 Glosarium", href: "/glosarium" },
+    { name: "👥 Komunitas", href: "/komunitas" },
   ];
 
   const allLinks = [...primaryLinks, ...secondaryLinks];

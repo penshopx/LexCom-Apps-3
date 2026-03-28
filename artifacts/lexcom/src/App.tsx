@@ -21,7 +21,9 @@ import Kursus from "@/pages/Kursus";
 import KursusDetail from "@/pages/KursusDetail";
 import Pengacara from "@/pages/Pengacara";
 import PromoAdvokat from "@/pages/PromoAdvokat";
-import { Layanan } from "@/pages/ComingSoon";
+import Layanan from "@/pages/Layanan";
+import Glosarium from "@/pages/Glosarium";
+import Kalkulator from "@/pages/Kalkulator";
 import { FloatingLexBot } from "@/components/FloatingLexBot";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 
@@ -49,6 +51,8 @@ function Router() {
       <Route path="/komunitas" component={Komunitas} />
       <Route path="/lexbot" component={LexBot} />
       <Route path="/promo" component={PromoAdvokat} />
+      <Route path="/glosarium" component={Glosarium} />
+      <Route path="/kalkulator" component={Kalkulator} />
       <Route component={NotFound} />
     </Switch>
   );

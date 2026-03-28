@@ -52,12 +52,31 @@ Every package extends `tsconfig.base.json` which sets `composite: true`. The roo
 
 ### Frontend (artifacts/lexcom)
 - Landing page with all sections
-- `/agentic-chatbots` — AI chat with 11 legal agents (SSE streaming)
+- `/agentic-chatbots` — AI chat with 19 legal agents (SSE streaming): 12 Pakar Hukum + 4 Lex Specialis + 3 Tenaga Ahli
+- `/lexbot` — LexBot multi-agent AI orchestrator (streaming, auto tool_choice fallback)
 - `/cases` — Legal case management (CRUD)
 - `/documents` — AI document generator (SSE streaming)
+- `/peraturan` — 50+ regulations database (UU, PP, Perpres, Permen) incl. KUHP Baru UU 1/2023
+- `/putusan` — 30+ court decisions (MA, MK, PN, PA) with pokok perkara & amar
+- `/panduan` — 30+ legal guides & articles
+- `/kursus` — Online legal courses
+- `/pengacara` — Verified lawyer directory
+- `/forum` — Community forum
+- `/layanan` — Services page (10 service cards)
+- `/kalkulator` — 6 legal calculators: biaya perkara, pesangon PHK (PP 35/2021), daluwarsa, masa penahanan, waris, biaya notaris
+- `/glosarium` — 120+ legal terms with definitions, examples & legal basis
+- `/promo` — Sales/promo landing page with pricing
 - Replit Auth integration (login/logout)
 - Dark/Light mode toggle — ThemeContext in `src/contexts/ThemeContext.tsx`, persisted to localStorage, sun/moon toggle in Navbar
 - PWA support — `vite-plugin-pwa` with manifest, service worker (workbox), law-themed PNG icons (192/512), installable on Android
+
+### Key Data Files
+- `src/data/glosarium.ts` — 120+ legal terms across 10 categories
+- `src/data/peraturan.ts` — 50+ regulations with ringkasan & isi
+- `src/data/putusan.ts` — 30+ court decisions
+- `src/data/panduan.ts` — 30+ legal guides
+- `src/data/kursus.ts` — Legal courses
+- `src/data/pengacara.ts` — Lawyer profiles
 
 ### Backend (artifacts/api-server routes)
 - `GET/POST /api/openai/conversations` — Conversation management
