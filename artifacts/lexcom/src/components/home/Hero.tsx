@@ -4,10 +4,12 @@ import { Link } from "wouter";
 
 const BADGES = [
   { icon: "🤖", text: "19 Agen AI Spesialis" },
-  { icon: "📚", text: "Database Hukum Lengkap" },
-  { icon: "🧮", text: "Kalkulator Hukum" },
-  { icon: "🏛️", text: "Sumber Resmi MA & MK" },
-  { icon: "🎓", text: "Kursus & Panduan" },
+  { icon: "✍️", text: "Penulis Cerdas AI" },
+  { icon: "🤖", text: "Chatbot Builder" },
+  { icon: "📚", text: "Ebook Builder AI" },
+  { icon: "🧠", text: "Riset & Peta Preseden" },
+  { icon: "📜", text: "Database 53+ Peraturan" },
+  { icon: "🧮", text: "6 Kalkulator Hukum" },
   { icon: "⚖️", text: "KUHP Baru 2026" },
 ];
 
@@ -32,8 +34,8 @@ export function Hero() {
             transition={{ duration: 0.5 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-8"
           >
-            <span className="animate-pulse">🚀</span>
-            <span className="text-sm font-medium text-primary">Platform AI Hukum Terlengkap Indonesia</span>
+            <span className="animate-pulse">⚡</span>
+            <span className="text-sm font-medium text-primary">Satu Ekosistem. Semua Kekuatan AI Hukum.</span>
           </motion.div>
 
           <motion.h1
@@ -42,8 +44,8 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-5xl md:text-7xl font-display font-bold leading-tight mb-6"
           >
-            Hukum Indonesia <br className="hidden md:block" />
-            <span className="text-gradient">Cerdas & Terpadu</span>
+            Riset. Tulis. Konsultasi. <br className="hidden md:block" />
+            <span className="text-gradient">Bangun dengan AI Hukum.</span>
           </motion.h1>
 
           <motion.p
@@ -52,7 +54,7 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl leading-relaxed"
           >
-            Konsultasi AI 24/7, database hukum terlengkap, alat bantu praktis, dan sumber resmi MA · MK · KPK — semua dalam satu platform untuk advokat, mahasiswa, dan masyarakat umum.
+            LexCom menghadirkan ekosistem AI hukum terlengkap — 19 pakar AI, Penulis Cerdas, Chatbot Builder, Ebook Builder, Riset AI, database hukum, dan kalkulator — untuk mahasiswa, akademisi, praktisi, dan publik.
           </motion.p>
 
           <motion.div

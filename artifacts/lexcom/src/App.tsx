@@ -27,6 +27,9 @@ import Kalkulator from "@/pages/Kalkulator";
 import RisetAI from "@/pages/RisetAI";
 import TelaahDokumen from "@/pages/TelaahDokumen";
 import PetaPreseden from "@/pages/PetaPreseden";
+import PenulisCerdas from "@/pages/PenulisCerdas";
+import ChatbotBuilder from "@/pages/ChatbotBuilder";
+import EbookBuilder from "@/pages/EbookBuilder";
 import { FloatingLexBot } from "@/components/FloatingLexBot";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 
@@ -59,6 +62,9 @@ function Router() {
       <Route path="/riset-ai" component={RisetAI} />
       <Route path="/telaah-dokumen" component={TelaahDokumen} />
       <Route path="/peta-preseden" component={PetaPreseden} />
+      <Route path="/penulis-cerdas" component={PenulisCerdas} />
+      <Route path="/chatbot-builder" component={ChatbotBuilder} />
+      <Route path="/ebook-builder" component={EbookBuilder} />
       <Route component={NotFound} />
     </Switch>
   );

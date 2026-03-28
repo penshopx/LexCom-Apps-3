@@ -47,6 +47,14 @@ const MENU_GROUPS = [
     ],
   },
   {
+    label: "Studio AI",
+    links: [
+      { name: "✍️ Penulis Cerdas",   href: "/penulis-cerdas",  desc: "Artikel, laporan & riset dengan AI" },
+      { name: "🤖 Chatbot Builder",  href: "/chatbot-builder", desc: "Bangun chatbot hukum kustom" },
+      { name: "📚 Ebook Builder",    href: "/ebook-builder",   desc: "Buat modul & panduan hukum AI" },
+    ],
+  },
+  {
     label: "Komunitas",
     links: [
       { name: "👨‍⚖️ Pengacara", href: "/pengacara", desc: "Direktori pengacara terverifikasi" },
@@ -73,6 +81,10 @@ const secondaryLinks = [
   { name: "·", href: "#", divider: true },
   { name: "🧠 Riset AI", href: "/riset-ai" },
   { name: "🕸️ Peta Preseden", href: "/peta-preseden" },
+  { name: "·", href: "#", divider: true },
+  { name: "✍️ Penulis Cerdas", href: "/penulis-cerdas" },
+  { name: "🤖 Chatbot Builder", href: "/chatbot-builder" },
+  { name: "📚 Ebook Builder", href: "/ebook-builder" },
   { name: "·", href: "#", divider: true },
   { name: "📚 Kursus", href: "/kursus" },
   { name: "👨‍⚖️ Pengacara", href: "/pengacara" },

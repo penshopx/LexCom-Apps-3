@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import {
   Sparkles, Bot, Database, Calculator, GraduationCap, Users, Building2,
   Scale, FileText, BookOpen, MessageSquare, Globe, ExternalLink,
-  Hash, Gavel, BookMarked, Receipt, User2, Briefcase
+  Hash, Gavel, BookMarked, Receipt, User2, Briefcase, PenLine, Code2
 } from "lucide-react";
 
 const EKOSISTEM = [
@@ -50,6 +50,17 @@ const EKOSISTEM = [
     items: [
       { icon: Sparkles,    label: "Riset AI Hub",       desc: "Ringkasan multi-agen & pencarian semantik", href: "/riset-ai" },
       { icon: Globe,       label: "Peta Preseden",      desc: "Visualisasi jaringan yurisprudensi",        href: "/peta-preseden" },
+    ],
+  },
+  {
+    kategori: "✍️ Studio AI",
+    color: "from-pink-500/20 to-rose-500/10",
+    border: "border-pink-500/20",
+    titleColor: "text-pink-400",
+    items: [
+      { icon: PenLine,   label: "Penulis Cerdas",  desc: "Artikel, laporan & skripsi AI",        href: "/penulis-cerdas" },
+      { icon: Bot,       label: "Chatbot Builder", desc: "Bangun chatbot hukum kustom",          href: "/chatbot-builder" },
+      { icon: BookMarked,label: "Ebook Builder",   desc: "Modul, panduan & laporan hukum AI",   href: "/ebook-builder" },
     ],
   },
   {
