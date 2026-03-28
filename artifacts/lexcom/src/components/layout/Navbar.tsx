@@ -44,6 +44,7 @@ const MENU_GROUPS = [
     links: [
       { name: "🧠 Riset AI Hub", href: "/riset-ai", desc: "Ringkasan multi-agen & pencarian semantik" },
       { name: "🕸️ Peta Preseden", href: "/peta-preseden", desc: "Jaringan yurisprudensi & putusan terkait" },
+      { name: "📊 Intelijen Regulasi", href: "/intelijen-regulasi", desc: "Dampak regulasi bisnis & skor risiko AI" },
     ],
   },
   {
@@ -88,6 +89,7 @@ const secondaryLinks = [
   { name: "·", href: "#", divider: true },
   { name: "🧠 Riset AI", href: "/riset-ai" },
   { name: "🕸️ Peta Preseden", href: "/peta-preseden" },
+  { name: "📊 Intelijen Regulasi", href: "/intelijen-regulasi" },
   { name: "·", href: "#", divider: true },
   { name: "✍️ Penulis Cerdas", href: "/penulis-cerdas" },
   { name: "🤖 Chatbot Builder", href: "/chatbot-builder" },

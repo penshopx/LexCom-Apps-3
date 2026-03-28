@@ -89,6 +89,8 @@ Every package extends `tsconfig.base.json` which sets `composite: true`. The roo
 - Advokat/Enterprise (Rp499k/bln, Rp399k annual): unlimited, chatbot embed, API access, white-label, multi-user, 24/7 support
 - Payment: WhatsApp-based for now (structured message per plan), replace with Midtrans/Xendit later
 
+- `/intelijen-regulasi` — AI-powered Business Regulatory Intelligence dashboard: 14 regulatory issues across 6 sectors (OSS, AI, PDP, Platform Digital, Insentif, Pusat Data); compliance risk score meter per issue; AI analysis + action recommendations per regulation; interactive compliance checklist with progress tracker; "Tanya Pakar Regulasi AI" chatbot sidebar; risk level filters (KRITIS/TINGGI/SEDANG/RENDAH); category tabs with issue counts; full-text search; sort by risk score. Based on BRIR (Business Regulatory Impact Report) format.
+
 ### Key Data Files
 - `src/data/glosarium.ts` — 120+ legal terms across 10 categories
 - `src/data/peraturan.ts` — 50+ regulations with ringkasan & isi
