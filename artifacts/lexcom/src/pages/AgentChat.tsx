@@ -9,6 +9,7 @@ import { Send, Bot, Loader2, MessageSquare, ArrowLeft, Sparkles } from "lucide-r
 import { useToast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
+import { MarkdownRenderer } from "@/components/ui/MarkdownRenderer";
 
 const AGENTS: Record<string, { emoji: string; name: string; category: string; description: string; specialties: string[] }> = {
   corporate: {
@@ -263,13 +264,17 @@ export default function AgentChat() {
                     }`}>
                       {msg.role === "assistant" ? agent.emoji : "👤"}
                     </div>
-                    <div className={`max-w-[75%] px-4 py-3 rounded-2xl text-sm leading-relaxed ${
+                    <div className={`max-w-[75%] px-4 py-3 rounded-2xl ${
                       msg.role === "user"
-                        ? "bg-primary text-white rounded-tr-sm"
+                        ? "bg-primary text-white rounded-tr-sm text-sm leading-relaxed"
                         : "bg-white/5 border border-white/10 text-foreground rounded-tl-sm"
                     }`}>
-                      {msg.content || (
-                        <span className="flex gap-1 items-center text-muted-foreground">
+                      {msg.role === "user" ? (
+                        msg.content
+                      ) : msg.content ? (
+                        <MarkdownRenderer content={msg.content} className="text-sm" />
+                      ) : (
+                        <span className="flex gap-1 items-center text-muted-foreground text-sm">
                           <Loader2 className="w-3 h-3 animate-spin" /> Sedang mengetik...
                         </span>
                       )}

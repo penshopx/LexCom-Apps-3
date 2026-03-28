@@ -4,6 +4,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Clock, User } from "lucide-react";
 import { dataPanduan } from "@/data/panduan";
+import { MarkdownRenderer } from "@/components/ui/MarkdownRenderer";
 
 const KATEGORI_COLORS: Record<string, string> = {
   Perdata: "bg-blue-500/20 text-blue-400 border-blue-500/30",
@@ -16,102 +17,6 @@ const KATEGORI_COLORS: Record<string, string> = {
 function formatTanggal(dateStr: string) {
   const d = new Date(dateStr);
   return d.toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
-}
-
-function renderMarkdown(text: string) {
-  const lines = text.split("\n");
-  const elements: React.ReactNode[] = [];
-  let i = 0;
-
-  while (i < lines.length) {
-    const line = lines[i];
-
-    if (line.startsWith("## ")) {
-      elements.push(
-        <h2 key={i} className="text-xl font-display font-bold mt-8 mb-4 text-foreground">
-          {line.slice(3)}
-        </h2>
-      );
-    } else if (line.startsWith("### ")) {
-      elements.push(
-        <h3 key={i} className="text-base font-semibold mt-5 mb-2 text-primary">
-          {line.slice(4)}
-        </h3>
-      );
-    } else if (line.startsWith("- ")) {
-      elements.push(
-        <li key={i} className="text-sm text-muted-foreground leading-relaxed ml-4 mb-1 list-disc">
-          <span dangerouslySetInnerHTML={{ __html: line.slice(2).replace(/\*\*(.+?)\*\*/g, "<strong class='text-foreground'>$1</strong>") }} />
-        </li>
-      );
-    } else if (line.match(/^\d+\. /)) {
-      elements.push(
-        <li key={i} className="text-sm text-muted-foreground leading-relaxed ml-4 mb-1 list-decimal">
-          <span dangerouslySetInnerHTML={{ __html: line.replace(/^\d+\. /, "").replace(/\*\*(.+?)\*\*/g, "<strong class='text-foreground'>$1</strong>") }} />
-        </li>
-      );
-    } else if (line.startsWith("```")) {
-      const codeLines: string[] = [];
-      i++;
-      while (i < lines.length && !lines[i].startsWith("```")) {
-        codeLines.push(lines[i]);
-        i++;
-      }
-      elements.push(
-        <pre key={i} className="bg-white/5 border border-white/10 rounded-lg p-4 text-xs overflow-x-auto my-4 text-muted-foreground">
-          {codeLines.join("\n")}
-        </pre>
-      );
-    } else if (line.includes("|") && line.trim().startsWith("|")) {
-      const rows: string[] = [line];
-      i++;
-      while (i < lines.length && lines[i].includes("|") && lines[i].trim().startsWith("|")) {
-        if (!lines[i].replace(/\|/g, "").replace(/-/g, "").trim()) {
-          i++;
-          continue;
-        }
-        rows.push(lines[i]);
-        i++;
-      }
-      const headers = rows[0].split("|").filter(c => c.trim()).map(c => c.trim());
-      const dataRows = rows.slice(1).map(r => r.split("|").filter(c => c.trim()).map(c => c.trim()));
-      elements.push(
-        <div key={i} className="overflow-x-auto my-4">
-          <table className="w-full text-xs border-collapse">
-            <thead>
-              <tr className="border-b border-white/20">
-                {headers.map((h, hi) => (
-                  <th key={hi} className="text-left py-2 px-3 font-semibold text-foreground">{h}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {dataRows.map((row, ri) => (
-                <tr key={ri} className="border-b border-white/10">
-                  {row.map((cell, ci) => (
-                    <td key={ci} className="py-2 px-3 text-muted-foreground">{cell}</td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      );
-      continue;
-    } else if (line.trim() !== "") {
-      elements.push(
-        <p key={i} className="text-sm text-muted-foreground leading-relaxed mb-3">
-          <span dangerouslySetInnerHTML={{ __html: line.replace(/\*\*(.+?)\*\*/g, "<strong class='text-foreground'>$1</strong>").replace(/`(.+?)`/g, "<code class='bg-white/10 px-1.5 py-0.5 rounded text-xs text-primary'>$1</code>") }} />
-        </p>
-      );
-    } else {
-      elements.push(<div key={i} className="h-1" />);
-    }
-
-    i++;
-  }
-
-  return elements;
 }
 
 export default function PanduanDetail() {
@@ -157,7 +62,7 @@ export default function PanduanDetail() {
           </div>
 
           <div className="glass-card rounded-2xl border border-white/10 p-6 md:p-8">
-            {renderMarkdown(panduan.konten)}
+            <MarkdownRenderer content={panduan.konten} />
           </div>
         </div>
       </main>

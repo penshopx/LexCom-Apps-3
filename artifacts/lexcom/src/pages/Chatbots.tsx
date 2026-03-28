@@ -8,6 +8,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Send, Bot, User as UserIcon, Loader2, Sparkles, MessageSquare } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
+import { MarkdownRenderer } from "@/components/ui/MarkdownRenderer";
 
 interface Agent {
   key: string;
@@ -233,7 +234,11 @@ export default function Chatbots() {
                         ? 'bg-primary/20 border border-primary/30 text-foreground rounded-tr-sm' 
                         : 'bg-card border border-white/10 text-foreground rounded-tl-sm shadow-lg'
                     }`}>
-                      <p className="whitespace-pre-wrap leading-relaxed text-sm">{msg.content}</p>
+                      {msg.role === 'user' ? (
+                        <p className="whitespace-pre-wrap leading-relaxed text-sm">{msg.content}</p>
+                      ) : (
+                        <MarkdownRenderer content={msg.content} className="text-sm" />
+                      )}
                     </div>
                   </motion.div>
                 ))}
