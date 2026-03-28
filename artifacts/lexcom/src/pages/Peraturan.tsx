@@ -3,8 +3,35 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Input } from "@/components/ui/input";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, FileText, X, Filter } from "lucide-react";
+import { Search, FileText, X, Filter, ExternalLink } from "lucide-react";
 import { dataPeraturan, type Peraturan as TPeraturan, type JenisPeraturan } from "@/data/peraturan";
+
+const SUMBER_JDIH = [
+  {
+    label: "JDIH Mahkamah Agung",
+    desc: "Peraturan, SEMA, PERMA, dan kebijakan MA RI",
+    url: "https://jdih.mahkamahagung.go.id/",
+    badge: "MA",
+    color: "border-blue-500/30 hover:border-blue-500/60 bg-blue-500/5",
+    badgeColor: "bg-blue-500/20 text-blue-400",
+  },
+  {
+    label: "JDIH Nasional (BPHN)",
+    desc: "Database peraturan perundang-undangan nasional RI",
+    url: "https://jdih.kemenkumham.go.id/",
+    badge: "Kemenkumham",
+    color: "border-purple-500/30 hover:border-purple-500/60 bg-purple-500/5",
+    badgeColor: "bg-purple-500/20 text-purple-400",
+  },
+  {
+    label: "Peraturan.go.id",
+    desc: "Portal resmi peraturan perundang-undangan Indonesia",
+    url: "https://peraturan.go.id/",
+    badge: "Pemerintah",
+    color: "border-green-500/30 hover:border-green-500/60 bg-green-500/5",
+    badgeColor: "bg-green-500/20 text-green-400",
+  },
+];
 
 const JENIS_LIST: Array<{ value: JenisPeraturan | "Semua"; label: string }> = [
   { value: "Semua", label: "Semua Jenis" },
@@ -54,6 +81,35 @@ export default function Peraturan() {
             <p className="text-muted-foreground">
               {dataPeraturan.length} peraturan — UU, PP, Perpres, dan Peraturan Menteri Indonesia
             </p>
+          </div>
+
+          {/* Sumber JDIH Panel */}
+          <div className="mb-8 bg-card border border-border rounded-2xl p-5">
+            <div className="flex items-center gap-2 mb-4">
+              <ExternalLink className="w-4 h-4 text-primary" />
+              <h2 className="font-semibold text-sm text-foreground">Akses Langsung Sumber Resmi</h2>
+              <span className="text-xs text-muted-foreground ml-auto">Website resmi pemerintah RI</span>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              {SUMBER_JDIH.map((s) => (
+                <a
+                  key={s.url}
+                  href={s.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`flex items-start gap-2.5 p-3 rounded-xl border transition-all group ${s.color}`}
+                >
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-1.5 mb-1">
+                      <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${s.badgeColor}`}>{s.badge}</span>
+                    </div>
+                    <p className="text-xs font-semibold text-foreground leading-tight mb-0.5 group-hover:text-primary transition-colors">{s.label}</p>
+                    <p className="text-[10px] text-muted-foreground leading-tight">{s.desc}</p>
+                  </div>
+                  <ExternalLink className="w-3 h-3 text-muted-foreground group-hover:text-primary flex-shrink-0 mt-0.5 transition-colors" />
+                </a>
+              ))}
+            </div>
           </div>
 
           {/* Search + Filter */}
@@ -157,6 +213,35 @@ export default function Peraturan() {
                 <div>
                   <h3 className="text-sm font-semibold mb-2 text-primary">Isi Pokok</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-wrap">{selected.isi}</p>
+                </div>
+                <div className="border-t border-border pt-4">
+                  <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-3">Akses Teks Resmi</h3>
+                  <div className="flex flex-wrap gap-2">
+                    <a
+                      href={`https://peraturan.go.id/search?q=${encodeURIComponent(selected.nomor)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs px-3 py-2 rounded-lg bg-green-500/10 border border-green-500/30 text-green-400 hover:bg-green-500/20 transition-colors"
+                    >
+                      <ExternalLink className="w-3 h-3" /> Peraturan.go.id
+                    </a>
+                    <a
+                      href={`https://jdih.mahkamahagung.go.id/`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs px-3 py-2 rounded-lg bg-blue-500/10 border border-blue-500/30 text-blue-400 hover:bg-blue-500/20 transition-colors"
+                    >
+                      <ExternalLink className="w-3 h-3" /> JDIH Mahkamah Agung
+                    </a>
+                    <a
+                      href={`https://jdih.kemenkumham.go.id/`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs px-3 py-2 rounded-lg bg-purple-500/10 border border-purple-500/30 text-purple-400 hover:bg-purple-500/20 transition-colors"
+                    >
+                      <ExternalLink className="w-3 h-3" /> JDIH Nasional (BPHN)
+                    </a>
+                  </div>
                 </div>
               </div>
             </motion.div>

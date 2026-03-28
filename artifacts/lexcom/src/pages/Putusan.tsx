@@ -3,8 +3,70 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Input } from "@/components/ui/input";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Scale, X, Filter } from "lucide-react";
+import { Search, Scale, X, Filter, ExternalLink } from "lucide-react";
 import { dataPutusan, type Putusan as TPutusan, type JenisPengadilan } from "@/data/putusan";
+
+const SUMBER_RESMI = [
+  {
+    label: "Direktori Putusan MA",
+    desc: "Database putusan lengkap Mahkamah Agung RI",
+    url: "https://putusan3.mahkamahagung.go.id/",
+    badge: "MA",
+    color: "border-blue-500/30 hover:border-blue-500/60 bg-blue-500/5",
+    badgeColor: "bg-blue-500/20 text-blue-400",
+  },
+  {
+    label: "Putusan Mahkamah Konstitusi",
+    desc: "Seluruh putusan MK sejak berdiri 2003",
+    url: "https://www.mkri.id/perkara/persidangan/putusan",
+    badge: "MK",
+    color: "border-red-500/30 hover:border-red-500/60 bg-red-500/5",
+    badgeColor: "bg-red-500/20 text-red-400",
+  },
+  {
+    label: "Penelusuran Perkara PN",
+    desc: "Cari perkara di seluruh Pengadilan Negeri Indonesia",
+    url: "https://badilum.mahkamahagung.go.id/publik/pelayanan-informasi/penelusuran-perkara.html",
+    badge: "PN",
+    color: "border-green-500/30 hover:border-green-500/60 bg-green-500/5",
+    badgeColor: "bg-green-500/20 text-green-400",
+  },
+  {
+    label: "Kepaniteraan MA",
+    desc: "Informasi dan penelusuran perkara di Mahkamah Agung",
+    url: "https://kepaniteraan.mahkamahagung.go.id/perkara/",
+    badge: "MA",
+    color: "border-purple-500/30 hover:border-purple-500/60 bg-purple-500/5",
+    badgeColor: "bg-purple-500/20 text-purple-400",
+  },
+  {
+    label: "Perkara Mahkamah Konstitusi",
+    desc: "Status dan jadwal sidang perkara MK",
+    url: "https://www.mkri.id/perkara",
+    badge: "MK",
+    color: "border-orange-500/30 hover:border-orange-500/60 bg-orange-500/5",
+    badgeColor: "bg-orange-500/20 text-orange-400",
+  },
+  {
+    label: "JDIH Mahkamah Agung",
+    desc: "Jaringan dokumentasi dan informasi hukum MA RI",
+    url: "https://jdih.mahkamahagung.go.id/",
+    badge: "JDIH",
+    color: "border-cyan-500/30 hover:border-cyan-500/60 bg-cyan-500/5",
+    badgeColor: "bg-cyan-500/20 text-cyan-400",
+  },
+];
+
+function buildSearchUrl(putusan: TPutusan): string {
+  const nomor = encodeURIComponent(putusan.nomor);
+  if (putusan.jenis === "MK") {
+    return `https://www.mkri.id/perkara/persidangan/putusan`;
+  }
+  if (putusan.jenis === "MA" || putusan.jenis === "PN") {
+    return `https://putusan3.mahkamahagung.go.id/pencarian/?q=${nomor}`;
+  }
+  return `https://putusan3.mahkamahagung.go.id/pencarian/?q=${nomor}`;
+}
 
 const JENIS_LIST: Array<{ value: JenisPengadilan | "Semua"; label: string }> = [
   { value: "Semua", label: "Semua Pengadilan" },
@@ -64,6 +126,35 @@ export default function Putusan() {
             <p className="text-muted-foreground">
               {dataPutusan.length} putusan — MK, MA, Pengadilan Negeri, dan Pengadilan Agama
             </p>
+          </div>
+
+          {/* Sumber Resmi Panel */}
+          <div className="mb-8 bg-card border border-border rounded-2xl p-5">
+            <div className="flex items-center gap-2 mb-4">
+              <ExternalLink className="w-4 h-4 text-primary" />
+              <h2 className="font-semibold text-sm text-foreground">Akses Langsung Sumber Resmi</h2>
+              <span className="text-xs text-muted-foreground ml-auto">Website resmi MA & MK RI</span>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+              {SUMBER_RESMI.map((s) => (
+                <a
+                  key={s.url}
+                  href={s.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`flex items-start gap-2.5 p-3 rounded-xl border transition-all group ${s.color}`}
+                >
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-1.5 mb-1">
+                      <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${s.badgeColor}`}>{s.badge}</span>
+                    </div>
+                    <p className="text-xs font-semibold text-foreground leading-tight mb-0.5 group-hover:text-primary transition-colors">{s.label}</p>
+                    <p className="text-[10px] text-muted-foreground leading-tight hidden sm:block">{s.desc}</p>
+                  </div>
+                  <ExternalLink className="w-3 h-3 text-muted-foreground group-hover:text-primary flex-shrink-0 mt-0.5 transition-colors" />
+                </a>
+              ))}
+            </div>
           </div>
 
           {/* Search + Filter */}
@@ -182,6 +273,61 @@ export default function Putusan() {
                 <div>
                   <h3 className="text-sm font-semibold mb-2 text-primary">Amar Putusan</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{selected.amar}</p>
+                </div>
+                <div className="border-t border-border pt-4">
+                  <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-3">Cari Putusan Lengkap di Sumber Resmi</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {selected.jenis === "MK" && (
+                      <>
+                        <a
+                          href={`https://www.mkri.id/perkara/persidangan/putusan`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 text-xs px-3 py-2 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 hover:bg-red-500/20 transition-colors"
+                        >
+                          <ExternalLink className="w-3 h-3" /> Putusan MK (mkri.id)
+                        </a>
+                        <a
+                          href={`https://www.mkri.id/perkara`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 text-xs px-3 py-2 rounded-lg bg-orange-500/10 border border-orange-500/30 text-orange-400 hover:bg-orange-500/20 transition-colors"
+                        >
+                          <ExternalLink className="w-3 h-3" /> Status Perkara MK
+                        </a>
+                      </>
+                    )}
+                    {(selected.jenis === "MA" || selected.jenis === "PN" || selected.jenis === "PA") && (
+                      <>
+                        <a
+                          href={`https://putusan3.mahkamahagung.go.id/pencarian/?q=${encodeURIComponent(selected.nomor)}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 text-xs px-3 py-2 rounded-lg bg-blue-500/10 border border-blue-500/30 text-blue-400 hover:bg-blue-500/20 transition-colors"
+                        >
+                          <ExternalLink className="w-3 h-3" /> Direktori Putusan MA
+                        </a>
+                        {selected.jenis === "PN" && (
+                          <a
+                            href={`https://badilum.mahkamahagung.go.id/publik/pelayanan-informasi/penelusuran-perkara.html`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 text-xs px-3 py-2 rounded-lg bg-green-500/10 border border-green-500/30 text-green-400 hover:bg-green-500/20 transition-colors"
+                          >
+                            <ExternalLink className="w-3 h-3" /> Penelusuran Perkara PN
+                          </a>
+                        )}
+                        <a
+                          href={`https://kepaniteraan.mahkamahagung.go.id/perkara/`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 text-xs px-3 py-2 rounded-lg bg-purple-500/10 border border-purple-500/30 text-purple-400 hover:bg-purple-500/20 transition-colors"
+                        >
+                          <ExternalLink className="w-3 h-3" /> Kepaniteraan MA
+                        </a>
+                      </>
+                    )}
+                  </div>
                 </div>
               </div>
             </motion.div>
