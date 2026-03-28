@@ -318,7 +318,7 @@ export default function LexBot() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Navbar />
-      <div className="flex-1 flex flex-col max-w-5xl mx-auto w-full px-4 pt-36 pb-6 gap-4">
+      <div className="flex-1 flex flex-col max-w-5xl mx-auto w-full px-4 pt-28 pb-6 gap-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-600 to-purple-700 flex items-center justify-center">

@@ -72,32 +72,6 @@ const MENU_GROUPS = [
   },
 ];
 
-const secondaryRowAI = [
-  { name: "✨ LexBot", href: "/lexbot" },
-  { name: "🤖 Agentic AI", href: "/agentic-chatbots" },
-  { name: "⚖️ Pakar AI", href: "/agents" },
-  { name: "🧠 Riset AI", href: "/riset-ai" },
-  { name: "📊 Intelijen Regulasi", href: "/intelijen-regulasi" },
-  { name: "✍️ Penulis Cerdas", href: "/penulis-cerdas" },
-  { name: "🤖 Chatbot Builder", href: "/chatbot-builder" },
-  { name: "📚 Ebook Builder", href: "/ebook-builder" },
-  { name: "🔬 Telaah Dokumen", href: "/telaah-dokumen" },
-];
-
-const secondaryRowDB = [
-  { name: "📜 Peraturan", href: "/peraturan" },
-  { name: "🏛️ Putusan", href: "/putusan" },
-  { name: "📖 Panduan", href: "/panduan" },
-  { name: "📕 Glosarium", href: "/glosarium" },
-  { name: "🧮 Kalkulator", href: "/kalkulator" },
-  { name: "📄 Dokumen", href: "/documents" },
-  { name: "📁 Kasus", href: "/cases" },
-  { name: "📚 Kursus", href: "/kursus" },
-  { name: "👨‍⚖️ Pengacara", href: "/pengacara" },
-  { name: "💬 Forum", href: "/forum" },
-];
-
-const secondaryLinks = [...secondaryRowAI, ...secondaryRowDB];
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -153,8 +127,6 @@ export function Navbar() {
     { name: "Peraturan", href: "/peraturan" },
     { name: "Forum", href: "/forum" },
   ];
-
-  const allNavLinks = secondaryLinks.filter(l => !l.divider);
 
   return (
     <header
@@ -321,38 +293,6 @@ export function Navbar() {
           </div>
         </div>
 
-        {/* Row 2a — AI Tools */}
-        <div className="hidden md:flex items-center flex-wrap gap-0.5 py-1 border-b border-border/20">
-          {secondaryRowAI.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`text-xs font-medium px-2.5 py-1 rounded-full whitespace-nowrap transition-all ${
-                isActive(link.href)
-                  ? "bg-primary/20 text-primary border border-primary/30"
-                  : "text-muted-foreground hover:text-foreground hover:bg-muted border border-transparent"
-              }`}
-            >
-              {link.name}
-            </Link>
-          ))}
-        </div>
-        {/* Row 2b — Database & Resources */}
-        <div className="hidden md:flex items-center flex-wrap gap-0.5 py-1">
-          {secondaryRowDB.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`text-xs font-medium px-2.5 py-1 rounded-full whitespace-nowrap transition-all ${
-                isActive(link.href)
-                  ? "bg-primary/20 text-primary border border-primary/30"
-                  : "text-muted-foreground hover:text-foreground hover:bg-muted border border-transparent"
-              }`}
-            >
-              {link.name}
-            </Link>
-          ))}
-        </div>
       </div>
 
       {/* Mobile Nav */}

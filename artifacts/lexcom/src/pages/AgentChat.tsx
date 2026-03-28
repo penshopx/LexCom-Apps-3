@@ -379,7 +379,7 @@ export default function AgentChat() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Navbar />
-      <main className="flex-1 pt-36 pb-8 px-4 max-w-5xl mx-auto w-full">
+      <main className="flex-1 pt-28 pb-8 px-4 max-w-5xl mx-auto w-full">
         {/* Back + Header */}
         <div className="mb-6 flex items-start gap-4">
           <Link href="/agents">

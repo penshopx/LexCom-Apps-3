@@ -165,7 +165,7 @@ export default function Documents() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen flex flex-col bg-background pt-36">
+      <div className="min-h-screen flex flex-col bg-background pt-28">
         <Navbar />
         <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 flex flex-col items-center justify-center">
           <FileCode2 className="w-20 h-20 text-muted-foreground mb-6 opacity-20" />
@@ -183,7 +183,7 @@ export default function Documents() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-background pt-36">
+    <div className="min-h-screen flex flex-col bg-background pt-28">
       <Navbar />
       
       <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">

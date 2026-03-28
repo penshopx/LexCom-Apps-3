@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/home/Hero";
+import { QuickNavBar } from "@/components/home/QuickNavBar";
 import { AgentsSection } from "@/components/home/AgentsSection";
 import { FeaturesSection } from "@/components/home/FeaturesSection";
 import { EkosistemSection } from "@/components/home/EkosistemSection";
@@ -16,6 +17,7 @@ export default function Home() {
       <Navbar />
       <main className="flex-1">
         <Hero />
+        <QuickNavBar />
         <FeaturesSection />
         <AgentsSection />
         <EkosistemSection />

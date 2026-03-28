@@ -443,7 +443,7 @@ export default function IntelijenRegulasi() {
     <div className="min-h-screen bg-background">
       <Navbar />
       {/* Hero */}
-      <section className="relative pt-36 pb-8 overflow-hidden border-b border-white/10">
+      <section className="relative pt-28 pb-8 overflow-hidden border-b border-white/10">
         <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-transparent to-blue-900/15" />
         <div className="absolute top-20 left-1/4 w-64 h-64 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

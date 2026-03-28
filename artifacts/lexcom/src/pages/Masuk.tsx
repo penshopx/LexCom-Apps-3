@@ -45,7 +45,7 @@ export default function Masuk() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Navbar />
-      <main className="flex-1 pt-36">
+      <main className="flex-1 pt-28">
         <div className="max-w-6xl mx-auto px-4 py-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
