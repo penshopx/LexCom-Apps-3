@@ -16,6 +16,11 @@ export interface Kursus {
   jabatanInstruktur: string;
   deskripsi: string;
   materi: MateriKursus[];
+  rating: number;
+  peserta: number;
+  topikEmoji: string;
+  gradientFrom: string;
+  gradientTo: string;
 }
 
 export const dataKursus: Kursus[] = [
@@ -28,6 +33,11 @@ export const dataKursus: Kursus[] = [
     instruktur: "Prof. Dr. Hikmahanto Juwana, SH, LLM, PhD",
     jabatanInstruktur: "Guru Besar Hukum Internasional UI",
     deskripsi: "Kursus pengantar sistem hukum Indonesia yang dirancang untuk masyarakat umum tanpa latar belakang hukum. Memahami struktur hukum, hak-hak dasar warga negara, dan cara berinteraksi dengan sistem hukum.",
+    rating: 4.9,
+    peserta: 5820,
+    topikEmoji: "⚖️",
+    gradientFrom: "#7c3aed",
+    gradientTo: "#4338ca",
     materi: [
       { modul: 1, judul: "Sistem Hukum dan Sumber Hukum Indonesia", durasi: "45 menit" },
       { modul: 2, judul: "UUD 1945 dan Hak Asasi Manusia", durasi: "50 menit" },
@@ -48,6 +58,11 @@ export const dataKursus: Kursus[] = [
     instruktur: "Dr. Agusmidah, SH, M.Hum",
     jabatanInstruktur: "Dosen Hukum Perburuhan USU",
     deskripsi: "Kursus komprehensif hukum ketenagakerjaan untuk HR Manager, pengusaha, dan karyawan. Membahas regulasi terkini pasca UU Cipta Kerja, mulai dari PKWT, pengupahan, pesangon, hingga PHK.",
+    rating: 4.8,
+    peserta: 4130,
+    topikEmoji: "👔",
+    gradientFrom: "#0369a1",
+    gradientTo: "#0891b2",
     materi: [
       { modul: 1, judul: "Kerangka Hukum Ketenagakerjaan Indonesia", durasi: "50 menit" },
       { modul: 2, judul: "PKWT vs PKWTT: Perbedaan dan Konsekuensi", durasi: "55 menit" },
@@ -70,6 +85,11 @@ export const dataKursus: Kursus[] = [
     instruktur: "Dr. Suyud Margono, SH, MH, FCIArb",
     jabatanInstruktur: "Arbiter BANI, Konsultan Hukum Bisnis",
     deskripsi: "Kursus praktis hukum bisnis untuk founder startup, pengusaha UMKM, dan profesional bisnis. Meliputi pemilihan bentuk usaha, kontrak bisnis, kekayaan intelektual, hingga penyelesaian sengketa bisnis.",
+    rating: 4.7,
+    peserta: 3480,
+    topikEmoji: "🏢",
+    gradientFrom: "#059669",
+    gradientTo: "#0d9488",
     materi: [
       { modul: 1, judul: "Memilih Bentuk Usaha: CV, PT, atau Koperasi?", durasi: "55 menit" },
       { modul: 2, judul: "Pendirian PT: Dari Akta hingga NIB", durasi: "60 menit" },
@@ -91,6 +111,11 @@ export const dataKursus: Kursus[] = [
     instruktur: "Dr. Mariam Darus Badrulzaman, SH",
     jabatanInstruktur: "Pakar Hukum Perdata dan Properti USU",
     deskripsi: "Kursus mendalam tentang hukum properti Indonesia untuk agen properti, developer, investor, dan masyarakat umum. Membahas UUPA, jenis-jenis hak atas tanah, transaksi properti, dan sengketa pertanahan.",
+    rating: 4.8,
+    peserta: 2910,
+    topikEmoji: "🏠",
+    gradientFrom: "#b45309",
+    gradientTo: "#d97706",
     materi: [
       { modul: 1, judul: "UUPA dan Sistem Hukum Agraria Indonesia", durasi: "55 menit" },
       { modul: 2, judul: "Jenis-Jenis Hak Atas Tanah: HM, HGB, HGU, HP", durasi: "60 menit" },
@@ -114,6 +139,11 @@ export const dataKursus: Kursus[] = [
     instruktur: "Dr. Neng Djubaedah, SH, MH",
     jabatanInstruktur: "Dosen Hukum Islam FHUI",
     deskripsi: "Kursus hukum keluarga dan waris untuk masyarakat umum. Meliputi perkawinan, perjanjian pranikah, hak-hak dalam perkawinan, perceraian, hak asuh anak, dan pembagian warisan.",
+    rating: 4.9,
+    peserta: 6240,
+    topikEmoji: "👨‍👩‍👧",
+    gradientFrom: "#be185d",
+    gradientTo: "#9333ea",
     materi: [
       { modul: 1, judul: "Hukum Perkawinan di Indonesia: Syarat dan Proses", durasi: "50 menit" },
       { modul: 2, judul: "Perjanjian Pranikah: Kapan dan Mengapa?", durasi: "40 menit" },
@@ -133,6 +163,11 @@ export const dataKursus: Kursus[] = [
     instruktur: "Prof. Dr. Sudikno Mertokusumo, SH",
     jabatanInstruktur: "Emeritus Hukum Acara UGM",
     deskripsi: "Kursus lanjutan hukum acara perdata untuk mahasiswa hukum, calon advokat, dan profesional hukum. Membahas secara mendalam prosedur beracara di PN, PT, MA, hingga PK.",
+    rating: 4.7,
+    peserta: 1870,
+    topikEmoji: "🏛️",
+    gradientFrom: "#dc2626",
+    gradientTo: "#b91c1c",
     materi: [
       { modul: 1, judul: "Kompetensi Pengadilan: Absolut dan Relatif", durasi: "55 menit" },
       { modul: 2, judul: "Surat Gugatan: Syarat Formil dan Materiil", durasi: "60 menit" },
@@ -159,6 +194,11 @@ export const dataKursus: Kursus[] = [
     instruktur: "Dr. Henry Soelistyo, SH, LLM",
     jabatanInstruktur: "Komisioner HKI, Penulis Buku HKI",
     deskripsi: "Kursus praktis HKI untuk kreator, pengusaha, dan profesional kreatif. Memahami merek, hak cipta, paten, desain industri, dan cara mendaftarkan perlindungan HKI di DJKI.",
+    rating: 4.8,
+    peserta: 4560,
+    topikEmoji: "🎨",
+    gradientFrom: "#0d9488",
+    gradientTo: "#0369a1",
     materi: [
       { modul: 1, judul: "Pengantar HKI: Jenis-Jenis dan Pentingnya Perlindungan", durasi: "40 menit" },
       { modul: 2, judul: "Hak Cipta: Perlindungan Otomatis untuk Karya Kreatif", durasi: "45 menit" },
@@ -177,6 +217,11 @@ export const dataKursus: Kursus[] = [
     instruktur: "Prof. Dr. Edward Omar Sharif Hiariej, SH, MHum",
     jabatanInstruktur: "Guru Besar Hukum Pidana UGM",
     deskripsi: "Kursus hukum pidana komprehensif dengan fokus pada KUHP terbaru (UU 1/2023) yang mulai berlaku 2026. Membahas asas-asas pidana, delik-delik penting, dan perubahan signifikan dari KUHP lama.",
+    rating: 4.9,
+    peserta: 7120,
+    topikEmoji: "🛡️",
+    gradientFrom: "#ea580c",
+    gradientTo: "#dc2626",
     materi: [
       { modul: 1, judul: "Asas-Asas Hukum Pidana Indonesia", durasi: "55 menit" },
       { modul: 2, judul: "KUHP Baru 2023: Perubahan Signifikan", durasi: "60 menit" },
@@ -199,6 +244,11 @@ export const dataKursus: Kursus[] = [
     instruktur: "Dr. Gunawan Widjaja, SH, MH, MM",
     jabatanInstruktur: "Arbiter Senior BANI, Mediator Bersertifikat",
     deskripsi: "Kursus lanjutan untuk praktisi hukum, pengacara, dan eksekutif bisnis tentang mekanisme alternatif penyelesaian sengketa. Meliputi mediasi, arbitrase BANI/ICC, dan penyelesaian sengketa internasional.",
+    rating: 4.6,
+    peserta: 1540,
+    topikEmoji: "🤝",
+    gradientFrom: "#4338ca",
+    gradientTo: "#6d28d9",
     materi: [
       { modul: 1, judul: "Kerangka Hukum APS di Indonesia", durasi: "50 menit" },
       { modul: 2, judul: "Negosiasi: Teknik dan Strategi", durasi: "55 menit" },
@@ -223,6 +273,11 @@ export const dataKursus: Kursus[] = [
     instruktur: "Dr. Shidarta, SH, MHum",
     jabatanInstruktur: "Dosen Hukum Perlindungan Konsumen Binus",
     deskripsi: "Kursus praktis hak-hak konsumen dalam era digital — belanja online, fintech, pinjol, dan penipuan digital. Dilengkapi cara melaporkan pelanggaran dan strategi perlindungan diri.",
+    rating: 4.8,
+    peserta: 8390,
+    topikEmoji: "💻",
+    gradientFrom: "#0891b2",
+    gradientTo: "#0369a1",
     materi: [
       { modul: 1, judul: "UU Perlindungan Konsumen dan Penerapannya di Era Digital", durasi: "45 menit" },
       { modul: 2, judul: "Hak Konsumen dalam E-Commerce dan Marketplace", durasi: "50 menit" },
