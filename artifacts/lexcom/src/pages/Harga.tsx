@@ -90,6 +90,7 @@ const PLANS = [
       { text: "Riset AI Hub (4 agen paralel)", ok: true },
       { text: "Telaah Dokumen (5 agen paralel)", ok: true },
       { text: "Peta Preseden dengan grafik", ok: true },
+      { text: "Intelijen Regulasi AI (skor risiko)", ok: true },
       { text: "200 kueri AI per hari", ok: true },
       { text: "Prioritas response waktu", ok: true },
       { text: "Embed Chatbot Kustom", ok: false },

@@ -9,6 +9,7 @@ import {
   PenLine, Bot, Scale, LogOut, ArrowRight, Shield, Calendar,
   Activity, Check, Settings, ChevronRight, Loader2
 } from "lucide-react";
+import { Link } from "wouter";
 
 const PLAN_INFO: Record<string, { name: string; color: string; bg: string; limit: number; icon: string }> = {
   free:     { name: "Gratis",  color: "text-muted-foreground", bg: "bg-white/10",    limit: 5,   icon: "🆓" },
@@ -18,12 +19,14 @@ const PLAN_INFO: Record<string, { name: string; color: string; bg: string; limit
 };
 
 const QUICK_LINKS = [
-  { icon: MessageSquare, label: "LexBot AI",         href: "/lexbot",           desc: "Konsultasi hukum" },
-  { icon: Scale,         label: "Pakar Hukum AI",    href: "/agents",           desc: "19 spesialis AI" },
-  { icon: PenLine,       label: "Penulis Cerdas",    href: "/penulis-cerdas",  desc: "Studio penulisan AI" },
-  { icon: Bot,           label: "Chatbot Builder",   href: "/chatbot-builder", desc: "Buat chatbot kustom" },
-  { icon: BookMarked,    label: "Ebook Builder",     href: "/ebook-builder",   desc: "Buat ebook hukum AI" },
-  { icon: FileText,      label: "Dokumen AI",        href: "/documents",       desc: "Generator dokumen" },
+  { icon: MessageSquare, label: "LexBot AI",           href: "/lexbot",              desc: "Konsultasi hukum" },
+  { icon: Scale,         label: "Pakar Hukum AI",      href: "/agents",              desc: "19 spesialis AI" },
+  { icon: PenLine,       label: "Penulis Cerdas",      href: "/penulis-cerdas",      desc: "Studio penulisan AI" },
+  { icon: Bot,           label: "Chatbot Builder",     href: "/chatbot-builder",     desc: "Buat chatbot kustom" },
+  { icon: BookMarked,    label: "Ebook Builder",       href: "/ebook-builder",       desc: "Buat ebook hukum AI" },
+  { icon: FileText,      label: "Dokumen AI",          href: "/documents",           desc: "Generator dokumen" },
+  { icon: BarChart3,     label: "Intelijen Regulasi",  href: "/intelijen-regulasi",  desc: "Skor risiko kepatuhan" },
+  { icon: Activity,      label: "Riset AI Hub",        href: "/riset-ai",            desc: "Riset multi-agen" },
 ];
 
 function UsageBar({ used, limit }: { used: number; limit: number }) {

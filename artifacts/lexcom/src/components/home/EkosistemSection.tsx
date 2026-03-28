@@ -3,7 +3,8 @@ import { Link } from "wouter";
 import {
   Sparkles, Bot, Database, Calculator, GraduationCap, Users, Building2,
   Scale, FileText, BookOpen, MessageSquare, Globe, ExternalLink,
-  Hash, Gavel, BookMarked, Receipt, User2, Briefcase, PenLine, Code2
+  Hash, Gavel, BookMarked, Receipt, User2, Briefcase, PenLine, Code2,
+  BarChart3, Search, Microscope, FolderOpen
 } from "lucide-react";
 
 const EKOSISTEM = [
@@ -38,18 +39,19 @@ const EKOSISTEM = [
     items: [
       { icon: Calculator,   label: "Kalkulator Hukum",   desc: "6 kalkulator (pesangon, waris…)",  href: "/kalkulator" },
       { icon: FileText,     label: "Generator Dokumen",  desc: "Draf otomatis berbasis AI",         href: "/documents" },
-      { icon: Briefcase,    label: "Telaah Dokumen AI",  desc: "Review 5 agen paralel",             href: "/telaah-dokumen" },
-      { icon: Briefcase,    label: "Manajemen Kasus",    desc: "Kelola perkara & dokumen",          href: "/cases" },
+      { icon: Microscope,   label: "Telaah Dokumen AI",  desc: "Review 5 agen paralel",             href: "/telaah-dokumen" },
+      { icon: FolderOpen,   label: "Manajemen Kasus",    desc: "Kelola perkara & dokumen",          href: "/cases" },
     ],
   },
   {
-    kategori: "🧠 Riset AI",
+    kategori: "🧠 Riset & Intelijen AI",
     color: "from-violet-500/20 to-indigo-500/10",
     border: "border-violet-500/20",
     titleColor: "text-violet-400",
     items: [
-      { icon: Sparkles,    label: "Riset AI Hub",       desc: "Ringkasan multi-agen & pencarian semantik", href: "/riset-ai" },
-      { icon: Globe,       label: "Peta Preseden",      desc: "Visualisasi jaringan yurisprudensi",        href: "/peta-preseden" },
+      { icon: Search,      label: "Riset AI Hub",          desc: "Ringkasan multi-agen & pencarian semantik", href: "/riset-ai" },
+      { icon: Globe,       label: "Peta Preseden",         desc: "Visualisasi jaringan yurisprudensi",        href: "/peta-preseden" },
+      { icon: BarChart3,   label: "Intelijen Regulasi",   desc: "Skor risiko kepatuhan bisnis & AI",         href: "/intelijen-regulasi" },
     ],
   },
   {
