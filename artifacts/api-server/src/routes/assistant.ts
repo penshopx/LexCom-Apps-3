@@ -337,22 +337,50 @@ router.post("/assistant/conversations/:id/chat", async (req, res) => {
       model: "gpt-5.2",
       messages: orchestratorMessages,
       tools: ORCHESTRATOR_TOOLS,
-      tool_choice: "required",
+      tool_choice: "auto",
       max_completion_tokens: 1024,
     });
 
-    const toolCall = orchestratorResult.choices[0]?.message?.tool_calls?.[0];
+    const orchestratorMessage = orchestratorResult.choices[0]?.message;
+    const toolCall = orchestratorMessage?.tool_calls?.[0];
+
+    let finalResponse = "";
 
     if (!toolCall) {
-      sendEvent({ type: "error", message: "Orchestrator tidak menghasilkan tool call" });
+      sendEvent({ type: "action", action: "answering" });
+      const fallbackContent = orchestratorMessage?.content?.trim();
+
+      const fallbackStream = await openai.chat.completions.create({
+        model: "gpt-5.2",
+        messages: [
+          { role: "system" as const, content: `${ORCHESTRATOR_SYSTEM}\n\nJawab secara langsung dan informatif dalam Bahasa Indonesia. Gunakan format markdown.` },
+          ...chatHistory,
+          { role: "user" as const, content },
+          ...(fallbackContent ? [{ role: "assistant" as const, content: fallbackContent }] : []),
+        ],
+        max_completion_tokens: 2048,
+        stream: true,
+      });
+
+      for await (const chunk of fallbackStream) {
+        const delta = chunk.choices[0]?.delta?.content;
+        if (delta) {
+          finalResponse += delta;
+          sendEvent({ type: "content", content: delta });
+        }
+      }
+
+      sendEvent({ type: "done", metadata: { action: "direct_answer" } });
+
+      if (finalResponse) {
+        await db.insert(messages).values({ conversationId: convId, role: "assistant", content: finalResponse });
+      }
       res.end();
       return;
     }
 
     const fnName = toolCall.function.name;
     const fnArgs = JSON.parse(toolCall.function.arguments) as Record<string, unknown>;
-
-    let finalResponse = "";
 
     if (fnName === "ask_clarifying_question") {
       const { question, context, suggestions } = fnArgs as {
