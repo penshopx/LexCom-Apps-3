@@ -1,6 +1,6 @@
 import { Router, type IRouter, type Request, type Response } from "express";
 import { db, forumThreadsTable, forumRepliesTable } from "@workspace/db";
-import { eq, desc } from "drizzle-orm";
+import { eq, desc, sql } from "drizzle-orm";
 
 const router: IRouter = Router();
 
@@ -45,6 +45,10 @@ router.post("/forum/threads", async (req: Request, res: Response) => {
 router.get("/forum/threads/:id", async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);
+    if (!Number.isInteger(id) || id <= 0) {
+      res.status(400).json({ error: "Invalid thread ID" });
+      return;
+    }
     const [thread] = await db.select().from(forumThreadsTable).where(eq(forumThreadsTable.id, id));
     if (!thread) {
       res.status(404).json({ error: "Thread not found" });
@@ -65,6 +69,10 @@ router.get("/forum/threads/:id", async (req: Request, res: Response) => {
 async function createReply(req: Request, res: Response): Promise<void> {
   try {
     const threadId = parseInt(req.params.id);
+    if (!Number.isInteger(threadId) || threadId <= 0) {
+      res.status(400).json({ error: "Invalid thread ID" });
+      return;
+    }
     const { content, authorName: anonName } = req.body as { content?: string; authorName?: string };
     if (!content) {
       res.status(400).json({ error: "content is required" });
@@ -83,7 +91,7 @@ async function createReply(req: Request, res: Response): Promise<void> {
       .returning();
     await db
       .update(forumThreadsTable)
-      .set({ replyCount: thread.replyCount + 1 })
+      .set({ replyCount: sql`${forumThreadsTable.replyCount} + 1` })
       .where(eq(forumThreadsTable.id, threadId));
     res.status(201).json(reply);
   } catch (err) {
