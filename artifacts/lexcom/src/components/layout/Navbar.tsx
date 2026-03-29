@@ -51,6 +51,8 @@ const MENU_GROUPS = [
   {
     label: "Pendidikan",
     links: [
+      { name: "🎓 Akademi Advokat", href: "/akademi-advokat", desc: "UPA prep, SOP, retainer builder" },
+      { name: "🏗️ Klinik PHI", href: "/klinik-phi", desc: "Hukum perburuhan & PHI lengkap" },
       { name: "📚 Kursus", href: "/kursus", desc: "Kursus hukum bersertifikat" },
       { name: "📖 Panduan", href: "/panduan", desc: "Tutorial prosedur hukum" },
     ],

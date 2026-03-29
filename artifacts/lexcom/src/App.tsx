@@ -35,6 +35,8 @@ import Masuk from "@/pages/Masuk";
 import Profil from "@/pages/Profil";
 import IntelijenRegulasi from "@/pages/IntelijenRegulasi";
 import AdvOkatOS from "@/pages/AdvOkatOS";
+import AkademiAdvokat from "@/pages/AkademiAdvokat";
+import KlinikPHI from "@/pages/KlinikPHI";
 import { FloatingLexBot } from "@/components/FloatingLexBot";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 
@@ -75,6 +77,8 @@ function Router() {
       <Route path="/profil" component={Profil} />
       <Route path="/intelijen-regulasi" component={IntelijenRegulasi} />
       <Route path="/advokat-os" component={AdvOkatOS} />
+      <Route path="/akademi-advokat" component={AkademiAdvokat} />
+      <Route path="/klinik-phi" component={KlinikPHI} />
       <Route component={NotFound} />
     </Switch>
   );

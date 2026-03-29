@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import {
   Bot, FileText, Briefcase, Users, BookOpen, Scale, Calculator, Library,
   MessageSquare, ArrowRight, CheckCircle, Star, Shield, Zap, Clock, Globe, ExternalLink,
-  PenLine, BookMarked, Search, BarChart3, Microscope, Cpu,
+  PenLine, BookMarked, Search, BarChart3, Microscope, Cpu, GraduationCap,
 } from "lucide-react";
 
 const SUMBER_PEMERINTAH = [
@@ -76,6 +76,32 @@ const SUMBER_PEMERINTAH = [
 ];
 
 const LAYANAN = [
+  {
+    icon: GraduationCap,
+    title: "Akademi Advokat",
+    subtitle: "UPA Prep · SOP Library · Retainer Builder",
+    desc: "Persiapan Ujian Profesi Advokat (UPA) dengan 680+ soal adaptif AI, roadmap 12 minggu terstruktur, SOP library profesional, dan sistem Retainer Builder untuk advokat.",
+    features: ["680+ latihan soal UPA adaptif", "SOP konsultan & retainer siap pakai", "Retainer Builder AI", "Roadmap belajar 12 minggu"],
+    link: "/akademi-advokat",
+    cta: "Buka Akademi",
+    badge: "Baru",
+    color: "border-emerald-500/30 bg-emerald-500/5",
+    badgeColor: "bg-emerald-500/20 text-emerald-300",
+    iconBg: "bg-emerald-500/10 text-emerald-400",
+  },
+  {
+    icon: Scale,
+    title: "Klinik PHI",
+    subtitle: "Hukum Perburuhan & Hubungan Industrial",
+    desc: "Panduan lengkap alur perkara PHI dari Bipartit hingga Kasasi MA, dengan generator 12 template dokumen AI, kalkulator pesangon otomatis, dan analisis kekuatan perkara.",
+    features: ["Alur perkara PHI 5 tahap visual", "12 template dokumen AI", "Kalkulator pesangon UU Cipta Kerja", "Employment Lawyer AI terintegrasi"],
+    link: "/klinik-phi",
+    cta: "Masuk Klinik PHI",
+    badge: "Baru",
+    color: "border-orange-500/30 bg-orange-500/5",
+    badgeColor: "bg-orange-500/20 text-orange-300",
+    iconBg: "bg-orange-500/10 text-orange-400",
+  },
   {
     icon: Cpu,
     title: "Advokat OS",
