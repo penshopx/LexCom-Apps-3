@@ -22,6 +22,7 @@ const ROW_DB = [
   { emoji: "📚", name: "Perpustakaan",    href: "/perpustakaan" },
   { emoji: "🏗️", name: "Klinik PHI",     href: "/klinik-phi" },
   { emoji: "⚖️", name: "Klinik PKPU",    href: "/klinik-pkpu" },
+  { emoji: "🛡️", name: "Klinik P2A",    href: "/klinik-perlindungan" },
   { emoji: "🏫", name: "BimTek",         href: "/bimtek" },
   { emoji: "🎓", name: "Akademi Advokat",href: "/akademi-advokat" },
   { emoji: "📜", name: "Peraturan",       href: "/peraturan" },

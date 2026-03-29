@@ -121,8 +121,9 @@ LexCom menggunakan OpenAI Function Calling (disebut juga "tool use") untuk:
 16. **Manajemen Perkara** (/cases) — Kelola perkara, jadwal sidang, dokumen, tenggat waktu (butuh login)
 
 ### 🏥 KLINIK HUKUM SPESIALIS
-17. **Klinik PHI** (/klinik-phi) — Panduan Pengadilan Hubungan Industrial: 5 tahap perkara (bipartit→kasasi MA), kalkulator pesangon PP 35/2021, 12 template dokumen, 4 jenis perselisihan. Gratis.
-18. **Klinik PKPU & Kepailitan** (/klinik-pkpu) — Panduan PKPU & Pailit (UU 37/2004): 5 tahap alur, kalkulator voting kuorum Pasal 281 (cek apakah perdamaian sah), generator dokumen kurator. Gratis.
+17. **Klinik Perlindungan Perempuan & Anak** (/klinik-perlindungan) — Panduan implementasi UU PKDRT (No. 23/2004), UU Perlindungan Anak (No. 35/2014), UU TPKS (No. 12/2022), dan PP 78/2021: 5 tahap alur perlindungan (pengaduan→perlindungan sementara→penyidikan→penuntutan→pemulihan), Checker Hak Korban interaktif (pilih kategori perempuan/anak + jenis kekerasan → tampilkan hak, langkah, dan lembaga yang membantu), 8 template dokumen, informasi hotline (SAPA 129, LPSK 1-500-006, KPAI, Komnas Perempuan), dan profil 6 lembaga pendukung (UPTD PPA, LPSK, P2TP2A, KPAI, Komnas Perempuan, LBH). Gratis.
+18. **Klinik PHI** (/klinik-phi) — Panduan Pengadilan Hubungan Industrial: 5 tahap perkara (bipartit→kasasi MA), kalkulator pesangon PP 35/2021, 12 template dokumen, 4 jenis perselisihan. Gratis.
+19. **Klinik PKPU & Kepailitan** (/klinik-pkpu) — Panduan PKPU & Pailit (UU 37/2004): 5 tahap alur, kalkulator voting kuorum Pasal 281 (cek apakah perdamaian sah), generator dokumen kurator. Gratis.
 
 ### 📚 DATABASE HUKUM
 19. **Peraturan** (/peraturan) — 53+ UU, PP, Perpres, Permen lengkap. Termasuk KUHP Baru (UU No. 1/2023) yang efektif 2 Januari 2026. Gratis.

@@ -43,6 +43,7 @@ import PerpustakaanHukum from "@/pages/PerpustakaanHukum";
 import LegalOps from "@/pages/LegalOps";
 import VaultDokumen from "@/pages/VaultDokumen";
 import BimTek from "@/pages/BimTek";
+import KlinikPerlindungan from "@/pages/KlinikPerlindungan";
 import { FloatingLexBot } from "@/components/FloatingLexBot";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 
@@ -91,6 +92,7 @@ function Router() {
       <Route path="/legal-ops" component={LegalOps} />
       <Route path="/vault" component={VaultDokumen} />
       <Route path="/bimtek" component={BimTek} />
+      <Route path="/klinik-perlindungan" component={KlinikPerlindungan} />
       <Route component={NotFound} />
     </Switch>
   );

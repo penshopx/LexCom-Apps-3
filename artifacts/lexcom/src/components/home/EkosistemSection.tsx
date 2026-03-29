@@ -74,8 +74,9 @@ const EKOSISTEM = [
     border: "border-red-500/20",
     titleColor: "text-red-400",
     items: [
-      { icon: Scale,        label: "Klinik PHI",           desc: "Pengadilan Hubungan Industrial + Kalkulator Pesangon", href: "/klinik-phi" },
-      { icon: Briefcase,    label: "Klinik PKPU & Pailit", desc: "Restrukturisasi utang + Kalkulator Voting",           href: "/klinik-pkpu" },
+      { icon: Scale,        label: "Klinik PHI",                desc: "PHI + Kalkulator Pesangon PP 35/2021",              href: "/klinik-phi" },
+      { icon: Briefcase,    label: "Klinik PKPU & Pailit",      desc: "Kepailitan + Kalkulator Voting Kuorum",             href: "/klinik-pkpu" },
+      { icon: Users,        label: "Klinik Perlindungan P&A",   desc: "UU PKDRT, UU PA, UU TPKS — checker hak korban",   href: "/klinik-perlindungan" },
     ],
   },
   {

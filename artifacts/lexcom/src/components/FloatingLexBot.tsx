@@ -289,6 +289,14 @@ const PAGE_CONTEXT: Record<string, { title: string; prompts: string[] }> = {
       "Ada topik forum tentang apa saja?",
     ],
   },
+  "/klinik-perlindungan": {
+    title: "Klinik Perlindungan Perempuan & Anak",
+    prompts: [
+      "Apa hak korban KDRT menurut hukum Indonesia?",
+      "Bagaimana cara melapor kekerasan terhadap anak?",
+      "Apa itu restitusi dan bagaimana cara mengajukannya?",
+    ],
+  },
   "/harga": {
     title: "Halaman Harga & Paket",
     prompts: [

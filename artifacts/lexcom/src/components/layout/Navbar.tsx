@@ -55,6 +55,7 @@ const MENU_GROUPS = [
       { name: "🏫 BimTek Profesi Hukum", href: "/bimtek", desc: "Advokat, Notaris, Panitera, PPAT, Kurator" },
       { name: "🏗️ Klinik PHI", href: "/klinik-phi", desc: "Hukum perburuhan & PHI lengkap" },
       { name: "⚖️ Klinik PKPU", href: "/klinik-pkpu", desc: "Kepailitan & restrukturisasi utang" },
+      { name: "🛡️ Klinik Perlindungan P&A", href: "/klinik-perlindungan", desc: "UU PKDRT, UU PA, UU TPKS — hak korban & alur perlindungan" },
       { name: "📚 Perpustakaan Hukum", href: "/perpustakaan", desc: "96+ e-book hukum terintegrasi AI" },
       { name: "📖 Panduan", href: "/panduan", desc: "Tutorial prosedur hukum" },
     ],
