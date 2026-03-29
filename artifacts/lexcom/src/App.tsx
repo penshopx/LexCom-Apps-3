@@ -34,6 +34,7 @@ import Harga from "@/pages/Harga";
 import Masuk from "@/pages/Masuk";
 import Profil from "@/pages/Profil";
 import IntelijenRegulasi from "@/pages/IntelijenRegulasi";
+import AdvOkatOS from "@/pages/AdvOkatOS";
 import { FloatingLexBot } from "@/components/FloatingLexBot";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 
@@ -73,6 +74,7 @@ function Router() {
       <Route path="/masuk" component={Masuk} />
       <Route path="/profil" component={Profil} />
       <Route path="/intelijen-regulasi" component={IntelijenRegulasi} />
+      <Route path="/advokat-os" component={AdvOkatOS} />
       <Route component={NotFound} />
     </Switch>
   );

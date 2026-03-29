@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import {
   Bot, FileText, Briefcase, Users, BookOpen, Scale, Calculator, Library,
   MessageSquare, ArrowRight, CheckCircle, Star, Shield, Zap, Clock, Globe, ExternalLink,
-  PenLine, BookMarked, Search, BarChart3, Microscope,
+  PenLine, BookMarked, Search, BarChart3, Microscope, Cpu,
 } from "lucide-react";
 
 const SUMBER_PEMERINTAH = [
@@ -76,6 +76,19 @@ const SUMBER_PEMERINTAH = [
 ];
 
 const LAYANAN = [
+  {
+    icon: Cpu,
+    title: "Advokat OS",
+    subtitle: "Sistem Operasi Pengacara Lengkap",
+    desc: "9 modul AI terintegrasi untuk seluruh alur kerja advokat: komando perkara, drafting, persiapan sidang, riset yurisprudensi, analisis bukti, billing otomatis, dan strategi hukum berbasis data.",
+    features: ["9 modul AI saling terhubung", "Legal Brief Generator MA RI", "Simulasi persidangan & profil hakim", "Time tracking & billing otomatis"],
+    link: "/advokat-os",
+    cta: "Lihat Advokat OS",
+    badge: "Baru",
+    color: "border-violet-500/40 bg-violet-500/8",
+    badgeColor: "bg-violet-500/20 text-violet-300",
+    iconBg: "bg-violet-500/10 text-violet-400",
+  },
   {
     icon: Bot,
     title: "Konsultasi AI 24/7",
