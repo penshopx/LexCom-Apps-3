@@ -56,6 +56,37 @@ const PRICE_COMPARISON = [
   { label: "LexCom Studio Opini AI", price: "Rp 199rb/bln", per: "tak terbatas", color: "text-emerald-400", icon: "⚡", highlight: true },
 ];
 
+const FAQ_STUDIO = [
+  { q: "Apakah opini hukum yang dihasilkan AI dapat langsung digunakan secara resmi?", a: "Opini hukum dari Studio Opini AI berfungsi sebagai kerangka analisis profesional yang sangat lengkap dan siap dipakai. Untuk keperluan formal (pengajuan ke pengadilan, pihak ketiga, atau klien institusional), disarankan untuk ditinjau dan ditandatangani oleh advokat terdaftar sebagai advisor. Produk AI LexCom adalah alat bantu, bukan pengganti tanggung jawab hukum advokat." },
+  { q: "Apakah fakta perkara saya aman dan terjaga kerahasiaannya?", a: "Ya. Seluruh data yang Anda masukkan di Studio Opini dienkripsi end-to-end dengan AES-256. LexCom tidak menyimpan data perkara klien untuk melatih AI, tidak membagikan data ke pihak ketiga, dan seluruh sesi dapat dihapus permanen kapan saja dari akun Anda." },
+  { q: "Berapa lama proses generate opini hukum?", a: "Rata-rata 60–120 detik untuk opini standar 4–6 halaman. Opini yang membutuhkan analisis lintas-bidang atau melibatkan yurisprudensi yang kompleks mungkin memerlukan 2–4 menit. Semua proses berjalan di background — Anda akan mendapat notifikasi ketika selesai." },
+  { q: "Apakah AI dapat membuat opini dalam format bilingual (Indonesia-Inggris)?", a: "Ya, Studio Opini AI mendukung output bilingual (Bahasa Indonesia dan Bahasa Inggris) untuk kebutuhan transaksi internasional, kontrak lintas batas, atau arbitrase internasional. Pilih opsi bahasa di langkah Generate sebelum proses dimulai." },
+  { q: "Berapa banyak opini yang bisa dibuat per bulan?", a: "Paket Gratis: 3 opini/bulan (dengan watermark). Paket Starter: 15 opini/bulan. Paket Pro: tak terbatas. Paket Advokat: tak terbatas + fitur kolaborasi tim dan branding firma hukum pada output opini." },
+];
+
+function StudioOpiniFaq() {
+  const [open, setOpen] = useState<number | null>(null);
+  return (
+    <div className="space-y-3">
+      {FAQ_STUDIO.map((faq, i) => (
+        <motion.div key={i} className="rounded-2xl border border-white/8 bg-white/3 overflow-hidden">
+          <button onClick={() => setOpen(open === i ? null : i)} className="w-full text-left px-5 py-4 flex items-center justify-between gap-3">
+            <span className="text-sm font-semibold text-foreground leading-snug">{faq.q}</span>
+            <ChevronRight className={`w-4 h-4 text-muted-foreground flex-shrink-0 transition-transform ${open === i ? "rotate-90" : ""}`} />
+          </button>
+          <AnimatePresence>
+            {open === i && (
+              <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.2 }}>
+                <div className="px-5 pb-4 text-sm text-muted-foreground leading-relaxed border-t border-white/5 pt-3">{faq.a}</div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
+      ))}
+    </div>
+  );
+}
+
 export default function StudioOpini() {
   const [step, setStep] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -392,6 +423,51 @@ export default function StudioOpini() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ─── CONTOH OUTPUT PER BIDANG ─── */}
+      <section className="py-14 border-t border-white/8">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-black text-foreground mb-2">Bidang Hukum × Contoh Topik Opini</h2>
+            <p className="text-muted-foreground text-sm">Studio Opini AI mampu menghasilkan analisis mendalam untuk ratusan topik hukum spesifik.</p>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-4">
+            {[
+              { bidang: "Korporasi & Bisnis", icon: "🏢", warna: "text-blue-400", topik: ["Legalitas skema kepemilikan saham asing", "Analisis risiko due diligence akuisisi startup", "Struktur holding optimal pasca UU Cipta Kerja"] },
+              { bidang: "Ketenagakerjaan", icon: "👷", warna: "text-orange-400", topik: ["Legalitas program pensiun dini", "Klausul non-solicit vs non-compete", "PHK massal prosedur dan kewajiban pesangon"] },
+              { bidang: "Properti & Real Estate", icon: "🏠", warna: "text-emerald-400", topik: ["Risiko hukum PPJB apartemen off-plan", "Konversi HGB menjadi SHM bagi WNA", "Sengketa jual beli tanah warisan ahli waris"] },
+              { bidang: "Kontrak & Perjanjian", icon: "📝", warna: "text-pink-400", topik: ["Force majeure dalam kontrak EPC infrastruktur", "Klausul penalti dan batas ganti rugi", "Analisis risiko kontrak SaaS dengan vendor asing"] },
+              { bidang: "Pidana Bisnis", icon: "⚖️", warna: "text-red-400", topik: ["Tanggung jawab pidana direksi atas korupsi korporasi", "Unsur TPPU dalam transaksi bisnis", "Analisis dakwaan fraud pengadaan barang & jasa"] },
+              { bidang: "Hukum Pajak", icon: "🧾", warna: "text-violet-400", topik: ["Dasar hukum banding PPh Badan ke Pengadilan Pajak", "Transfer pricing dan risiko hukum pajak internasional", "Keberatan dan banding bea masuk kepabeanan"] },
+            ].map((b) => (
+              <div key={b.bidang} className="rounded-2xl border border-white/8 bg-white/3 p-5">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-xl">{b.icon}</span>
+                  <h3 className={`font-bold text-sm ${b.warna}`}>{b.bidang}</h3>
+                </div>
+                <div className="space-y-1.5">
+                  {b.topik.map((t) => (
+                    <div key={t} className="flex items-start gap-2 text-xs text-muted-foreground">
+                      <ChevronRight className="w-3 h-3 flex-shrink-0 mt-0.5 text-muted-foreground/50" />
+                      <span className="leading-snug">{t}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── FAQ STUDIO OPINI ─── */}
+      <section className="py-14 border-t border-white/8 bg-gradient-to-b from-background to-card/20">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-black text-foreground mb-2">Pertanyaan yang Sering Ditanyakan</h2>
+          </div>
+          <StudioOpiniFaq />
         </div>
       </section>
 

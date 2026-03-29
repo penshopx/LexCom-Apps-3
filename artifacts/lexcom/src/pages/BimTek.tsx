@@ -256,6 +256,37 @@ const JADWAL = [
   { tanggal: "10 Mei 2026", profesi: "PPAT", format: "Online", slot: "25 tersisa", level: "Lanjutan" },
 ];
 
+const FAQ_BIMTEK = [
+  { q: "Apakah sertifikat BimTek LexCom diakui secara resmi?", a: "Sertifikat BimTek LexCom adalah sertifikat pelatihan profesional yang diakui sebagai bukti pengembangan kompetensi. Untuk pengakuan SKP/CPD dari organisasi profesi (PERADI, INI, Kemenkumham), peserta dapat menggunakan sertifikat ini sebagai bukti pendukung dalam proses pengakuan jam belajar mandiri." },
+  { q: "Apakah BimTek dapat diikuti sambil tetap bekerja / berpraktik?", a: "Ya, seluruh BimTek LexCom dirancang untuk profesional aktif. Setiap modul tersedia dalam format rekaman video (30-60 menit) yang dapat diakses kapan saja. Jadwal sesi live hanya 1 hari per jalur, dengan pilihan sesi pagi atau sore hari." },
+  { q: "Berapa lama akses ke materi setelah mendaftar?", a: "Paket Satu Jalur: akses rekaman 30 hari sejak tanggal pendaftaran. Paket Semua Jalur: akses lifetime, termasuk pembaruan materi di masa mendatang. Paket Korporat: akses lifetime untuk seluruh anggota tim yang terdaftar." },
+  { q: "Apakah ada sesi konsultasi langsung dengan instruktur?", a: "Ya, khusus peserta Paket Semua Jalur mendapatkan 1 sesi konsultasi 1-on-1 selama 30 menit via video call dengan instruktur pilihan. Peserta Paket Korporat mendapatkan 2 sesi konsultasi tim per bulan." },
+  { q: "Bagaimana format modul BimTek?", a: "Setiap modul terdiri dari: (1) Video materi 45-90 menit, (2) PDF materi dan template dokumen yang dapat diunduh, (3) Kuis pemahaman akhir modul, (4) Studi kasus yang dianalisis dengan AI LexCom, dan (5) Akses forum diskusi sesama peserta dan instruktur." },
+];
+
+function BimTekFaq() {
+  const [open, setOpen] = useState<number | null>(null);
+  return (
+    <div className="space-y-3">
+      {FAQ_BIMTEK.map((faq, i) => (
+        <motion.div key={i} className="rounded-2xl border border-white/8 bg-white/3 overflow-hidden">
+          <button onClick={() => setOpen(open === i ? null : i)} className="w-full text-left px-5 py-4 flex items-center justify-between gap-3">
+            <span className="text-sm font-semibold text-foreground leading-snug">{faq.q}</span>
+            <ChevronRight className={`w-4 h-4 text-muted-foreground flex-shrink-0 transition-transform ${open === i ? "rotate-90" : ""}`} />
+          </button>
+          <AnimatePresence>
+            {open === i && (
+              <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.2 }}>
+                <div className="px-5 pb-4 text-sm text-muted-foreground leading-relaxed border-t border-white/5 pt-3">{faq.a}</div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
+      ))}
+    </div>
+  );
+}
+
 export default function BimTek() {
   const [activeProfesi, setActiveProfesi] = useState("advokat");
   const [openModul, setOpenModul] = useState<number | null>(null);
@@ -477,6 +508,130 @@ export default function BimTek() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ─── PAKET HARGA BIMTEK ─── */}
+      <section className="py-14 border-t border-white/8">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl font-black text-foreground mb-2">Paket BimTek — Pilih yang Sesuai Kebutuhan</h2>
+            <p className="text-muted-foreground text-sm">Semua paket sudah termasuk akses video rekaman, materi PDF, dan sertifikat elektronik ber-QR code.</p>
+          </div>
+          <div className="grid sm:grid-cols-3 gap-5">
+            {[
+              {
+                nama: "Satu Jalur", harga: "Rp 450.000", per: "per jalur profesi", color: "border-white/12 bg-white/3", btn: "border border-white/15 text-foreground hover:bg-white/5",
+                fitur: ["1 jalur profesi pilihan", "6 modul teknis lengkap", "Rekaman video 30 hari", "Sertifikat elektronik", "Materi PDF download", "Forum diskusi peserta"],
+              },
+              {
+                nama: "Semua Jalur", harga: "Rp 1.290.000", per: "semua 6 jalur profesi", color: "border-violet-500/40 bg-violet-500/8", btn: "bg-gradient-to-r from-violet-600 to-purple-600 text-white shadow-lg shadow-violet-500/20", highlight: true,
+                fitur: ["6 jalur profesi sekaligus", "36 modul teknis lengkap", "Rekaman video lifetime", "6 sertifikat elektronik", "Template dokumen eksklusif", "Akses update materi baru", "Konsultasi 1-on-1 (30 mnt)"],
+              },
+              {
+                nama: "Korporat", harga: "Rp 4.500.000", per: "untuk tim legal (5–20 orang)", color: "border-sky-500/25 bg-sky-500/5", btn: "bg-gradient-to-r from-sky-600 to-blue-600 text-white",
+                fitur: ["Hingga 20 akun tim", "Semua 6 jalur profesi", "Dashboard progress tim", "Rekaman video lifetime", "Sertifikat per individu", "Pelatihan khusus on-demand", "Laporan kompetensi tim"],
+              },
+            ].map((p) => (
+              <div key={p.nama} className={`rounded-3xl border p-6 flex flex-col relative ${p.color}`}>
+                {p.highlight && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-violet-600 text-white text-[10px] font-black">PALING POPULER</div>
+                )}
+                <h3 className="font-black text-foreground text-lg mb-0.5">{p.nama}</h3>
+                <p className="text-2xl font-black text-foreground mt-1 mb-0.5">{p.harga}</p>
+                <p className="text-[11px] text-muted-foreground mb-5">{p.per}</p>
+                <div className="space-y-2 mb-6 flex-1">
+                  {p.fitur.map((f) => (
+                    <div key={f} className="flex items-center gap-2 text-xs text-foreground/80">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-violet-400 flex-shrink-0" /> {f}
+                    </div>
+                  ))}
+                </div>
+                <Link href="/masuk">
+                  <button className={`w-full py-2.5 rounded-xl font-bold text-sm transition ${p.btn}`}>
+                    Daftar Sekarang
+                  </button>
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── NARASUMBER / INSTRUKTUR ─── */}
+      <section className="py-14 border-t border-white/8 bg-gradient-to-b from-background to-card/20">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-black text-foreground mb-2">Narasumber & Instruktur</h2>
+            <p className="text-muted-foreground text-sm">Praktisi hukum aktif dengan pengalaman litigasi dan profesi lebih dari 15 tahun.</p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {[
+              { nama: "Dr. Andi Permata, S.H., M.H.", spesialisasi: "Hukum Pidana & Litigasi", jalur: "Advokat", pengalaman: "22 tahun · 500+ perkara pidana", badge: "Eks. Jaksa Senior" },
+              { nama: "Notaris Ratna Dewi, S.H., M.Kn.", spesialisasi: "Kenotariatan & Pertanahan", jalur: "Notaris & PPAT", pengalaman: "18 tahun · 10.000+ akta", badge: "Ketua INI DKI 2021–2023" },
+              { nama: "Dr. Hendra Kurnia, S.H., LL.M.", spesialisasi: "Kepailitan & Restrukturisasi", jalur: "Kurator & PKPU", pengalaman: "16 tahun · 80+ kasus PKPU", badge: "Kurator Bersertifikat" },
+              { nama: "Siti Rahayu, S.H., M.H.", spesialisasi: "Hukum Ketenagakerjaan & PHI", jalur: "Legal & HRD", pengalaman: "14 tahun · 200+ perkara PHK", badge: "Mediator Disnaker" },
+              { nama: "R. Baskoro Prasetyo, S.H.", spesialisasi: "Kepaniteraan & Hukum Acara", jalur: "Kepaniteraan", pengalaman: "20 tahun · PN Jakarta Pusat", badge: "Panitera Pengganti Senior" },
+              { nama: "Dewi Anggraini, S.H., M.Kn.", spesialisasi: "Hukum Agraria & PPJB", jalur: "PPAT", pengalaman: "15 tahun · Bogor & Depok", badge: "PPAT Aktif" },
+            ].map((ins) => (
+              <motion.div key={ins.nama} whileHover={{ y: -2 }} className="rounded-2xl border border-white/8 bg-white/3 hover:border-violet-500/20 p-5 transition-all">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-600 to-purple-700 flex items-center justify-center text-white text-sm font-black">
+                    {ins.nama.split(" ").filter(w => !w.includes(".")).slice(0,1)[0][0]}
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-bold text-violet-400 mb-0.5">{ins.jalur}</p>
+                    <span className="text-[9px] px-2 py-0.5 rounded-full bg-violet-500/15 text-violet-300 font-bold">{ins.badge}</span>
+                  </div>
+                </div>
+                <h3 className="font-bold text-foreground text-xs mb-1 leading-snug">{ins.nama}</h3>
+                <p className="text-[11px] text-muted-foreground mb-1">{ins.spesialisasi}</p>
+                <p className="text-[10px] text-muted-foreground/70">{ins.pengalaman}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── TESTIMONI ─── */}
+      <section className="py-14 border-t border-white/8">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-black text-foreground mb-2">Apa Kata Peserta BimTek</h2>
+          </div>
+          <div className="grid sm:grid-cols-3 gap-5">
+            {[
+              { nama: "Arief S., Advokat", kota: "Jakarta", teks: "Modul KUHP Baru sangat relevan — langsung bisa saya terapkan dalam pledoi minggu berikutnya. Instrukturnya sangat berpengalaman dan responsif.", bintang: 5, jalur: "Advokat" },
+              { nama: "Notaris Indah P.", kota: "Surabaya", teks: "Akhirnya ada BimTek kenotariatan yang tidak membosankan. Simulasi kasus PPJB dan akta fidusia sangat membantu pemahaman praktis.", bintang: 5, jalur: "Notaris & PPAT" },
+              { nama: "Bambang H., Legal Manager", kota: "Bandung", teks: "Tim legal kami ikut paket korporat — 12 orang selesai semua jalur dalam 2 bulan. Kompetensi tim naik signifikan, worth every rupiah.", bintang: 5, jalur: "Legal & HRD" },
+            ].map((t) => (
+              <div key={t.nama} className="rounded-2xl border border-white/8 bg-white/3 p-5">
+                <div className="flex items-center gap-0.5 mb-3">
+                  {Array.from({ length: t.bintang }).map((_, i) => (
+                    <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                  ))}
+                </div>
+                <p className="text-sm text-foreground/80 leading-relaxed mb-4 italic">"{t.teks}"</p>
+                <div className="flex items-center gap-2">
+                  <div className="w-7 h-7 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center text-white text-xs font-black">{t.nama[0]}</div>
+                  <div>
+                    <p className="text-xs font-bold text-foreground">{t.nama}</p>
+                    <p className="text-[10px] text-muted-foreground">{t.kota} · {t.jalur}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── FAQ BIMTEK ─── */}
+      <section className="py-14 border-t border-white/8 bg-gradient-to-b from-background to-card/20">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-black text-foreground mb-2">Pertanyaan yang Sering Ditanyakan</h2>
+          </div>
+          <BimTekFaq />
         </div>
       </section>
 

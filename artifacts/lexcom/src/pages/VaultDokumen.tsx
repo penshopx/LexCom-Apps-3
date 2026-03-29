@@ -134,6 +134,37 @@ const FEATURED_DOCS = [
   { title: "Surat PHK Efisiensi dengan Pesangon", cat: "Ketenagakerjaan", badge: "Sering Dicari", color: "border-red-500/30" },
 ];
 
+const FAQ_VAULT = [
+  { q: "Apakah template Vault LexCom dibuat oleh pengacara berpengalaman?", a: "Ya, semua template disusun oleh tim advokat LexCom dengan pengalaman rata-rata 15+ tahun dan diperbarui setiap kuartal mengikuti regulasi terbaru — termasuk KUHP Baru 2026, UU Cipta Kerja, dan peraturan turunannya." },
+  { q: "Bisakah saya mengedit template setelah diunduh?", a: "Tentu. Template tersedia dalam format .docx (Microsoft Word) yang sepenuhnya dapat diedit, serta PDF untuk keperluan resmi. Anda juga dapat menggunakan fitur AI Editor di LexCom untuk merevisi langsung dalam platform." },
+  { q: "Apakah template berlaku untuk semua yurisdiksi di Indonesia?", a: "Template dirancang untuk hukum positif Indonesia berlaku nasional. Untuk transaksi yang melibatkan regulasi daerah (Perda) atau kekhususan seperti Aceh atau Papua, kami menyediakan catatan adaptasi yang diperlukan." },
+  { q: "Seberapa sering template diperbarui?", a: "Template diperbarui setiap kuartal (3 bulan sekali) atau segera setelah ada perubahan regulasi signifikan. Peserta Pro & Advokat mendapat notifikasi langsung setiap kali template yang pernah mereka unduh diperbarui." },
+  { q: "Apakah bisa request template yang belum tersedia?", a: "Ya! Pengguna Pro dan Advokat dapat mengajukan permintaan template baru melalui fitur Custom Template Request. Tim LexCom akan memprioritaskan pembuatan dalam 7 hari kerja dan memberitahu pemohon ketika selesai." },
+];
+
+function VaultFaq() {
+  const [open, setOpen] = useState<number | null>(null);
+  return (
+    <div className="space-y-3">
+      {FAQ_VAULT.map((faq, i) => (
+        <motion.div key={i} className="rounded-2xl border border-white/8 bg-white/3 overflow-hidden">
+          <button onClick={() => setOpen(open === i ? null : i)} className="w-full text-left px-5 py-4 flex items-center justify-between gap-3">
+            <span className="text-sm font-semibold text-foreground leading-snug">{faq.q}</span>
+            <ChevronRight className={`w-4 h-4 text-muted-foreground flex-shrink-0 transition-transform ${open === i ? "rotate-90" : ""}`} />
+          </button>
+          <AnimatePresence>
+            {open === i && (
+              <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.2 }}>
+                <div className="px-5 pb-4 text-sm text-muted-foreground leading-relaxed border-t border-white/5 pt-3">{faq.a}</div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
+      ))}
+    </div>
+  );
+}
+
 export default function VaultDokumen() {
   const [activeKat, setActiveKat] = useState<string | null>(null);
   const [query, setQuery] = useState("");
@@ -410,6 +441,64 @@ export default function VaultDokumen() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ─── PERBANDINGAN BIAYA ─── */}
+      <section className="py-14 border-t border-white/8">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-black text-foreground mb-2">Berapa yang Anda Hemat?</h2>
+            <p className="text-muted-foreground text-sm">Bandingkan biaya membuat dokumen hukum secara konvensional vs. menggunakan Vault LexCom.</p>
+          </div>
+          <div className="grid sm:grid-cols-3 gap-4 mb-8">
+            {[
+              { dok: "Perjanjian Jual Beli Tanah", konvensional: "Rp 3–8 jt", lexcom: "Gratis s.d. Rp 49rb", saving: "Hemat s.d. Rp 7,9 jt" },
+              { dok: "Gugatan Perdata Lengkap", konvensional: "Rp 5–20 jt", lexcom: "Rp 49–99rb/template", saving: "Hemat s.d. Rp 19,9 jt" },
+              { dok: "Akta Pendirian PT (notariil)", konvensional: "Rp 2–5 jt", lexcom: "Rp 49rb/draft", saving: "Hemat s.d. Rp 4,9 jt" },
+            ].map((row) => (
+              <div key={row.dok} className="rounded-2xl border border-white/8 bg-white/3 p-5">
+                <p className="text-xs font-bold text-foreground mb-3 leading-snug">{row.dok}</p>
+                <div className="space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] text-muted-foreground">Konvensional</span>
+                    <span className="text-[11px] font-bold text-red-400">{row.konvensional}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] text-muted-foreground">LexCom Vault</span>
+                    <span className="text-[11px] font-bold text-emerald-400">{row.lexcom}</span>
+                  </div>
+                  <div className="pt-1.5 border-t border-white/8">
+                    <span className="text-[11px] font-black text-amber-400">{row.saving}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="rounded-3xl border border-amber-500/20 bg-gradient-to-br from-amber-950/20 to-orange-950/10 p-6 grid sm:grid-cols-3 gap-5">
+            {[
+              { tier: "Gratis", harga: "Rp 0", fitur: "50 template akses terbatas, watermark", highlight: false },
+              { tier: "Starter", harga: "Rp 79.000/bln", fitur: "500+ template, no watermark, DOC+PDF", highlight: false },
+              { tier: "Pro & Advokat", harga: "Rp 199rb–499rb/bln", fitur: "1.500+ template + AI generator tak terbatas", highlight: true },
+            ].map((t) => (
+              <div key={t.tier} className={`rounded-2xl border p-4 text-center ${t.highlight ? "border-amber-500/30 bg-amber-500/8" : "border-white/8 bg-white/3"}`}>
+                <p className={`text-xs font-bold mb-1 ${t.highlight ? "text-amber-400" : "text-muted-foreground"}`}>Paket {t.tier}</p>
+                <p className="text-lg font-black text-foreground mb-2">{t.harga}</p>
+                <p className="text-[11px] text-muted-foreground leading-snug">{t.fitur}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── FAQ VAULT ─── */}
+      <section className="py-14 border-t border-white/8 bg-gradient-to-b from-background to-card/20">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-black text-foreground mb-2">Pertanyaan yang Sering Ditanyakan</h2>
+          </div>
+          <VaultFaq />
         </div>
       </section>
 

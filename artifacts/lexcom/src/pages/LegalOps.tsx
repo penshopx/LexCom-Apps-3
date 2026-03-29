@@ -582,6 +582,67 @@ export default function LegalOps() {
         </div>
       </div>
 
+      {/* ─── PERBANDINGAN: MANUAL VS LEGALOPS AI ─── */}
+      <section className="py-14 border-t border-white/8">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-black text-foreground mb-2">Legal Ops Manual vs. LexCom Legal Ops AI</h2>
+            <p className="text-muted-foreground text-sm">Bukan sekadar lebih cepat — tapi transformasi total cara kerja departemen hukum.</p>
+          </div>
+          <div className="overflow-x-auto rounded-2xl border border-white/10">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-white/8">
+                  <th className="text-left px-5 py-4 text-xs font-bold text-muted-foreground uppercase tracking-widest w-[35%]">Aspek</th>
+                  <th className="px-5 py-4 text-xs font-bold text-red-400 uppercase tracking-widest w-[32%]">Manual / Spreadsheet</th>
+                  <th className="px-5 py-4 text-xs font-bold text-emerald-400 uppercase tracking-widest w-[33%]">LexCom Legal Ops AI</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { aspek: "Tracking deadline kontrak", manual: "Reminder manual di kalender, sering terlewat", ai: "Alert otomatis D-30, D-7, D-1 via email & dashboard" },
+                  { aspek: "Pemantauan perkara litigasi", manual: "File fisik & email terpisah, sulit monitoring", ai: "Dashboard real-time semua perkara, riwayat lengkap" },
+                  { aspek: "Review risiko kontrak", manual: "Baca manual, 2–5 hari per kontrak", ai: "Skor risiko otomatis dalam 2 menit, klausul berisiko disorot" },
+                  { aspek: "Legal intake dari internal", manual: "Email tidak terstruktur, prioritas subjektif", ai: "Triage otomatis, prioritas AI, SLA terpantau" },
+                  { aspek: "Manajemen counsel eksternal", manual: "Invoice diperiksa manual, biaya tidak terprediksi", ai: "Budget tracker otomatis, perbandingan fee antar firma" },
+                  { aspek: "Compliance calendar", manual: "Spreadsheet manual, tidak terintegrasi", ai: "Obligation register berbasis regulasi aktif, alert bertingkat" },
+                  { aspek: "Pelaporan ke manajemen", manual: "Buat laporan manual 3–5 jam per minggu", ai: "Laporan interaktif real-time, satu klik ekspor" },
+                  { aspek: "Biaya operasional", manual: "Staf administratif legal + software terpisah", ai: "All-in-one, Rp 199rb–499rb/bulan" },
+                ].map((row, i) => (
+                  <tr key={row.aspek} className={`border-b border-white/5 ${i % 2 === 0 ? "bg-white/1" : ""}`}>
+                    <td className="px-5 py-3.5 font-semibold text-foreground text-xs">{row.aspek}</td>
+                    <td className="px-5 py-3.5 text-center">
+                      <span className="text-xs text-muted-foreground flex items-start gap-1.5">
+                        <span className="text-red-400 mt-0.5 flex-shrink-0">✕</span>
+                        <span className="leading-snug">{row.manual}</span>
+                      </span>
+                    </td>
+                    <td className="px-5 py-3.5 text-center">
+                      <span className="text-xs text-foreground/85 flex items-start gap-1.5">
+                        <span className="text-emerald-400 mt-0.5 flex-shrink-0">✓</span>
+                        <span className="leading-snug">{row.ai}</span>
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="mt-6 grid sm:grid-cols-3 gap-4">
+            {[
+              { val: "85%", label: "Pengurangan waktu administrasi legal", color: "text-emerald-400" },
+              { val: "3×", label: "Lebih cepat identifikasi kontrak berisiko", color: "text-sky-400" },
+              { val: "0%", label: "Deadline terlewat dengan alert LexCom", color: "text-violet-400" },
+            ].map((s) => (
+              <div key={s.label} className="rounded-2xl border border-white/8 bg-white/3 p-4 text-center">
+                <p className={`text-2xl font-black ${s.color}`}>{s.val}</p>
+                <p className="text-xs text-muted-foreground leading-snug mt-1">{s.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ─── CTA ─── */}
       <section className="py-16 border-t border-white/8 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-sky-950/25 via-background to-blue-950/20 pointer-events-none" />

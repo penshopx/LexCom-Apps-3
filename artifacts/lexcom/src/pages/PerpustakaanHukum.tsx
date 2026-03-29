@@ -35,6 +35,55 @@ const EBOOK_FEATURED = [
 
 const SEARCH_SUGGESTIONS = ["PKPU", "pesangon", "non-kompetisi", "KUHP baru", "hak atas tanah", "kontrak kerja", "opini hukum", "banding pajak"];
 
+const AI_QA_DEMOS = [
+  { q: "Apa syarat sah PKWT berdasarkan UU Cipta Kerja?", a: "Berdasarkan PP No. 35/2021 (turunan UU Cipta Kerja), PKWT wajib: (1) dibuat tertulis dalam bahasa Indonesia, (2) untuk pekerjaan yang selesai dalam waktu tertentu atau bersifat musiman, (3) maksimal 5 tahun termasuk perpanjangan, dan (4) pekerja berhak atas uang kompensasi di akhir PKWT. PKWT yang tidak memenuhi syarat demi hukum berubah menjadi PKWTT.", src: "UU Cipta Kerja & PP 35/2021, hal. 34-41" },
+  { q: "Apa perubahan krusial KUHP Baru vs KUHP Lama terkait delik aduan?", a: "KUHP Baru (UU No. 1/2023, berlaku 2 Januari 2026) memperluas delik aduan absolut pada beberapa pasal yang sebelumnya delik biasa, termasuk: perzinaan (hanya dapat diadukan suami/istri/orangtua/anak), pencemaran nama baik ringan, dan penghinaan ringan. Ini berarti jaksa tidak dapat menuntut tanpa aduan dari pihak yang berhak.", src: "Panduan KUHP Baru 2026, hal. 89-102" },
+  { q: "Kapan perusahaan dikatakan memenuhi syarat insolvensi untuk dipailitkan?", a: "Berdasarkan Pasal 2 UU No. 37/2004, syarat kepailitan adalah: (1) debitor memiliki paling sedikit 2 (dua) kreditor, dan (2) tidak membayar lunas satu utang yang telah jatuh tempo dan dapat ditagih. Pengadilan tidak menilai apakah debitor mampu bayar — hanya apakah utang jatuh tempo dan ada minimal 2 kreditor.", src: "Hukum Kepailitan & PKPU Terapan, hal. 22-28" },
+];
+
+function AiQaDemo() {
+  const [active, setActive] = useState(0);
+  const item = AI_QA_DEMOS[active];
+  return (
+    <div className="rounded-3xl border border-indigo-500/20 bg-gradient-to-br from-indigo-950/20 to-violet-950/10 overflow-hidden">
+      <div className="px-6 py-4 border-b border-white/8 bg-indigo-500/5 flex items-center gap-3">
+        <Brain className="w-4 h-4 text-indigo-400" />
+        <div>
+          <p className="font-black text-foreground text-sm">Demo: Tanya Jawab AI Perpustakaan</p>
+          <p className="text-[10px] text-muted-foreground">AI menjawab berdasarkan isi buku + regulasi terbaru</p>
+        </div>
+      </div>
+      <div className="flex gap-2 px-5 pt-4 overflow-x-auto scrollbar-hide">
+        {AI_QA_DEMOS.map((d, i) => (
+          <button key={i} onClick={() => setActive(i)} className={`flex-shrink-0 text-[10px] font-bold px-3 py-1.5 rounded-full transition-all ${active === i ? "bg-indigo-600 text-white" : "bg-white/8 text-muted-foreground hover:bg-white/12"}`}>
+            Pertanyaan {i + 1}
+          </button>
+        ))}
+      </div>
+      <div className="p-5 space-y-3">
+        <div className="rounded-2xl border border-white/10 bg-white/3 p-4 flex items-start gap-3">
+          <div className="w-6 h-6 rounded-full bg-indigo-500/20 flex-shrink-0 flex items-center justify-center">
+            <span className="text-[10px]">👤</span>
+          </div>
+          <p className="text-sm text-foreground/90 italic">"{item.q}"</p>
+        </div>
+        <motion.div key={active} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} className="rounded-2xl border border-indigo-500/20 bg-indigo-500/5 p-4 flex items-start gap-3">
+          <div className="w-6 h-6 rounded-full bg-indigo-600 flex-shrink-0 flex items-center justify-center">
+            <Sparkles className="w-3 h-3 text-white" />
+          </div>
+          <div className="flex-1">
+            <p className="text-sm text-foreground/85 leading-relaxed mb-2">{item.a}</p>
+            <div className="flex items-center gap-1.5">
+              <BookMarked className="w-3 h-3 text-indigo-400" />
+              <span className="text-[10px] text-indigo-400 font-semibold">{item.src}</span>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  );
+}
+
 export default function PerpustakaanHukum() {
   const [query, setQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
@@ -224,6 +273,59 @@ export default function PerpustakaanHukum() {
                 <h3 className="font-bold text-foreground text-sm mb-2">{f.title}</h3>
                 <p className="text-xs text-muted-foreground leading-relaxed">{f.desc}</p>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── AI TANYA JAWAB DEMO ─── */}
+      <section className="py-12 border-t border-white/8">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-6">
+            <h2 className="text-2xl font-black text-foreground mb-2">💬 Coba: Tanya AI tentang Isi Buku</h2>
+            <p className="text-muted-foreground text-sm">Bukan hanya baca — tanya langsung ke AI yang memahami seluruh isi perpustakaan.</p>
+          </div>
+          <AiQaDemo />
+          <div className="mt-5 text-center">
+            <Link href="/masuk">
+              <button className="px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-bold text-sm flex items-center gap-2 mx-auto">
+                <Sparkles className="w-4 h-4" /> Tanya AI dari Buku Pilihan Anda
+              </button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── TAMBAHAN E-BOOK ─── */}
+      <section className="py-12 border-t border-white/8 bg-gradient-to-b from-background to-card/20">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <h2 className="text-xl font-black text-foreground">E-Book Lainnya yang Populer</h2>
+              <p className="text-xs text-muted-foreground">Paling banyak dibaca pengguna LexCom bulan ini</p>
+            </div>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { title: "Hukum Perlindungan Data Pribadi", cat: "Bisnis Digital", pages: 124, icon: "🛡️", color: "border-teal-500/30" },
+              { title: "Mediasi & Arbitrase Sengketa Bisnis", cat: "Perdata", pages: 148, icon: "🤝", color: "border-blue-500/30" },
+              { title: "Hukum Waris Islam & Perdata", cat: "Syariah", pages: 168, icon: "☪️", color: "border-indigo-500/30" },
+              { title: "Perizinan Berusaha OSS-RBA", cat: "Administrasi", pages: 112, icon: "📋", color: "border-pink-500/30" },
+              { title: "Hukum Fintech & Kripto Indonesia", cat: "Bisnis Digital", pages: 135, icon: "💻", color: "border-cyan-500/30" },
+              { title: "Tata Cara Banding di MA — Panduan Lengkap", cat: "Litigasi", pages: 178, icon: "🏛️", color: "border-violet-500/30" },
+              { title: "Hukum Persaingan Usaha & Antimonopoli", cat: "Korporasi", pages: 155, icon: "⚡", color: "border-amber-500/30" },
+              { title: "Panduan Pengadaan Barang/Jasa Pemerintah", cat: "Administrasi", pages: 190, icon: "🏗️", color: "border-emerald-500/30" },
+            ].map((book) => (
+              <motion.div key={book.title} whileHover={{ y: -2 }} className={`rounded-2xl border ${book.color} bg-white/2 hover:bg-white/4 p-4 cursor-pointer group transition-all`}>
+                <div className="text-2xl mb-2">{book.icon}</div>
+                <h3 className="font-bold text-foreground text-xs mb-1 leading-snug">{book.title}</h3>
+                <p className="text-[10px] text-indigo-400 font-semibold mb-2">{book.cat} · {book.pages} hal</p>
+                <Link href="/masuk">
+                  <button className="text-[10px] font-bold text-indigo-400 group-hover:text-indigo-300 flex items-center gap-1">
+                    Baca & Analisis <ArrowRight className="w-2.5 h-2.5" />
+                  </button>
+                </Link>
+              </motion.div>
             ))}
           </div>
         </div>

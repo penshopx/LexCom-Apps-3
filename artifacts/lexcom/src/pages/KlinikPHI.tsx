@@ -136,6 +136,245 @@ const AI_DOCS = [
   { label: "Perhitungan Pesangon AI", stage: "Kalkulasi", icon: "🧮", color: "text-amber-400" },
 ];
 
+const PHK_ALASAN = [
+  { id: "efisiensi", label: "Efisiensi / Restrukturisasi", multiplier: 1 },
+  { id: "pelanggaran", label: "Pelanggaran Berat (SP3)", multiplier: 1 },
+  { id: "sakit", label: "Sakit Berkepanjangan (>12 bln)", multiplier: 2 },
+  { id: "pensiun", label: "Pensiun", multiplier: 1 },
+  { id: "meninggal", label: "Meninggal Dunia", multiplier: 2 },
+  { id: "cacat", label: "Cacat Akibat Kecelakaan Kerja", multiplier: 2 },
+  { id: "pekerja_resign", label: "Mengundurkan Diri", multiplier: 0 },
+  { id: "pkwt", label: "PKWT Berakhir", multiplier: 0 },
+];
+
+function getPesangon(masaKerja: number): number {
+  if (masaKerja < 1) return 1;
+  if (masaKerja < 2) return 1;
+  if (masaKerja < 3) return 2;
+  if (masaKerja < 4) return 3;
+  if (masaKerja < 5) return 4;
+  if (masaKerja < 6) return 5;
+  if (masaKerja < 7) return 6;
+  if (masaKerja < 8) return 7;
+  if (masaKerja < 9) return 8;
+  return 9;
+}
+
+function getUPMK(masaKerja: number): number {
+  if (masaKerja < 3) return 0;
+  if (masaKerja < 6) return 2;
+  if (masaKerja < 9) return 3;
+  if (masaKerja < 12) return 4;
+  if (masaKerja < 15) return 5;
+  if (masaKerja < 18) return 6;
+  if (masaKerja < 21) return 7;
+  if (masaKerja < 24) return 8;
+  return 10;
+}
+
+function PesangonKalkulator() {
+  const [upah, setUpah] = useState("");
+  const [masaKerja, setMasaKerja] = useState("");
+  const [alasan, setAlasan] = useState("efisiensi");
+  const [result, setResult] = useState<null | { pesangon: number; upmk: number; uph: number; total: number; multiplier: number }>(null);
+
+  function hitung() {
+    const upahNum = parseFloat(upah.replace(/\D/g, ""));
+    const masaNum = parseInt(masaKerja);
+    if (!upahNum || !masaNum) return;
+    const alasanObj = PHK_ALASAN.find((a) => a.id === alasan)!;
+    const m = alasanObj.multiplier;
+    const bulanPesangon = getPesangon(masaNum);
+    const bulanUPMK = getUPMK(masaNum);
+    const pesangon = upahNum * bulanPesangon * m;
+    const upmk = upahNum * bulanUPMK;
+    const uph = upahNum * 0.15;
+    setResult({ pesangon, upmk, uph, total: pesangon + upmk + uph, multiplier: m });
+  }
+
+  function formatRp(n: number) {
+    return "Rp " + Math.round(n).toLocaleString("id-ID");
+  }
+
+  function handleUpahChange(val: string) {
+    const num = val.replace(/\D/g, "");
+    setUpah(num ? parseInt(num).toLocaleString("id-ID") : "");
+  }
+
+  return (
+    <div className="rounded-3xl border border-amber-500/20 bg-gradient-to-br from-amber-950/20 to-orange-950/10 overflow-hidden">
+      <div className="px-6 py-4 border-b border-white/8 bg-amber-500/5 flex items-center gap-3">
+        <Calculator className="w-4 h-4 text-amber-400" />
+        <div>
+          <p className="font-black text-foreground text-sm">Kalkulator Pesangon — PP No. 35/2021</p>
+          <p className="text-[10px] text-muted-foreground">Berdasarkan UU Cipta Kerja — estimasi. Konsultasikan dengan advokat untuk kepastian hukum.</p>
+        </div>
+      </div>
+      <div className="p-6 grid sm:grid-cols-2 gap-6">
+        <div className="space-y-4">
+          <div>
+            <label className="text-xs font-bold text-muted-foreground mb-1.5 block">Upah Terakhir (Gaji Pokok + Tunjangan Tetap)</label>
+            <div className="relative">
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs text-muted-foreground font-semibold">Rp</span>
+              <input
+                value={upah}
+                onChange={(e) => handleUpahChange(e.target.value)}
+                placeholder="Contoh: 10.000.000"
+                className="w-full pl-10 pr-3 py-2.5 rounded-xl border border-white/10 bg-white/5 text-foreground text-sm focus:outline-none focus:border-amber-500/40 transition"
+              />
+            </div>
+          </div>
+          <div>
+            <label className="text-xs font-bold text-muted-foreground mb-1.5 block">Masa Kerja (tahun penuh)</label>
+            <input
+              type="number"
+              value={masaKerja}
+              onChange={(e) => setMasaKerja(e.target.value)}
+              placeholder="Contoh: 5"
+              min="0"
+              max="40"
+              className="w-full px-3 py-2.5 rounded-xl border border-white/10 bg-white/5 text-foreground text-sm focus:outline-none focus:border-amber-500/40 transition"
+            />
+          </div>
+          <div>
+            <label className="text-xs font-bold text-muted-foreground mb-1.5 block">Alasan PHK</label>
+            <select
+              value={alasan}
+              onChange={(e) => setAlasan(e.target.value)}
+              className="w-full px-3 py-2.5 rounded-xl border border-white/10 bg-card text-foreground text-sm focus:outline-none focus:border-amber-500/40 transition"
+            >
+              {PHK_ALASAN.map((a) => (
+                <option key={a.id} value={a.id}>{a.label}</option>
+              ))}
+            </select>
+          </div>
+          <button
+            onClick={hitung}
+            className="w-full py-3 rounded-xl bg-gradient-to-r from-amber-600 to-orange-600 text-white font-black text-sm flex items-center justify-center gap-2"
+          >
+            <Calculator className="w-4 h-4" /> Hitung Pesangon
+          </button>
+        </div>
+        <div>
+          {result ? (
+            <motion.div initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} className="space-y-3">
+              <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-4">
+                <p className="text-[10px] font-bold text-emerald-400 uppercase tracking-widest mb-3">Hasil Estimasi Pesangon</p>
+                <div className="space-y-2.5">
+                  {[
+                    { label: `Uang Pesangon (${result.multiplier}x ketentuan)`, val: result.pesangon, note: result.multiplier === 0 ? "Tidak berhak" : "" },
+                    { label: "Uang Penghargaan Masa Kerja (UPMK)", val: result.upmk },
+                    { label: "Uang Penggantian Hak (UPH) ~15%", val: result.uph },
+                  ].map((r) => (
+                    <div key={r.label} className="flex items-center justify-between gap-3">
+                      <span className="text-xs text-muted-foreground leading-tight">{r.label}</span>
+                      <span className="text-xs font-black text-foreground text-right flex-shrink-0">
+                        {r.note || formatRp(r.val)}
+                      </span>
+                    </div>
+                  ))}
+                  <div className="pt-2 border-t border-white/10 flex items-center justify-between">
+                    <span className="text-sm font-black text-foreground">TOTAL ESTIMASI</span>
+                    <span className="text-lg font-black text-amber-400">{formatRp(result.total)}</span>
+                  </div>
+                </div>
+              </div>
+              <div className="rounded-xl border border-amber-500/15 bg-amber-500/5 p-3">
+                <p className="text-[10px] text-amber-300 leading-relaxed">
+                  ⚠️ Hasil ini merupakan estimasi berdasarkan PP 35/2021. Besaran aktual dapat berbeda tergantung perjanjian kerja, PKB, dan putusan PHI. Konsultasikan dengan Employment Lawyer AI kami.
+                </p>
+              </div>
+              <Link href="/agents">
+                <button className="w-full py-2.5 rounded-xl border border-orange-500/30 text-orange-400 text-xs font-bold hover:bg-orange-500/5 transition flex items-center justify-center gap-2">
+                  <Brain className="w-3.5 h-3.5" /> Analisis Mendalam dengan Employment AI
+                </button>
+              </Link>
+            </motion.div>
+          ) : (
+            <div className="h-full flex flex-col items-center justify-center text-center py-8">
+              <div className="text-5xl mb-4">🧮</div>
+              <p className="text-sm font-bold text-foreground mb-1">Isi formulir dan klik Hitung</p>
+              <p className="text-xs text-muted-foreground leading-relaxed max-w-[200px]">
+                Hasil estimasi pesangon, UPMK, dan UPH akan tampil di sini sesuai PP 35/2021.
+              </p>
+              <div className="mt-5 space-y-2 text-left w-full max-w-[240px]">
+                {["Pesangon max 9x upah", "UPMK max 10x upah", "UPH penggantian hak"].map((f) => (
+                  <div key={f} className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-amber-400/60 flex-shrink-0" /> {f}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const FAQ_PHI = [
+  {
+    q: "Apakah pekerja PKWT berhak atas pesangon jika kontrak tidak diperpanjang?",
+    a: "Pekerja PKWT tidak berhak atas pesangon konvensional, namun berhak atas uang kompensasi (Pasal 61A UU Cipta Kerja) yang dihitung berdasarkan masa kerja PKWT yang telah dilalui — 1/12 upah per bulan yang telah dilalui.",
+  },
+  {
+    q: "Berapa lama batas waktu mengajukan gugatan ke PHI setelah PHK?",
+    a: "Gugatan ke PHI harus diajukan dalam 1 (satu) tahun sejak tanggal PHK atau sejak terjadi perselisihan. Lewat dari 1 tahun, gugatan dapat dinyatakan daluarsa oleh majelis hakim (Pasal 82 UU No. 2/2004).",
+  },
+  {
+    q: "Apakah pesangon bisa lebih dari ketentuan UU?",
+    a: "Ya, berdasarkan Pasal 1338 KUH Perdata dan prinsip kebebasan berkontrak, pengusaha dan pekerja dapat menyepakati pesangon yang lebih tinggi dari ketentuan minimum dalam UU melalui Perjanjian Kerja atau PKB.",
+  },
+  {
+    q: "Apa perbedaan PHK efisiensi 1x dan 2x pesangon?",
+    a: "PHK karena efisiensi umumnya memberikan pesangon 1x ketentuan. PHK karena perusahaan merugi selama 2 tahun berturut-turut yang dibuktikan dengan laporan keuangan yang diaudit juga 1x. Namun PHK karena peleburan/penggabungan/perubahan status yang tidak bersedia dilanjutkan oleh pekerja mendapat 1.5x.",
+  },
+  {
+    q: "Apakah biaya pengacara dalam perkara PHI ditanggung negara?",
+    a: "Perkara perselisihan hubungan industrial di PHI tidak dipungut biaya perkara (Pasal 58 UU No. 2/2004). Namun biaya kuasa hukum dan biaya transportasi/akomodasi ditanggung pihak masing-masing, kecuali ditetapkan lain oleh hakim.",
+  },
+  {
+    q: "Bagaimana jika mediator Disnaker tidak mengeluarkan anjuran dalam 30 hari?",
+    a: "Jika mediator tidak menyelesaikan tugas dalam 30 hari kerja, para pihak dapat melanjutkan ke PHI tanpa anjuran mediator (Pasal 15 ayat 2 UU No. 2/2004). Risalah ketidakhadiran mediasi atau keterlambatan dapat dilampirkan sebagai bukti.",
+  },
+];
+
+function FaqPHI() {
+  const [open, setOpen] = useState<number | null>(null);
+  return (
+    <div className="space-y-3">
+      {FAQ_PHI.map((faq, i) => (
+        <motion.div
+          key={i}
+          className="rounded-2xl border border-white/8 bg-white/3 overflow-hidden"
+        >
+          <button
+            onClick={() => setOpen(open === i ? null : i)}
+            className="w-full text-left px-5 py-4 flex items-center justify-between gap-3"
+          >
+            <span className="text-sm font-semibold text-foreground leading-snug">{faq.q}</span>
+            <ChevronRight className={`w-4 h-4 text-muted-foreground flex-shrink-0 transition-transform ${open === i ? "rotate-90" : ""}`} />
+          </button>
+          <AnimatePresence>
+            {open === i && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                <div className="px-5 pb-4 text-sm text-muted-foreground leading-relaxed border-t border-white/5 pt-3">
+                  {faq.a}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
+      ))}
+    </div>
+  );
+}
+
 export default function KlinikPHI() {
   const [activeStage, setActiveStage] = useState("bipartit");
   const stage = PHI_STAGES.find((s) => s.id === activeStage) ?? PHI_STAGES[0];
@@ -381,6 +620,27 @@ export default function KlinikPHI() {
               </Link>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ─── KALKULATOR PESANGON INTERAKTIF ─── */}
+      <section className="py-14 border-t border-white/8">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-black text-foreground mb-2">🧮 Kalkulator Pesangon Interaktif</h2>
+            <p className="text-muted-foreground text-sm">Berdasarkan UU Cipta Kerja (PP No. 35/2021) — hitung otomatis pesangon, UPMK, dan UPH.</p>
+          </div>
+          <PesangonKalkulator />
+        </div>
+      </section>
+
+      {/* ─── FAQ ─── */}
+      <section className="py-14 border-t border-white/8 bg-gradient-to-b from-background to-card/20">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-black text-foreground mb-2">Pertanyaan yang Sering Ditanyakan</h2>
+          </div>
+          <FaqPHI />
         </div>
       </section>
 

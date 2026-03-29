@@ -106,6 +106,170 @@ const STATS = [
   { val: "UU 37/2004", label: "Dasar hukum utama", sub: "Kepailitan & PKPU" },
 ];
 
+function KalkulatorVoting() {
+  const [totalKreditor, setTotalKreditor] = useState("");
+  const [kreditorSetuju, setKreditorSetuju] = useState("");
+  const [totalTagihan, setTotalTagihan] = useState("");
+  const [tagihanSetuju, setTagihanSetuju] = useState("");
+  const [result, setResult] = useState<null | { pctKreditor: number; pctTagihan: number; quorumKreditor: boolean; quorumTagihan: boolean; lolos: boolean }>(null);
+
+  function hitung() {
+    const tk = parseInt(totalKreditor);
+    const ks = parseInt(kreditorSetuju);
+    const tt = parseFloat(totalTagihan.replace(/\D/g, ""));
+    const ts = parseFloat(tagihanSetuju.replace(/\D/g, ""));
+    if (!tk || !ks || !tt || !ts) return;
+    const pctKreditor = (ks / tk) * 100;
+    const pctTagihan = (ts / tt) * 100;
+    const quorumKreditor = pctKreditor > 50;
+    const quorumTagihan = pctTagihan >= 66.67;
+    setResult({ pctKreditor, pctTagihan, quorumKreditor, quorumTagihan, lolos: quorumKreditor && quorumTagihan });
+  }
+
+  function formatAngka(val: string) {
+    const num = val.replace(/\D/g, "");
+    return num ? parseInt(num).toLocaleString("id-ID") : "";
+  }
+
+  return (
+    <div className="rounded-3xl border border-red-500/20 bg-gradient-to-br from-red-950/20 to-orange-950/10 overflow-hidden">
+      <div className="px-6 py-4 border-b border-white/8 bg-red-500/5 flex items-center gap-3">
+        <BarChart3 className="w-4 h-4 text-red-400" />
+        <div>
+          <p className="font-black text-foreground text-sm">Kalkulator Quorum Voting — Pasal 281 UU 37/2004</p>
+          <p className="text-[10px] text-muted-foreground">Persyaratan: lebih dari ½ jumlah kreditor konkuren yang mewakili ≥ ⅔ total tagihan konkuren.</p>
+        </div>
+      </div>
+      <div className="p-6 grid sm:grid-cols-2 gap-6">
+        <div className="space-y-4">
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="text-xs font-bold text-muted-foreground mb-1.5 block">Total Kreditor</label>
+              <input type="number" value={totalKreditor} onChange={(e) => setTotalKreditor(e.target.value)} placeholder="Misal: 20" className="w-full px-3 py-2.5 rounded-xl border border-white/10 bg-white/5 text-foreground text-sm focus:outline-none focus:border-red-500/40 transition" />
+            </div>
+            <div>
+              <label className="text-xs font-bold text-muted-foreground mb-1.5 block">Kreditor Setuju</label>
+              <input type="number" value={kreditorSetuju} onChange={(e) => setKreditorSetuju(e.target.value)} placeholder="Misal: 12" className="w-full px-3 py-2.5 rounded-xl border border-white/10 bg-white/5 text-foreground text-sm focus:outline-none focus:border-red-500/40 transition" />
+            </div>
+          </div>
+          <div>
+            <label className="text-xs font-bold text-muted-foreground mb-1.5 block">Total Nilai Tagihan (Rp)</label>
+            <input value={totalTagihan} onChange={(e) => setTotalTagihan(formatAngka(e.target.value))} placeholder="Misal: 50.000.000.000" className="w-full px-3 py-2.5 rounded-xl border border-white/10 bg-white/5 text-foreground text-sm focus:outline-none focus:border-red-500/40 transition" />
+          </div>
+          <div>
+            <label className="text-xs font-bold text-muted-foreground mb-1.5 block">Nilai Tagihan Kreditor Setuju (Rp)</label>
+            <input value={tagihanSetuju} onChange={(e) => setTagihanSetuju(formatAngka(e.target.value))} placeholder="Misal: 35.000.000.000" className="w-full px-3 py-2.5 rounded-xl border border-white/10 bg-white/5 text-foreground text-sm focus:outline-none focus:border-red-500/40 transition" />
+          </div>
+          <button onClick={hitung} className="w-full py-3 rounded-xl bg-gradient-to-r from-red-600 to-orange-600 text-white font-black text-sm flex items-center justify-center gap-2">
+            <Calculator className="w-4 h-4" /> Hitung Quorum
+          </button>
+        </div>
+        <div>
+          {result ? (
+            <motion.div initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} className="space-y-3">
+              <div className={`rounded-2xl border p-5 text-center ${result.lolos ? "border-emerald-500/30 bg-emerald-500/8" : "border-red-500/30 bg-red-500/8"}`}>
+                <div className="text-4xl mb-2">{result.lolos ? "✅" : "❌"}</div>
+                <p className={`text-lg font-black mb-1 ${result.lolos ? "text-emerald-400" : "text-red-400"}`}>
+                  {result.lolos ? "QUORUM TERPENUHI" : "QUORUM TIDAK TERPENUHI"}
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  {result.lolos ? "Rencana perdamaian dapat dihomologasi pengadilan." : "Rencana perdamaian belum memenuhi syarat Pasal 281 UU 37/2004."}
+                </p>
+              </div>
+              <div className="space-y-3">
+                {[
+                  { label: "Kreditor setuju", pct: result.pctKreditor, target: 50, ok: result.quorumKreditor, unit: "% (min. >50%)" },
+                  { label: "Nilai tagihan setuju", pct: result.pctTagihan, target: 66.67, ok: result.quorumTagihan, unit: "% (min. ≥66,67%)" },
+                ].map((r) => (
+                  <div key={r.label} className={`rounded-xl border p-3 ${r.ok ? "border-emerald-500/20 bg-emerald-500/5" : "border-red-500/20 bg-red-500/5"}`}>
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-xs text-muted-foreground">{r.label}</span>
+                      <span className={`text-sm font-black ${r.ok ? "text-emerald-400" : "text-red-400"}`}>{r.pct.toFixed(1)}{r.unit}</span>
+                    </div>
+                    <div className="h-2 rounded-full bg-white/10 overflow-hidden">
+                      <div className={`h-full rounded-full transition-all ${r.ok ? "bg-emerald-500" : "bg-red-500"}`} style={{ width: `${Math.min(r.pct, 100)}%` }} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+              {!result.lolos && (
+                <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-3">
+                  <p className="text-[10px] text-amber-300 leading-relaxed">
+                    💡 Jika quorum tidak terpenuhi, rencana perdamaian ditolak dan debitor dapat dinyatakan pailit. Pertimbangkan merevisi rencana perdamaian dan melakukan pendekatan ulang kepada kreditor konkuren.
+                  </p>
+                </div>
+              )}
+            </motion.div>
+          ) : (
+            <div className="h-full flex flex-col items-center justify-center text-center py-8">
+              <div className="text-5xl mb-4">🗳️</div>
+              <p className="text-sm font-bold text-foreground mb-1">Isi data voting dan klik Hitung</p>
+              <p className="text-xs text-muted-foreground leading-relaxed max-w-[220px]">Hasil quorum berdasarkan Pasal 281 UU No. 37/2004 akan tampil di sini.</p>
+              <div className="mt-5 space-y-2 text-left w-full max-w-[240px]">
+                {["Syarat 1: >50% jumlah kreditor", "Syarat 2: ≥⅔ nilai tagihan", "Keduanya wajib terpenuhi"].map((f) => (
+                  <div key={f} className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-red-400/60 flex-shrink-0" /> {f}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const FAQ_PKPU = [
+  {
+    q: "Apa perbedaan PKPU dan Pailit? Kapan sebaiknya memilih PKPU?",
+    a: "PKPU (Penundaan Kewajiban Pembayaran Utang) adalah mekanisme restrukturisasi — debitor masih mengoperasikan usahanya di bawah pengawasan pengurus, sambil menegosiasikan rencana perdamaian. Pailit adalah likuidasi: aset dilelang dan dibagikan kepada kreditor. PKPU tepat dipilih jika debitor memiliki prospek usaha yang baik namun mengalami kesulitan likuiditas sementara.",
+  },
+  {
+    q: "Siapa saja yang dapat mengajukan permohonan PKPU?",
+    a: "PKPU dapat diajukan oleh: (1) Debitor sendiri yang memperkirakan tidak dapat melanjutkan pembayaran utang yang jatuh tempo; (2) Satu atau lebih kreditor yang memiliki tagihan yang telah jatuh tempo; atau (3) Bank Indonesia/OJK untuk lembaga keuangan tertentu. Permohonan diajukan ke Pengadilan Niaga yang berwenang.",
+  },
+  {
+    q: "Apakah seluruh tagihan kreditor tertanggung selama PKPU berlangsung?",
+    a: "Selama PKPU berlangsung, debitor tidak boleh melakukan pembayaran utang kepada kreditor konkuren tanpa persetujuan pengurus. Namun kreditor separatis (pemegang jaminan kebendaan seperti hak tanggungan, fidusia) tetap dapat mengeksekusi jaminannya setelah 90 hari sejak penetapan PKPU, kecuali pengadilan memperpanjang penangguhan.",
+  },
+  {
+    q: "Apa konsekuensi jika rencana perdamaian ditolak dalam voting?",
+    a: "Jika rencana perdamaian tidak memenuhi quorum voting (>½ kreditor yang mewakili ≥⅔ tagihan), pengadilan akan menyatakan debitor pailit secara otomatis berdasarkan Pasal 289 UU No. 37/2004. Kurator kemudian ditunjuk untuk melakukan pemberesan harta pailit.",
+  },
+  {
+    q: "Berapa lama proses homologasi setelah voting berhasil?",
+    a: "Setelah voting berhasil, Hakim Pengawas melaporkan hasil kepada Pengadilan Niaga. Pengadilan kemudian menetapkan homologasi (pengesahan rencana perdamaian) dalam sidang. Proses ini biasanya berlangsung 7-14 hari setelah voting. Rencana perdamaian yang dihomologasi memiliki kekuatan hukum mengikat semua kreditor.",
+  },
+  {
+    q: "Apa yang dimaksud dengan kreditor separatis, preferen, dan konkuren?",
+    a: "Kreditor separatis adalah pemegang jaminan kebendaan (HT, fidusia, gadai, hipotek) — diutamakan dari hasil eksekusi jaminan. Kreditor preferen adalah yang diistimewakan UU (pajak, upah pekerja, biaya perkara). Kreditor konkuren adalah kreditor tanpa jaminan khusus — mereka yang menjadi subjek utama voting rencana perdamaian PKPU.",
+  },
+];
+
+function FaqPKPU() {
+  const [open, setOpen] = useState<number | null>(null);
+  return (
+    <div className="space-y-3">
+      {FAQ_PKPU.map((faq, i) => (
+        <motion.div key={i} className="rounded-2xl border border-white/8 bg-white/3 overflow-hidden">
+          <button onClick={() => setOpen(open === i ? null : i)} className="w-full text-left px-5 py-4 flex items-center justify-between gap-3">
+            <span className="text-sm font-semibold text-foreground leading-snug">{faq.q}</span>
+            <ChevronRight className={`w-4 h-4 text-muted-foreground flex-shrink-0 transition-transform ${open === i ? "rotate-90" : ""}`} />
+          </button>
+          <AnimatePresence>
+            {open === i && (
+              <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.2 }}>
+                <div className="px-5 pb-4 text-sm text-muted-foreground leading-relaxed border-t border-white/5 pt-3">{faq.a}</div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
+      ))}
+    </div>
+  );
+}
+
 export default function KlinikPKPU() {
   const [activeStage, setActiveStage] = useState("permohonan");
   const stage = PKPU_STAGES.find((s) => s.id === activeStage) ?? PKPU_STAGES[0];
@@ -334,6 +498,28 @@ export default function KlinikPKPU() {
               </Link>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ─── KALKULATOR VOTING QUORUM INTERAKTIF ─── */}
+      <section className="py-14 border-t border-white/8">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-black text-foreground mb-2">🗳️ Kalkulator Voting Quorum Rencana Perdamaian</h2>
+            <p className="text-muted-foreground text-sm">Berdasarkan Pasal 281 UU No. 37/2004 — hitung otomatis apakah rencana perdamaian memenuhi persyaratan voting.</p>
+          </div>
+          <KalkulatorVoting />
+        </div>
+      </section>
+
+      {/* ─── FAQ PKPU ─── */}
+      <section className="py-14 border-t border-white/8 bg-gradient-to-b from-background to-card/20">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-black text-foreground mb-2">Pertanyaan yang Sering Ditanyakan</h2>
+            <p className="text-muted-foreground text-sm">Panduan praktis PKPU & Kepailitan dari perspektif kurator dan advokat berpengalaman.</p>
+          </div>
+          <FaqPKPU />
         </div>
       </section>
 
