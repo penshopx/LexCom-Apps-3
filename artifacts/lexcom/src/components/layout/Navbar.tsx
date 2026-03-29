@@ -62,6 +62,8 @@ const MENU_GROUPS = [
     label: "Studio AI",
     links: [
       { name: "📄 Studio Opini Hukum", href: "/studio-opini", desc: "Opini hukum profesional dengan AI" },
+      { name: "🗄️ Vault Template",    href: "/vault",          desc: "1.500+ template dokumen hukum" },
+      { name: "🏢 Legal Ops Suite",   href: "/legal-ops",      desc: "Dashboard departemen legal korporasi" },
       { name: "✍️ Penulis Cerdas",   href: "/penulis-cerdas",  desc: "Artikel, laporan & riset dengan AI" },
       { name: "🤖 Chatbot Builder",  href: "/chatbot-builder", desc: "Bangun chatbot hukum kustom" },
       { name: "📚 Ebook Builder",    href: "/ebook-builder",   desc: "Buat modul & panduan hukum AI" },

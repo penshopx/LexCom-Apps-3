@@ -40,6 +40,8 @@ import KlinikPHI from "@/pages/KlinikPHI";
 import StudioOpini from "@/pages/StudioOpini";
 import KlinikPKPU from "@/pages/KlinikPKPU";
 import PerpustakaanHukum from "@/pages/PerpustakaanHukum";
+import LegalOps from "@/pages/LegalOps";
+import VaultDokumen from "@/pages/VaultDokumen";
 import { FloatingLexBot } from "@/components/FloatingLexBot";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 
@@ -85,6 +87,8 @@ function Router() {
       <Route path="/studio-opini" component={StudioOpini} />
       <Route path="/klinik-pkpu" component={KlinikPKPU} />
       <Route path="/perpustakaan" component={PerpustakaanHukum} />
+      <Route path="/legal-ops" component={LegalOps} />
+      <Route path="/vault" component={VaultDokumen} />
       <Route component={NotFound} />
     </Switch>
   );

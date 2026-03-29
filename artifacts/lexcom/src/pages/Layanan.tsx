@@ -6,6 +6,7 @@ import {
   Bot, FileText, Briefcase, Users, BookOpen, Scale, Calculator, Library,
   MessageSquare, ArrowRight, CheckCircle, Star, Shield, Zap, Clock, Globe, ExternalLink,
   PenLine, BookMarked, Search, BarChart3, Microscope, Cpu, GraduationCap, TrendingDown,
+  Building2, Archive,
 } from "lucide-react";
 
 const SUMBER_PEMERINTAH = [
@@ -140,6 +141,32 @@ const LAYANAN = [
     color: "border-indigo-500/30 bg-indigo-500/5",
     badgeColor: "bg-indigo-500/20 text-indigo-300",
     iconBg: "bg-indigo-500/10 text-indigo-400",
+  },
+  {
+    icon: Building2,
+    title: "Legal Ops Suite",
+    subtitle: "Dashboard Lengkap untuk Departemen Legal",
+    desc: "6 modul terintegrasi untuk departemen legal korporasi: CLM (Contract Lifecycle), Litigation Tracker, Compliance Obligation Register, Legal Intake & Triage, dan External Counsel Management — semua dalam satu dashboard AI.",
+    features: ["CLM dengan pipeline kontrak visual", "Litigation & compliance calendar", "AI Triage permintaan legal internal", "External Counsel budget tracker"],
+    link: "/legal-ops",
+    cta: "Buka Legal Ops Suite",
+    badge: "Korporasi",
+    color: "border-sky-500/30 bg-sky-500/5",
+    badgeColor: "bg-sky-500/20 text-sky-300",
+    iconBg: "bg-sky-500/10 text-sky-400",
+  },
+  {
+    icon: Archive,
+    title: "Vault Template 1.500+",
+    subtitle: "Template Dokumen Hukum Terlengkap di Indonesia",
+    desc: "1.500+ template siap pakai dalam 8 kategori: litigasi, perjanjian, akta notariil, ketenagakerjaan, peradilan khusus, surat & somasi, dokumen korporat, dan properti — semua dapat di-generate AI dalam 60 detik.",
+    features: ["500+ surat & perjanjian hukum", "1.000+ akta notariil", "AI auto-fill berdasarkan fakta kasus", "Unduh DOC + PDF siap tanda tangan"],
+    link: "/vault",
+    cta: "Buka Vault Template",
+    badge: "1.500+",
+    color: "border-amber-500/30 bg-amber-500/5",
+    badgeColor: "bg-amber-500/20 text-amber-300",
+    iconBg: "bg-amber-500/10 text-amber-400",
   },
   {
     icon: Cpu,
