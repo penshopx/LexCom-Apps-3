@@ -49,62 +49,260 @@ interface StreamEvent {
 }
 
 const PAGE_CONTEXT: Record<string, { title: string; prompts: string[] }> = {
-  "/agentic-chatbots": {
-    title: "Halaman Agentic AI Chat",
-    prompts: [
-      "Cara menggunakan Agentic AI Chat?",
-      "Bedanya Mode Otomatis vs Manual?",
-      "Bagaimana cara sintesis bekerja?",
-    ],
-  },
-  "/lexbot": {
-    title: "Halaman Chaesa Lexbot",
-    prompts: [
-      "Apa bedanya Chaesa Lexbot dengan Agentic AI Chat?",
-      "Bagaimana cara kerja multi-agent di Chaesa Lexbot?",
-    ],
-  },
-  "/agents": {
-    title: "Halaman Agen AI",
-    prompts: [
-      "Apa perbedaan setiap agen hukum?",
-      "Cara konsultasi dengan agen secara langsung?",
-    ],
-  },
-  "/documents": {
-    title: "Halaman Generator Dokumen",
-    prompts: [
-      "Cara membuat dokumen hukum otomatis?",
-      "Dokumen apa saja yang bisa dibuat?",
-    ],
-  },
-  "/cases": {
-    title: "Halaman Manajemen Perkara",
-    prompts: [
-      "Cara menambah perkara baru?",
-      "Bagaimana melacak status perkara?",
-    ],
-  },
-  "/panduan": {
-    title: "Halaman Panduan Hukum",
-    prompts: [
-      "Rekomendasikan panduan untuk pemula?",
-      "Ada panduan tentang PHK?",
-    ],
-  },
-  "/forum": {
-    title: "Halaman Forum Diskusi",
-    prompts: [
-      "Cara posting pertanyaan di forum?",
-      "Bisa posting anonim?",
-    ],
-  },
   "/": {
     title: "Beranda LexCom",
     prompts: [
       "Apa saja fitur utama LexCom?",
       "Mulai dari mana untuk pemula?",
       "Fitur mana yang gratis tanpa login?",
+    ],
+  },
+  "/lexbot": {
+    title: "Chaesa Lexbot",
+    prompts: [
+      "Apa bedanya Chaesa Lexbot dengan Agentic AI Chat?",
+      "Bagaimana cara kerja multi-agent di Chaesa Lexbot?",
+      "Agen spesialis mana yang paling cocok untuk perkara saya?",
+    ],
+  },
+  "/agentic-chatbots": {
+    title: "Agentic AI Chat",
+    prompts: [
+      "Cara menggunakan Agentic AI Chat?",
+      "Bedanya Mode Otomatis vs Manual?",
+      "Bagaimana cara sintesis multi-agen bekerja?",
+    ],
+  },
+  "/agents": {
+    title: "19 Pakar Hukum AI",
+    prompts: [
+      "Apa perbedaan setiap agen hukum?",
+      "Cara konsultasi dengan agen secara langsung?",
+      "Agen mana yang cocok untuk masalah ketenagakerjaan?",
+    ],
+  },
+  "/advokat-os": {
+    title: "Advokat OS",
+    prompts: [
+      "Fitur apa saja yang ada di Advokat OS?",
+      "Apakah Advokat OS bisa digunakan untuk manajemen klien?",
+      "Paket mana yang termasuk Advokat OS?",
+    ],
+  },
+  "/documents": {
+    title: "Generator Dokumen AI",
+    prompts: [
+      "Cara membuat dokumen hukum otomatis?",
+      "Dokumen apa saja yang bisa dibuat?",
+      "Apakah dokumen yang dihasilkan bisa diedit?",
+    ],
+  },
+  "/cases": {
+    title: "Manajemen Perkara",
+    prompts: [
+      "Cara menambah perkara baru?",
+      "Bagaimana melacak status perkara?",
+      "Bisa simpan dokumen per perkara?",
+    ],
+  },
+  "/vault": {
+    title: "Vault Template Dokumen",
+    prompts: [
+      "Apa saja jenis template yang tersedia di Vault?",
+      "Apakah template bisa diedit setelah diunduh?",
+      "Ada template kontrak kerja atau PPJB?",
+    ],
+  },
+  "/legal-ops": {
+    title: "Legal Ops Suite",
+    prompts: [
+      "Modul apa saja yang ada di Legal Ops?",
+      "Apakah Legal Ops cocok untuk departemen hukum perusahaan?",
+      "Bagaimana cara melacak compliance deadline?",
+    ],
+  },
+  "/studio-opini": {
+    title: "Studio Opini Hukum AI",
+    prompts: [
+      "Bagaimana cara membuat opini hukum dengan AI?",
+      "Apakah opini yang dihasilkan bisa langsung digunakan?",
+      "Bidang hukum apa saja yang didukung Studio Opini?",
+    ],
+  },
+  "/klinik-phi": {
+    title: "Klinik PHI — Hukum Perburuhan",
+    prompts: [
+      "Bagaimana cara menghitung pesangon PHK?",
+      "Apa saja tahap perkara di PHI?",
+      "Berapa lama proses bipartit sebelum ke Disnaker?",
+    ],
+  },
+  "/klinik-pkpu": {
+    title: "Klinik PKPU & Kepailitan",
+    prompts: [
+      "Apa perbedaan PKPU dan Kepailitan?",
+      "Berapa quorum yang dibutuhkan untuk voting perdamaian?",
+      "Siapa saja yang bisa mengajukan permohonan PKPU?",
+    ],
+  },
+  "/riset-ai": {
+    title: "Riset AI Hub",
+    prompts: [
+      "Bagaimana cara melakukan riset hukum dengan AI?",
+      "Apakah Riset AI bisa mencari putusan yang relevan?",
+      "Apa bedanya Riset AI dengan pencarian biasa?",
+    ],
+  },
+  "/telaah-dokumen": {
+    title: "Telaah Dokumen AI",
+    prompts: [
+      "Dokumen apa yang bisa dianalisis dengan Telaah Dokumen?",
+      "Berapa banyak agen yang mereview dokumen saya?",
+      "Apa yang dilaporkan setelah review dokumen?",
+    ],
+  },
+  "/peta-preseden": {
+    title: "Peta Preseden",
+    prompts: [
+      "Bagaimana cara membaca jaringan yurisprudensi?",
+      "Apakah Peta Preseden mencakup putusan MK dan MA?",
+      "Cara menemukan putusan serupa dengan kasus saya?",
+    ],
+  },
+  "/intelijen-regulasi": {
+    title: "Intelijen Regulasi",
+    prompts: [
+      "Bagaimana cara cek risiko kepatuhan bisnis?",
+      "Regulasi apa yang paling berdampak pada bisnis saya?",
+      "Apakah ada notifikasi perubahan UU secara otomatis?",
+    ],
+  },
+  "/penulis-cerdas": {
+    title: "Penulis Cerdas AI",
+    prompts: [
+      "Artikel hukum apa yang bisa ditulis oleh AI?",
+      "Apakah bisa buat skripsi atau tesis hukum?",
+      "Bagaimana cara membuat opini hukum dengan Penulis Cerdas?",
+    ],
+  },
+  "/chatbot-builder": {
+    title: "Chatbot Builder",
+    prompts: [
+      "Bagaimana cara membuat chatbot hukum kustom?",
+      "Chatbot bisa dipasang di website firma saya?",
+      "Apakah perlu coding untuk membuat chatbot?",
+    ],
+  },
+  "/ebook-builder": {
+    title: "Ebook Builder",
+    prompts: [
+      "Jenis konten apa yang bisa dibuat dengan Ebook Builder?",
+      "Apakah output bisa diexport ke PDF?",
+      "Bisa buat modul BimTek dengan Ebook Builder?",
+    ],
+  },
+  "/perpustakaan": {
+    title: "Perpustakaan Hukum Digital",
+    prompts: [
+      "Ada berapa buku yang tersedia di perpustakaan?",
+      "Bagaimana cara menggunakan fitur AI Tanya Jawab buku?",
+      "Apakah ada buku tentang KUHP Baru 2026?",
+    ],
+  },
+  "/bimtek": {
+    title: "BimTek Profesi Hukum",
+    prompts: [
+      "Jalur profesi apa saja yang tersedia di BimTek?",
+      "Berapa biaya BimTek dan apa saja yang termasuk?",
+      "Apakah BimTek memberikan kredit CPD resmi?",
+    ],
+  },
+  "/akademi-advokat": {
+    title: "Akademi Advokat",
+    prompts: [
+      "Apa saja program yang ada di Akademi Advokat?",
+      "Apakah Akademi Advokat membantu persiapan UPA?",
+      "Paket mana yang termasuk Akademi Advokat?",
+    ],
+  },
+  "/peraturan": {
+    title: "Database Peraturan",
+    prompts: [
+      "Bagaimana cara mencari peraturan spesifik?",
+      "Apakah KUHP Baru (UU 1/2023) sudah tersedia?",
+      "Ada berapa peraturan yang tersedia di LexCom?",
+    ],
+  },
+  "/putusan": {
+    title: "Database Putusan",
+    prompts: [
+      "Bagaimana cara mencari putusan berdasarkan topik?",
+      "Apakah tersedia putusan MK dan MA terbaru?",
+      "Bisa cari putusan berdasarkan nomor perkara?",
+    ],
+  },
+  "/kalkulator": {
+    title: "Kalkulator Hukum",
+    prompts: [
+      "Kalkulator apa saja yang tersedia?",
+      "Cara menghitung pesangon sesuai PP 35/2021?",
+      "Apakah kalkulator waris bisa menghitung hak bagian ahli waris?",
+    ],
+  },
+  "/panduan": {
+    title: "Panduan Hukum",
+    prompts: [
+      "Rekomendasikan panduan untuk pemula?",
+      "Ada panduan tentang cara gugatan cerai?",
+      "Panduan prosedur PHK yang benar?",
+    ],
+  },
+  "/glosarium": {
+    title: "Glosarium Hukum",
+    prompts: [
+      "Apa arti istilah 'cessie' dalam hukum?",
+      "Jelaskan perbedaan 'wanprestasi' dan 'PMH'?",
+      "Ada berapa istilah hukum di glosarium LexCom?",
+    ],
+  },
+  "/kursus": {
+    title: "Kursus Hukum Online",
+    prompts: [
+      "Kursus hukum apa yang tersedia?",
+      "Apakah kursus memberikan sertifikat?",
+      "Rekomendasi kursus untuk mahasiswa hukum?",
+    ],
+  },
+  "/pengacara": {
+    title: "Direktori Pengacara",
+    prompts: [
+      "Cara mencari pengacara sesuai spesialisasi?",
+      "Apakah semua pengacara di direktori sudah terverifikasi?",
+      "Cara booking konsultasi dengan pengacara?",
+    ],
+  },
+  "/forum": {
+    title: "Forum Diskusi Hukum",
+    prompts: [
+      "Cara posting pertanyaan di forum?",
+      "Bisa posting anonim?",
+      "Ada topik forum tentang apa saja?",
+    ],
+  },
+  "/harga": {
+    title: "Halaman Harga & Paket",
+    prompts: [
+      "Apa perbedaan paket Starter, Pro, dan Advokat?",
+      "Fitur apa yang tersedia di paket Gratis?",
+      "Apakah bisa upgrade atau downgrade paket kapan saja?",
+    ],
+  },
+  "/layanan": {
+    title: "Semua Layanan LexCom",
+    prompts: [
+      "Apa saja layanan unggulan LexCom?",
+      "Fitur mana yang paling populer?",
+      "Layanan mana yang cocok untuk advokat?",
     ],
   },
 };
@@ -403,7 +601,7 @@ export function FloatingLexBot() {
                     <Cpu className="w-2.5 h-2.5" /> Orchestrator
                   </Badge>
                   <Badge variant="outline" className="text-[10px] h-4 gap-0.5 border-blue-500/30 text-blue-400">
-                    <Network className="w-2.5 h-2.5" /> 11 Specialists
+                    <Network className="w-2.5 h-2.5" /> 19 Spesialis
                   </Badge>
                   <Badge variant="outline" className="text-[10px] h-4 gap-0.5 border-green-500/30 text-green-400">
                     <GitMerge className="w-2.5 h-2.5" /> Function Calling
@@ -530,7 +728,7 @@ function WelcomeState({ prompts, onSend }: { prompts: string[]; onSend: (p: stri
         </div>
         <div className="py-2 px-1 rounded-xl bg-blue-500/10 border border-blue-500/20">
           <div className="flex justify-center text-blue-400 mb-1"><Bot className="w-3 h-3" /></div>
-          <p className="text-[10px] text-blue-400 font-medium">11 Agen</p>
+          <p className="text-[10px] text-blue-400 font-medium">19 Agen</p>
         </div>
         <div className="py-2 px-1 rounded-xl bg-green-500/10 border border-green-500/20">
           <div className="flex justify-center text-green-400 mb-1"><GitMerge className="w-3 h-3" /></div>
