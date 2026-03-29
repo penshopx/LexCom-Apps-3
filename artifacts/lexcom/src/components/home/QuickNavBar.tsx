@@ -16,16 +16,16 @@ const ROW_AI = [
 ];
 
 const ROW_DB = [
-  { emoji: "🎓", name: "Akademi Advokat", href: "/akademi-advokat" },
-  { emoji: "🏗️", name: "Klinik PHI",     href: "/klinik-phi" },
-  { emoji: "📜", name: "Peraturan",       href: "/peraturan" },
-  { emoji: "🏛️", name: "Putusan",        href: "/putusan" },
-  { emoji: "🧮", name: "Kalkulator",     href: "/kalkulator" },
-  { emoji: "📄", name: "Dokumen AI",     href: "/documents" },
-  { emoji: "📁", name: "Kasus",          href: "/cases" },
-  { emoji: "📚", name: "Kursus",         href: "/kursus" },
-  { emoji: "👨‍⚖️", name: "Pengacara",    href: "/pengacara" },
-  { emoji: "💬", name: "Forum",          href: "/forum" },
+  { emoji: "📄", name: "Studio Opini",   href: "/studio-opini" },
+  { emoji: "⚖️", name: "Klinik PKPU",   href: "/klinik-pkpu" },
+  { emoji: "📚", name: "Perpustakaan",  href: "/perpustakaan" },
+  { emoji: "📜", name: "Peraturan",     href: "/peraturan" },
+  { emoji: "🏛️", name: "Putusan",      href: "/putusan" },
+  { emoji: "🧮", name: "Kalkulator",   href: "/kalkulator" },
+  { emoji: "📄", name: "Dokumen AI",   href: "/documents" },
+  { emoji: "👨‍⚖️", name: "Pengacara",  href: "/pengacara" },
+  { emoji: "💬", name: "Forum",        href: "/forum" },
+  { emoji: "📁", name: "Kasus",        href: "/cases" },
 ];
 
 function NavLink({ emoji, name, href }: { emoji: string; name: string; href: string }) {

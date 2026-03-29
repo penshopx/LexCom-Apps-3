@@ -53,13 +53,15 @@ const MENU_GROUPS = [
     links: [
       { name: "🎓 Akademi Advokat", href: "/akademi-advokat", desc: "UPA prep, SOP, retainer builder" },
       { name: "🏗️ Klinik PHI", href: "/klinik-phi", desc: "Hukum perburuhan & PHI lengkap" },
-      { name: "📚 Kursus", href: "/kursus", desc: "Kursus hukum bersertifikat" },
+      { name: "⚖️ Klinik PKPU", href: "/klinik-pkpu", desc: "Kepailitan & restrukturisasi utang" },
+      { name: "📚 Perpustakaan Hukum", href: "/perpustakaan", desc: "96+ e-book hukum terintegrasi AI" },
       { name: "📖 Panduan", href: "/panduan", desc: "Tutorial prosedur hukum" },
     ],
   },
   {
     label: "Studio AI",
     links: [
+      { name: "📄 Studio Opini Hukum", href: "/studio-opini", desc: "Opini hukum profesional dengan AI" },
       { name: "✍️ Penulis Cerdas",   href: "/penulis-cerdas",  desc: "Artikel, laporan & riset dengan AI" },
       { name: "🤖 Chatbot Builder",  href: "/chatbot-builder", desc: "Bangun chatbot hukum kustom" },
       { name: "📚 Ebook Builder",    href: "/ebook-builder",   desc: "Buat modul & panduan hukum AI" },
