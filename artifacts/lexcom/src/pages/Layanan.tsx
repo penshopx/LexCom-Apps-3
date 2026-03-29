@@ -78,6 +78,19 @@ const SUMBER_PEMERINTAH = [
 
 const LAYANAN = [
   {
+    icon: BookOpen,
+    title: "BimTek Profesi Hukum",
+    subtitle: "Bimbingan Teknis Bersertifikat — 6 Jalur Profesi",
+    desc: "Program BimTek terakreditasi untuk Advokat, Notaris & PPAT, Panitera/Kepaniteraan, Kurator & Pengurus PKPU, serta Legal HRD Korporasi. 36 modul, simulasi AI kasus nyata, sertifikat CPD/SKP, 100% online.",
+    features: ["6 jalur profesi: Advokat, Notaris, Panitera, PPAT, Kurator, Legal HRD", "36 modul kurikulum terstruktur per profesi", "Simulasi kasus nyata berbasis AI LexCom", "Sertifikat BimTek + kredit poin CPD/SKP"],
+    link: "/bimtek",
+    cta: "Daftar BimTek",
+    badge: "Baru",
+    color: "border-violet-500/30 bg-violet-500/5",
+    badgeColor: "bg-violet-500/20 text-violet-300",
+    iconBg: "bg-violet-500/10 text-violet-400",
+  },
+  {
     icon: GraduationCap,
     title: "Akademi Advokat",
     subtitle: "UPA Prep · SOP Library · Retainer Builder",

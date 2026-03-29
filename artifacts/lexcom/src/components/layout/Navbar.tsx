@@ -52,6 +52,7 @@ const MENU_GROUPS = [
     label: "Pendidikan",
     links: [
       { name: "🎓 Akademi Advokat", href: "/akademi-advokat", desc: "UPA prep, SOP, retainer builder" },
+      { name: "🏫 BimTek Profesi Hukum", href: "/bimtek", desc: "Advokat, Notaris, Panitera, PPAT, Kurator" },
       { name: "🏗️ Klinik PHI", href: "/klinik-phi", desc: "Hukum perburuhan & PHI lengkap" },
       { name: "⚖️ Klinik PKPU", href: "/klinik-pkpu", desc: "Kepailitan & restrukturisasi utang" },
       { name: "📚 Perpustakaan Hukum", href: "/perpustakaan", desc: "96+ e-book hukum terintegrasi AI" },
