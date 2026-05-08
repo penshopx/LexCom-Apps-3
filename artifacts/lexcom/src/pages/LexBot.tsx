@@ -18,6 +18,8 @@ import {
   X,
   RotateCcw,
   Cpu,
+  Share2,
+  Check,
 } from "lucide-react";
 
 interface ChatMessage {
@@ -116,17 +118,56 @@ export default function LexBot() {
   const [isStreaming, setIsStreaming] = useState(false);
   const [agentStatus, setAgentStatus] = useState<AgentStatusType | null>(null);
   const [currentAgent, setCurrentAgent] = useState<string>("orchestrator");
+  const [isLoadingHistory, setIsLoadingHistory] = useState(false);
+  const [copied, setCopied] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const abortRef = useRef<AbortController | null>(null);
 
-  useEffect(() => {
-    const saved = localStorage.getItem(LEXBOT_STORAGE_KEY);
-    if (saved) {
-      const id = parseInt(saved);
-      if (!isNaN(id)) setConversationId(id);
+  const loadConversation = useCallback(async (id: number) => {
+    setIsLoadingHistory(true);
+    try {
+      const res = await fetch(`/api/assistant/conversations/${id}/messages`, {
+        credentials: "include",
+      });
+      if (!res.ok) return;
+      const data = (await res.json()) as Array<{
+        id: number;
+        role: string;
+        content: string;
+        createdAt: string;
+      }>;
+      const loaded: ChatMessage[] = data.map((m) => ({
+        id: crypto.randomUUID(),
+        role: m.role as "user" | "assistant",
+        content: m.content,
+        timestamp: new Date(m.createdAt),
+      }));
+      setMessages(loaded);
+    } catch {
+    } finally {
+      setIsLoadingHistory(false);
     }
   }, []);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const convParam = params.get("conv");
+    if (convParam) {
+      const id = parseInt(convParam);
+      if (!isNaN(id)) {
+        setConversationId(id);
+        localStorage.setItem(LEXBOT_STORAGE_KEY, String(id));
+        void loadConversation(id);
+      }
+    } else {
+      const saved = localStorage.getItem(LEXBOT_STORAGE_KEY);
+      if (saved) {
+        const id = parseInt(saved);
+        if (!isNaN(id)) setConversationId(id);
+      }
+    }
+  }, [loadConversation]);
 
   useEffect(() => {
     scrollToBottom();
@@ -148,6 +189,9 @@ export default function LexBot() {
     const data = (await res.json()) as { id: number };
     setConversationId(data.id);
     localStorage.setItem(LEXBOT_STORAGE_KEY, String(data.id));
+    const url = new URL(window.location.href);
+    url.searchParams.set("conv", String(data.id));
+    window.history.replaceState({}, "", url.toString());
     return data.id;
   }, [conversationId]);
 
@@ -321,6 +365,18 @@ export default function LexBot() {
     setIsStreaming(false);
     setInput("");
     localStorage.removeItem(LEXBOT_STORAGE_KEY);
+    const url = new URL(window.location.href);
+    url.searchParams.delete("conv");
+    window.history.replaceState({}, "", url.toString());
+  };
+
+  const shareLink = () => {
+    const url = new URL(window.location.href);
+    if (conversationId) url.searchParams.set("conv", String(conversationId));
+    void navigator.clipboard.writeText(url.toString()).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
   };
 
   const agentInfo = AGENT_DISPLAY[currentAgent] ?? AGENT_DISPLAY.orchestrator;
@@ -343,15 +399,29 @@ export default function LexBot() {
           </div>
           <div className="flex items-center gap-2">
             {messages.length > 0 && (
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={resetConversation}
-                className="text-muted-foreground hover:text-foreground gap-2"
-              >
-                <RotateCcw className="w-3.5 h-3.5" />
-                Reset
-              </Button>
+              <>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={shareLink}
+                  className="text-muted-foreground hover:text-foreground gap-2"
+                >
+                  {copied ? (
+                    <><Check className="w-3.5 h-3.5 text-green-400" /> Tersalin!</>
+                  ) : (
+                    <><Share2 className="w-3.5 h-3.5" /> Bagikan</>
+                  )}
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={resetConversation}
+                  className="text-muted-foreground hover:text-foreground gap-2"
+                >
+                  <RotateCcw className="w-3.5 h-3.5" />
+                  Reset
+                </Button>
+              </>
             )}
             <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-green-500/10 border border-green-500/30">
               <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
@@ -360,7 +430,12 @@ export default function LexBot() {
           </div>
         </div>
 
-        {messages.length === 0 ? (
+        {isLoadingHistory ? (
+          <div className="flex-1 flex flex-col items-center justify-center gap-3">
+            <Loader2 className="w-8 h-8 animate-spin text-violet-400" />
+            <p className="text-sm text-muted-foreground">Memuat riwayat percakapan…</p>
+          </div>
+        ) : messages.length === 0 ? (
           <div className="flex-1 flex flex-col items-center justify-center gap-8 py-8">
             <div className="text-center space-y-3 max-w-lg">
               <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-violet-600 to-purple-700 flex items-center justify-center mx-auto shadow-2xl shadow-violet-500/20">
