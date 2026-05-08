@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect, useCallback } from "react";
-import { useAuth } from "@workspace/replit-auth-web";
 import { Navbar } from "@/components/layout/Navbar";
 import { MarkdownRenderer } from "@/components/ui/MarkdownRenderer";
 import { Button } from "@/components/ui/button";
@@ -108,8 +107,9 @@ type AgentStatusType = {
   title?: string;
 };
 
+const LEXBOT_STORAGE_KEY = "lexbot_page_conv_id";
+
 export default function LexBot() {
-  const { user } = useAuth();
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [conversationId, setConversationId] = useState<number | null>(null);
   const [input, setInput] = useState("");
@@ -119,6 +119,14 @@ export default function LexBot() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const abortRef = useRef<AbortController | null>(null);
+
+  useEffect(() => {
+    const saved = localStorage.getItem(LEXBOT_STORAGE_KEY);
+    if (saved) {
+      const id = parseInt(saved);
+      if (!isNaN(id)) setConversationId(id);
+    }
+  }, []);
 
   useEffect(() => {
     scrollToBottom();
@@ -139,6 +147,7 @@ export default function LexBot() {
     });
     const data = (await res.json()) as { id: number };
     setConversationId(data.id);
+    localStorage.setItem(LEXBOT_STORAGE_KEY, String(data.id));
     return data.id;
   }, [conversationId]);
 
@@ -311,6 +320,7 @@ export default function LexBot() {
     setAgentStatus(null);
     setIsStreaming(false);
     setInput("");
+    localStorage.removeItem(LEXBOT_STORAGE_KEY);
   };
 
   const agentInfo = AGENT_DISPLAY[currentAgent] ?? AGENT_DISPLAY.orchestrator;
@@ -372,6 +382,9 @@ export default function LexBot() {
                 </Badge>
                 <Badge variant="outline" className="text-xs gap-1 border-green-500/30 text-green-400">
                   <Sparkles className="w-3 h-3" /> Function Calling AI
+                </Badge>
+                <Badge variant="outline" className="text-xs gap-1 border-emerald-500/30 text-emerald-400">
+                  <FileText className="w-3 h-3" /> Gratis · Tanpa Login
                 </Badge>
               </div>
             </div>

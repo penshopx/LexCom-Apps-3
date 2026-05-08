@@ -336,6 +336,8 @@ const AGENT_DISPLAY: Record<string, { label: string; emoji: string }> = {
   orchestrator: { label: "Chaesa Lexbot", emoji: "✨" },
 };
 
+const STORAGE_KEY = "lexbot_floating_conv_id";
+
 export function FloatingLexBot() {
   const [location] = useLocation();
   const [isOpen, setIsOpen] = useState(false);
@@ -352,6 +354,14 @@ export function FloatingLexBot() {
 
   const pageCtx = PAGE_CONTEXT[location] ?? PAGE_CONTEXT["/"]!;
   const prompts = pageCtx.prompts ?? DEFAULT_PROMPTS;
+
+  useEffect(() => {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      const id = parseInt(saved);
+      if (!isNaN(id)) setConversationId(id);
+    }
+  }, []);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -381,6 +391,7 @@ export function FloatingLexBot() {
     });
     const data = (await res.json()) as { id: number };
     setConversationId(data.id);
+    localStorage.setItem(STORAGE_KEY, String(data.id));
     return data.id;
   }, [conversationId]);
 
@@ -504,6 +515,7 @@ export function FloatingLexBot() {
     setIsStreaming(false);
     setAgentStatus(null);
     setInput("");
+    localStorage.removeItem(STORAGE_KEY);
   };
 
   const STATUS_COLORS: Record<AgentStatus["type"], string> = {
@@ -613,6 +625,9 @@ export function FloatingLexBot() {
                   </Badge>
                   <Badge variant="outline" className="text-[10px] h-4 gap-0.5 border-green-500/30 text-green-400">
                     <GitMerge className="w-2.5 h-2.5" /> Function Calling
+                  </Badge>
+                  <Badge variant="outline" className="text-[10px] h-4 gap-0.5 border-emerald-500/30 text-emerald-400">
+                    <BookOpen className="w-2.5 h-2.5" /> Tanpa Login
                   </Badge>
                 </div>
 
