@@ -51,7 +51,7 @@ export function Footer() {
               <li><a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">Tentang Kami</a></li>
               <li><a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">Karir</a></li>
               <li><a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">Privasi & Syarat</a></li>
-              <li><a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">Kontak</a></li>
+              <li><Link href="/lexbot" className="text-sm text-muted-foreground hover:text-primary transition-colors">Helpdesk / Kontak</Link></li>
             </ul>
           </div>
         </div>

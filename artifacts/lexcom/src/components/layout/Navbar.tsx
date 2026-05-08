@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "wouter";
-import { Scale, Menu, X, LogIn, LogOut, Loader2, Sun, Moon, ChevronDown, User, Crown, Settings, BarChart3 } from "lucide-react";
+import { Scale, Menu, X, LogIn, LogOut, Loader2, Sun, Moon, ChevronDown, User, Crown, Settings, BarChart3, HelpCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@workspace/replit-auth-web";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -135,6 +135,7 @@ export function Navbar() {
     { name: "Layanan", href: "/layanan" },
     { name: "Peraturan", href: "/peraturan" },
     { name: "Forum", href: "/forum" },
+    { name: "Bantuan", href: "/lexbot" },
   ];
 
   return (
@@ -207,6 +208,17 @@ export function Navbar() {
                           </div>
                         ))}
                       </div>
+                      <div className="mt-4 pt-4 border-t border-white/10">
+                        <Link href="/lexbot" className="flex items-center gap-3 px-4 py-3 rounded-xl bg-violet-500/10 border border-violet-500/20 hover:bg-violet-500/15 transition-colors group">
+                          <div className="w-8 h-8 rounded-lg bg-violet-500/20 flex items-center justify-center flex-shrink-0">
+                            <HelpCircle className="w-4 h-4 text-violet-400" />
+                          </div>
+                          <div>
+                            <p className="text-xs font-semibold text-foreground group-hover:text-violet-400 transition-colors">Butuh bantuan? Chat dengan Chaesa Lexbot</p>
+                            <p className="text-[10px] text-muted-foreground">Helpdesk AI · Gratis · Tanpa Login</p>
+                          </div>
+                        </Link>
+                      </div>
                     </motion.div>
                   </>
                 )}
@@ -264,9 +276,10 @@ export function Navbar() {
                       {/* Menu items */}
                       <div className="p-1.5">
                         {[
-                          { icon: User,     label: "Profil Saya",     href: "/profil" },
-                          { icon: BarChart3, label: "Penggunaan AI",  href: "/profil" },
-                          { icon: Crown,    label: "Upgrade Paket",   href: "/harga" },
+                          { icon: User,        label: "Profil Saya",      href: "/profil" },
+                          { icon: BarChart3,   label: "Penggunaan AI",    href: "/profil" },
+                          { icon: Crown,       label: "Upgrade Paket",    href: "/harga" },
+                          { icon: HelpCircle,  label: "Helpdesk / Bantuan", href: "/lexbot" },
                         ].map((item, i) => (
                           <Link key={i} href={item.href} onClick={() => setUserDropdownOpen(false)}
                             className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-white/5 transition-colors">
@@ -333,6 +346,15 @@ export function Navbar() {
                   </div>
                 </div>
               ))}
+              <div className="h-px bg-border" />
+              <Link href="/lexbot" onClick={() => setIsMobileMenuOpen(false)}
+                className="flex items-center gap-3 px-4 py-3 rounded-xl bg-violet-500/10 border border-violet-500/20 text-violet-400 hover:bg-violet-500/15 transition-colors">
+                <HelpCircle className="w-4 h-4 flex-shrink-0" />
+                <div>
+                  <p className="text-sm font-semibold">Helpdesk / Bantuan</p>
+                  <p className="text-[10px] text-muted-foreground">Chat dengan Chaesa Lexbot · Gratis</p>
+                </div>
+              </Link>
               <div className="h-px bg-border" />
               {isLoading ? (
                 <div className="flex justify-center p-4"><Loader2 className="w-6 h-6 animate-spin text-muted-foreground" /></div>
